@@ -24,7 +24,7 @@ the config dir. <br>
 > 1. `cd server` 
 > 1. `python -m pip install --upgrade pip`
 > 1. `pip install --upgrade setuptools`
-> 1. `git checkout main`
+> 1. `git checkout master`
 > 1. `python -m pip install -r requirements.txt`
 6. Now to install dependences for the react app. Follow these commands
 > 1. `cd ..`

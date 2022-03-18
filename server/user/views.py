@@ -29,6 +29,22 @@ class RegisterUser(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
+class CheckToken(APIView):
+    permissions_classes = [IsAuthenticated]
+
+    def post(self, request):
+        try:
+            user = User.objects.get(username=request.data['username'])
+            token = Token.objects.get(user=user)
+            if (token.key == request.data['token']):
+                return Response(status=status.HTTP_200_OK)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response(
+                {'error': True, 'error_msg': e},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
 class DeleteUser(APIView):
     permissions_classes = [IsAuthenticated]
 

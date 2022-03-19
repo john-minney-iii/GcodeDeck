@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 
-export default class Navbar extends Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        if (this.props.authenticated) {
-            return(
-                <nav class="navbar navbar-expand-lg navbar-light">
+export default function Navbar(props) {
+    if (props.authenticated) {
+        return(
+            <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand mx-2" href="/">GCODEdeck</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,8 +18,8 @@ export default class Navbar extends Component {
                     </div>
                 </div>
             </nav>
-            );
-        }
+        );
+    } else {
         return(
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand mx-2" href="/">GCODEdeck</a>
@@ -40,4 +36,4 @@ export default class Navbar extends Component {
             </nav>
         );
     }
-}
+};

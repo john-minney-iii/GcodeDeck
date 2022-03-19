@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Navbar from './components/navbar';
+import LandingPage from './views/landing_page';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/app.css';
 
 export default class App extends Component {
@@ -69,13 +70,7 @@ export default class App extends Component {
     render() {
         return(
             <div className='app m-5'>
-                <Navbar authenticated={this.state.loggedIn} />
-                <div className='m-5'>
-                    <a className='btn btn-primary mx-2' onClick={this.registerTestUser}>Register User</a>
-                    <a className='btn btn-primary mx-2' onClick={this.loginOnClick}>Test Login</a>
-                    <a className='btn btn-primary mx-2' onClick={this.deleteOnClick}>Test Delete</a>
-                    <a className='btn btn-primary mx-2' onClick={this.data}>Data</a>
-                </div>
+                <LandingPage authenticated={false} />
             </div>
         );
     }

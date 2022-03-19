@@ -15,8 +15,8 @@ export default class LandingPage extends Component {
         if (this.state.authenticated) 
             return(
                 <div>
-                    <a href="" className="btn btn-primary btn-lg rounded-pill mx-2">My Programs</a>
-                    <a href="" className="btn btn-outline-primary btn-lg rounded-pill">Create a new program</a>
+                    <a href="/" className="btn btn-primary btn-lg rounded-pill mx-2">My Programs</a>
+                    <a href="/" className="btn btn-outline-primary btn-lg rounded-pill">Create a new program</a>
                 </div>
             );
         return null;
@@ -27,8 +27,8 @@ export default class LandingPage extends Component {
             return <img src={HeroImage} class="w-75" alt="cnc router" />;
         return(
             <div>
-                <a href="/user/login" className="btn btn-primary btn-lg rounded-pill mx-2">Login</a>
-                <a href="/user/register" className="btn btn-primary btn-lg rounded-pill">Register</a>
+                <a href="/" className="btn btn-primary btn-lg rounded-pill mx-2">Login</a>
+                <a href="/" className="btn btn-primary btn-lg rounded-pill">Register</a>
             </div>
         );
     };

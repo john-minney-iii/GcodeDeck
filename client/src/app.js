@@ -6,7 +6,7 @@ export default class App extends Component {
     render() {
         return(
             <div className='app m-5'>
-                <Navbar authenticated={true} />
+                <Navbar authenticated={false} />
             </div>
         );
     }

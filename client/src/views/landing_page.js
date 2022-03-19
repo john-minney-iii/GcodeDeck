@@ -27,8 +27,12 @@ export default class LandingPage extends Component {
             return <img src={HeroImage} class="w-75" alt="cnc router" />;
         return(
             <div>
-                <a href="/" className="btn btn-primary btn-lg rounded-pill mx-2">Login</a>
-                <a href="/" className="btn btn-primary btn-lg rounded-pill">Register</a>
+                <button 
+                    className="btn btn-primary btn-lg rounded-pill mx-2"
+                >Login</button>
+                <button 
+                    className="btn btn-primary btn-lg rounded-pill"
+                >Register</button>
             </div>
         );
     };

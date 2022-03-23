@@ -3,6 +3,7 @@ import LandingPage from './views/landing_page';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/app.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default class App extends Component {
     constructor(props) {
@@ -69,9 +70,14 @@ export default class App extends Component {
 
     render() {
         return(
-            <div className='app m-5'>
-                <LandingPage authenticated={false} />
-            </div>
+            // <div className='app m-5'>
+            //     <LandingPage authenticated={false} />
+            // </div>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<LandingPage authenticated={false} />} />
+                </Routes>
+            </BrowserRouter>
         );
     }
 }

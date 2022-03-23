@@ -29,7 +29,7 @@ export default function Navbar(props) {
                 <div className="collapse navbar-collapse mx-2" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-auto">
                         <a href="/" className="nav-item nav-link active" id="homeNavLink">Home</a>
-                        <a href="/" className="nav-item nav-link" id="aboutusNavLink">About Us</a>
+                        <a href="/about-us/" className="nav-item nav-link" id="aboutusNavLink">About Us</a>
                         <a href="/" className="nav-item nav-link" id="communityNavLink">Community</a>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LandingPage from './views/landing_page';
+import AboutUs from './views/about_us';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/app.css';
@@ -21,7 +22,7 @@ export default class App extends Component {
             'first_name': 'first-name-test',
             'last_name': 'last-name-test',
             'email': 'test@domain.com',
-            'password': 'testpass'   
+            'password': 'testpass'
          }).then(res => {
             console.log('Register');
             if (res.status === 201)
@@ -73,6 +74,7 @@ export default class App extends Component {
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<LandingPage authenticated={false} />} />
+                    <Route path='about-us/' element={<AboutUs/>} />
                 </Routes>
             </BrowserRouter>
         );

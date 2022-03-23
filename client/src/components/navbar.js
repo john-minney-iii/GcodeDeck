@@ -13,7 +13,7 @@ export default function Navbar(props) {
                         <a href="/" className="nav-item nav-link active" id="homeNavLink">Home</a>
                         <a href="/" className="nav-item nav-link" id="myProgramsNavLink">My Programs</a>
                         <a href="/" className="nav-item nav-link" id="myToolsNavLink">My Tools</a>
-                        <a href="/" className="nav-item nav-link" id="communityNavLink">Community</a>
+                        <a href="/community/" className="nav-item nav-link" id="communityNavLink">Community</a>
                         <a href='/' className="nav-item nav-link" id="accountNavLink">Account</a>
                     </div>
                 </div>
@@ -30,7 +30,7 @@ export default function Navbar(props) {
                     <div className="navbar-nav ms-auto">
                         <a href="/" className="nav-item nav-link active" id="homeNavLink">Home</a>
                         <a href="/about-us/" className="nav-item nav-link" id="aboutusNavLink">About Us</a>
-                        <a href="/" className="nav-item nav-link" id="communityNavLink">Community</a>
+                        <a href="/community/" className="nav-item nav-link" id="communityNavLink">Community</a>
                     </div>
                 </div>
             </nav>

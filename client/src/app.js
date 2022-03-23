@@ -70,9 +70,6 @@ export default class App extends Component {
 
     render() {
         return(
-            // <div className='app m-5'>
-            //     <LandingPage authenticated={false} />
-            // </div>
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<LandingPage authenticated={false} />} />

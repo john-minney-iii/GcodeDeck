@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../components/navbar';
+import { Modal } from 'react-bootstrap';
 import '../assets/css/landing-page.css';
 import HeroImage from '../assets/img/hero-image.webp';
 
@@ -7,9 +8,19 @@ export default class LandingPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            authenticated: this.props.authenticated
+            authenticated: this.props.authenticated,
+            loginModalShow: false,
+            registerModalShow: false
         }
     }
+
+    handleModal = (which) => {
+        if (which === 'login') {
+            this.setState({ loginModalShow: !this.state.loginModalShow });
+        } else if (which === 'register') {
+            this.setState({ registerModalShow: !this.state.registerModalShow });
+        }
+    };
 
     authenticatedCallToActions = () => {
         if (this.state.authenticated) 
@@ -29,9 +40,11 @@ export default class LandingPage extends Component {
             <div>
                 <button 
                     className="btn btn-primary btn-lg rounded-pill mx-2"
+                    onClick={() => this.handleModal('login')}
                 >Login</button>
                 <button 
                     className="btn btn-primary btn-lg rounded-pill"
+                    onClick={() => this.handleModal('register')}
                 >Register</button>
             </div>
         );
@@ -55,6 +68,34 @@ export default class LandingPage extends Component {
                         </div>
                     </div>
                 </div>
+                <Modal show={this.state.loginModalShow} onHide={() => this.handleModal('login')}>
+                    <Modal.Header closeButton>This is a Modal Heading</Modal.Header>
+                    <Modal.Body>This is a Modal Body</Modal.Body>
+                    <Modal.Footer>
+                        <button 
+                            className='btn btn-primary btn-lg rounded-pill'
+                            onClick={() => this.handleModal('login')}
+                        >Cancel</button>
+                        <button 
+                            className='btn btn-primary btn-lg rounded-pill'
+                            onClick={() => this.handleModal('login')}
+                        >Login</button>
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={this.state.registerModalShow} onHide={() => this.handleModal('register')}>
+                    <Modal.Header closeButton>This is a Modal Heading</Modal.Header>
+                    <Modal.Body>This is a Modal Body</Modal.Body>
+                    <Modal.Footer>
+                        <button 
+                            className='btn btn-primary btn-lg rounded-pill'
+                            onClick={() => this.handleModal('register')}
+                        >Cancel</button>
+                        <button 
+                            className='btn btn-primary btn-lg rounded-pill'
+                            onClick={() => this.handleModal('register')}
+                        >Register</button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         );
     }

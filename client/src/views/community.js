@@ -41,17 +41,19 @@ export default class Community extends Component {
                             </div>
                             <div className='col-lg community-buttons-container'>
                                 <div>
-                                    <a href='' className='btn btn-primary btn-lg rounded-pill mx-2'>Release Notes</a>
                                     <button
-                                        className='btn btn-primary btn-lg rounded-pill'
+                                        className='btn btn-primary btn-lg rounded-pill mx-2 my-2 w-36'
+                                    >Release Notes</button>
+                                    <button
+                                        className='btn btn-primary btn-lg rounded-pill w-36'
                                         onClick={() => this.handleModal('report')}
                                     >Report a Bug</button>
                                     <button
-                                        className='btn btn-primary btn-lg rounded-pill mx-2'
+                                        className='btn btn-primary btn-lg rounded-pill mx-2 w-36'
                                         onClick={() => this.handleModal('system')}
                                     >System Request</button>
                                     <button
-                                        className='btn btn-primary btn-lg rounded-pill'
+                                        className='btn btn-primary btn-lg rounded-pill w-36'
                                         onClick={() => this.handleModal('contact')}
                                     >Contact Us</button>
                                 </div>

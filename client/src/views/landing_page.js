@@ -3,12 +3,12 @@ import Navbar from '../components/navbar';
 import { Modal } from 'react-bootstrap';
 import '../assets/css/landing-page.css';
 import HeroImage from '../assets/img/hero-image.webp';
+import axios from 'axios';
 
 export default class LandingPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            authenticated: this.props.authenticated,
             // States for Register Modal
             registerModalShow: false,
             firstName: '',
@@ -20,7 +20,11 @@ export default class LandingPage extends Component {
             // States for Login Modal
             loginModalShow: false,
             loginUserName: '',
-            loginPswd: ''
+            loginPswd: '',
+            // States for login
+            username: '',
+            token: '',
+            authenticated: false
         };
     }
 
@@ -65,7 +69,7 @@ export default class LandingPage extends Component {
 
     unAuthenticatedCallToActions = () => {
         if (this.state.authenticated)
-            return <img src={HeroImage} class="w-75" alt="cnc router" />;
+            return <img src={HeroImage} className="w-75" alt="cnc router" />;
         return(
             <div>
                 <button 
@@ -82,20 +86,20 @@ export default class LandingPage extends Component {
 
     loginForm = () => <form>
         <div className='form-group'>
-            <label for='usernameInput'>Username</label>
+            <label htmlFor='usernameInput'>Username</label>
             <input 
                 type='text' 
-                class='form-control' 
+                className='form-control' 
                 id='usernameInput' 
                 value={this.state.loginUserName}
                 onChange={(e) => this.setState({ loginUserName: e.target.value })}
             />
         </div>
         <div className='form-group'>
-            <label for='passwordInput'>Password</label>
+            <label htmlFor='passwordInput'>Password</label>
             <input 
                 type='password' 
-                class='form-control' 
+                className='form-control' 
                 id='passwordInput' 
                 value={this.state.loginPswd}
                 onChange={(e) => this.setState({ loginPswd: e.target.value })}
@@ -103,77 +107,112 @@ export default class LandingPage extends Component {
         </div>
     </form>;
 
+    async loginOnSubmit() {
+        await this.loginUser();
+        console.log(this.state.username, this.state.token);
+    };
+
     registerForm = () => <form>
         <div className='form-group'>
-            <label for='firstNameInput'>First Name</label>
+            <label htmlFor='firstNameInput'>First Name</label>
             <input 
                 type='text' 
-                class='form-control' 
+                className='form-control' 
                 id='firstNameInput' 
                 value={this.state.firstName} 
                 onChange={(e) => this.setState({ firstName: e.target.value })}
             />
         </div>
         <div className='form-group'>
-            <label for='lastNameInput'>Last Name</label>
+            <label htmlFor='lastNameInput'>Last Name</label>
             <input 
                 type='text' 
-                class='form-control' 
+                className='form-control' 
                 id='lastNameInput' 
                 value={this.state.lastName} 
                 onChange={(e) => this.setState({ lastName: e.target.value })}
             />
         </div>
         <div className='form-group'>
-            <label for='usernameInput'>Username</label>
+            <label htmlFor='usernameInput'>Username</label>
             <input 
                 type='text' 
-                class='form-control' 
+                className='form-control' 
                 id='usernameInput' 
                 value={this.state.regUserName} 
                 onChange={(e) => this.setState({ regUserName: e.target.value })}
             />
-            <small id='usernameHelp' class='form-text text-muted'>
+            <small id='usernameHelp' className='form-text text-muted'>
                 150 characters or fewer. Letters, digits and @/_/+/- only
             </small>
         </div>
         <div className='form-group'>
-            <label for='emailInput'>Email</label>
+            <label htmlFor='emailInput'>Email</label>
             <input 
                 type='email' 
-                class='form-control' 
+                className='form-control' 
                 id='emailInput' 
                 value={this.state.email} 
                 onChange={(e) => this.setState({ email: e.target.value })}
             />
         </div>
         <div className='form-group'>
-            <label for='pswdInput'>Password</label>
+            <label htmlFor='pswdInput'>Password</label>
             <input 
                 type='password' 
-                class='form-control' 
+                className='form-control' 
                 id='pswdInput' 
                 value={this.state.regPswd} 
                 onChange={(e) => this.setState({ regPswd: e.target.value })}
 
             />
-            <small id='usernameHelp' class='form-text text-muted'>
+            <small id='usernameHelp' className='form-text text-muted'>
                 Use a mix of letters, numbers, and symbols. Password cannot
                 be too similar to your other personal information, nor be a commonly 
                 used password, nor be entirely numeric.
             </small>
         </div>
         <div className='form-group'>
-            <label for='pswdConfInput'>Confirm Password</label>
+            <label htmlFor='pswdConfInput'>Confirm Password</label>
             <input 
                 type='password' 
-                class='form-control' 
+                className='form-control' 
                 id='pswdConfInput' 
                 value={this.state.regPswdConfirm} 
                 onChange={(e) => this.setState({ regPswdConfirm: e.target.value })}
             />
         </div>
     </form>;
+
+    async registerOnSubmit() {
+        await this.registerUser();
+    };
+
+    // Server Axios Calls
+    async registerUser() {
+        axios.post('http://localhost:8000/api/v1/user/register/', {
+            'username': this.state.regUserName,
+            'first_name': this.state.firstName,
+            'last_name': this.state.lastName,
+            'email': this.state.email,
+            'password': this.state.regPswd
+         }).then(res => {
+            console.log(res);
+            if (res.status === 201)
+                console.log('User created');
+        });
+    };    
+
+    async loginUser() {
+        axios.post('http://localhost:8000/api/v1/user/auth/', {
+            'username': this.state.loginUserName,
+            'password': this.state.loginPswd
+        }).then(res => {
+            console.log(res);
+            if (res.status === 200)
+                this.setState({ token: res.data.token, authenticated: true});
+        })
+    }
 
     render() {
         return(
@@ -203,7 +242,10 @@ export default class LandingPage extends Component {
                         >Cancel</button>
                         <button 
                             className='btn btn-primary btn-lg rounded-pill'
-                            onClick={() => this.handleModal('login', false)}
+                            onClick={() => {
+                                this.handleModal('login', false);
+                                this.loginOnSubmit();
+                            }}
                         >Login</button>
                     </Modal.Footer>
                 </Modal>
@@ -211,7 +253,7 @@ export default class LandingPage extends Component {
                     <Modal.Header closeButton>Register New Account</Modal.Header>
                     <Modal.Body><this.registerForm /></Modal.Body>
                     <Modal.Footer>
-                        <small id='usernameHelp' class='text-muted'>
+                        <small id='usernameHelp' className='text-muted'>
                             By clicking Agree and Continue you agree to GCODEdeck's Terms of Service 
                             and Cookies and Privacy Policy
                         </small>
@@ -221,7 +263,10 @@ export default class LandingPage extends Component {
                         >Cancel</button>
                         <button 
                             className='btn btn-primary btn-lg rounded-pill'
-                            onClick={() => this.handleModal('register', false)}
+                            onClick={() => {
+                                this.handleModal('register', false);
+                                this.registerOnSubmit();
+                            }}
                         >Agree and Register</button>
                     </Modal.Footer>
                 </Modal>

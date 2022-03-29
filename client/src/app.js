@@ -8,39 +8,6 @@ import './assets/css/app.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: '',
-            token: '',
-            loggedIn: false
-        };
-    }
-
-    registerTestUser = () => {
-        axios.post('/api/v1/user/register/', {
-            'username': 'test',
-            'first_name': 'first-name-test',
-            'last_name': 'last-name-test',
-            'email': 'test@domain.com',
-            'password': 'testpass'
-         }).then(res => {
-            console.log('Register');
-            if (res.status === 201)
-                this.setState({ username: 'test' });
-        });
-    };
-
-    loginOnClick = () => {
-        console.log('Login Clicked');
-        axios.post('/api/v1/user/auth/', {
-            "username": "test",
-            "password": "testpass"
-        }).then(res => {
-            if (res.status === 200)
-                this.setState({ token: res.data.token, loggedIn: true });
-        });
-    };
 
     deleteOnClick = () => {
         console.log('Delete Clicked');
@@ -74,9 +41,9 @@ export default class App extends Component {
         return(
             <BrowserRouter>
                 <Routes>
-                    <Route path='/' element={<LandingPage authenticated={false} />} />
+                    <Route path='/' element={<LandingPage />} />
                     <Route path='about-us/' element={<AboutUs/>} />
-                    <Route path='community/' element={<Community authenticated={false} />} />
+                    <Route path='community/' element={<Community />} />
                 </Routes>
             </BrowserRouter>
         );

@@ -50,6 +50,43 @@ export default class LandingPage extends Component {
         );
     };
 
+    registerForm = () => {
+        return <form>
+            <div className='form-group'>
+                <label for='firstNameInput'>First Name</label>
+                <input type='text' class='form-control' id='firstNameInput' placeholder='First Name' />
+            </div>
+            <div className='form-group'>
+                <label for='lastNameInput'>Last Name</label>
+                <input type='text' class='form-control' id='lastNameInput' placeholder='Last Name' />
+            </div>
+            <div className='form-group'>
+                <label for='usernameInput'>Username</label>
+                <input type='text' class='form-control' id='usernameInput' placeholder='Username' />
+                <small id='usernameHelp' class='form-text text-muted'>
+                    150 characters or fewer. Letters, digits and @/_/+/- only
+                </small>
+            </div>
+            <div className='form-group'>
+                <label for='emailInput'>Email</label>
+                <input type='email' class='form-control' id='emailInput' placeholder='Email' />
+            </div>
+            <div className='form-group'>
+                <label for='pswdInput'>Password</label>
+                <input type='password' class='form-control' id='pswdInput' placeholder='' />
+                <small id='usernameHelp' class='form-text text-muted'>
+                    Use a mix of letters, numbers, and symbols. Password cannot
+                    be too similar to your other personal information, nor be a commonly 
+                    used password, nor be entirely numeric.
+                </small>
+            </div>
+            <div className='form-group'>
+                <label for='pswdConfInput'>Confirm Password</label>
+                <input type='password' class='form-control' id='pswdConfInput' placeholder='' />
+            </div>
+        </form>
+    };
+
     render() {
         return(
             <div className='landing-page'>
@@ -83,8 +120,8 @@ export default class LandingPage extends Component {
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.registerModalShow} onHide={() => this.handleModal('register')}>
-                    <Modal.Header closeButton>This is a Modal Heading</Modal.Header>
-                    <Modal.Body>This is a Modal Body</Modal.Body>
+                    <Modal.Header closeButton>Register New Account</Modal.Header>
+                    <Modal.Body><this.registerForm /></Modal.Body>
                     <Modal.Footer>
                         <button 
                             className='btn btn-primary btn-lg rounded-pill'

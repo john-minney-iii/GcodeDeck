@@ -1,12 +1,18 @@
 import { useState } from "react";
 import Navbar from "../components/navbar";
 import { Modal } from "react-bootstrap";
+import axios from "axios";
 import '../assets/css/community.css';
 
 export default function Community(props) {
     const [reportModalShow, setReportModalShow] = useState(false);
     const [systemModalShow, setSystemModalShow] = useState(false);
     const [contactModalShow, setContactModalShow] = useState(false);
+    // States for forms
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [subject, setSubject] = useState('');
+    const [message, setMessage] = useState('');
 
     const handleModal = (which) => {
         if (which === 'report')
@@ -15,6 +21,14 @@ export default function Community(props) {
             setSystemModalShow(!systemModalShow);
         else if (which === 'contact')
             setContactModalShow(!contactModalShow);
+        resetFormStates();
+    };
+
+    const resetFormStates = () => {
+        setUsername('');
+        setEmail('');
+        setSubject('');
+        setMessage('');
     };
 
     return <div className='community-view'>

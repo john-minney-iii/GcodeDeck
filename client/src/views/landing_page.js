@@ -164,7 +164,7 @@ export default function LandingPage(props) {
             'password': pswd
         }).then(res => {
             if (res.status === 200)
-                props.loginUser(username, res.data.token);
+                props.loginUser(res.data.token);
         });
     };
 
@@ -177,7 +177,7 @@ export default function LandingPage(props) {
             'password': pswd
         }).then(res => {
             if (res.status === 201)
-                loginSubmit(username, res.data.token);
+                loginSubmit(res.data.token);
         });
     };
 

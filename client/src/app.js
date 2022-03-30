@@ -10,15 +10,13 @@ export default class App extends Component {
         super(props);
         this.state = {
             currentView: 'landing-page',
-            username: '',
             token: '',
             authenticated: false
         };
     }
 
-    loginUser = (username, token) => {
+    loginUser = (token) => {
         this.setState({
-            username: username,
             token: token,
             authenticated: true
         });

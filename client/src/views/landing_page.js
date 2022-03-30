@@ -10,13 +10,13 @@ export default function LandingPage(props) {
     const [regModalShow, setRegModalShow] = useState(false);
     const [loginModalShow, setLoginModalShow] = useState(false);
     // Values for reg form
-    let firstName = '';
-    let lastName = '';
-    let email = '';
-    let regPswdConfirm = '';
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
+    const [email, setEmail] = useState();
+    const [regPswdConfirm, setRegPswdConfirm] = useState();
     // Values for login and reg form
-    let username = '';
-    let pswd = '';
+    const [username, setUsername] = useState();
+    const [pswd, setPswd] = useState();
 
     const handleModal = (which) => {
         if (which === 'login')
@@ -27,12 +27,12 @@ export default function LandingPage(props) {
     };
 
     const resetFormStates = () => {
-        firstName = '';
-        lastName = '';
-        email = '';
-        pswd = '';
-        regPswdConfirm = '';
-        username = '';
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setPswd('');
+        setRegPswdConfirm('');
+        setUsername('');
     };
 
     const AuthenticatedCallToActions = () => {
@@ -69,9 +69,9 @@ export default function LandingPage(props) {
             <input 
                 type='text' 
                 className='form-control' 
-                id='usernameInput' 
-                // value={username}
-                onChange={(e) => username = e.target.value}
+                id='usernameInput'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
             />
         </div>
         <div className='form-group'>
@@ -80,8 +80,8 @@ export default function LandingPage(props) {
                 type='password' 
                 className='form-control' 
                 id='passwordInput' 
-                // value={pswd} 
-                onChange={(e) => pswd = e.target.value}
+                value={pswd}
+                onChange={(e) => setPswd(e.target.value)}
             />
         </div>
     </form>;
@@ -93,8 +93,8 @@ export default function LandingPage(props) {
                 type='text' 
                 className='form-control' 
                 id='firstNameInput' 
-                // value={firstName} 
-                onChange={(e) => firstName = e.target.value}
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
             />
         </div>
         <div className='form-group'>
@@ -103,8 +103,8 @@ export default function LandingPage(props) {
                 type='text' 
                 className='form-control' 
                 id='lastNameInput' 
-                // value={lastName} 
-                onChange={(e) => lastName = e.target.value}
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
             />
         </div>
         <div className='form-group'>
@@ -113,8 +113,8 @@ export default function LandingPage(props) {
                 type='text' 
                 className='form-control' 
                 id='usernameInput' 
-                // value={username} 
-                onChange={(e) => username = e.target.value}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
             />
             <small id='usernameHelp' className='form-text text-muted'>
                 150 characters or fewer. Letters, digits and @/_/+/- only
@@ -126,8 +126,8 @@ export default function LandingPage(props) {
                 type='email' 
                 className='form-control' 
                 id='emailInput' 
-                // value={email} 
-                onChange={(e) => email = e.target.value}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
             />
         </div>
         <div className='form-group'>
@@ -136,8 +136,8 @@ export default function LandingPage(props) {
                 type='password' 
                 className='form-control' 
                 id='pswdInput' 
-                // value={pswd} 
-                onChange={(e) => pswd = e.target.value}
+                value={pswd}
+                onChange={(e) => setPswd(e.target.value)}
 
             />
             <small id='usernameHelp' className='form-text text-muted'>
@@ -152,8 +152,8 @@ export default function LandingPage(props) {
                 type='password' 
                 className='form-control' 
                 id='pswdConfInput' 
-                // value={regPswdConfirm} 
-                onChange={(e) => regPswdConfirm = e.target.value}
+                value={regPswdConfirm}
+                onChange={(e) => setRegPswdConfirm(e.target.value)}
             />
         </div>
     </form>;
@@ -171,6 +171,11 @@ export default function LandingPage(props) {
     };
 
     const registerSubmit = async () => {
+        console.log(username);
+        console.log(firstName);
+        console.log(lastName);
+        console.log(email);
+        console.log(pswd);
         axios.post('http://localhost:8000/api/v1/user/register/', {
             'username': username,
             'first_name': firstName,
@@ -201,7 +206,7 @@ export default function LandingPage(props) {
         </div>
         <Modal show={loginModalShow} onHide={() => handleModal('login')}>
             <Modal.Header closeButton>Login</Modal.Header>
-            <Modal.Body><LoginForm /></Modal.Body>
+            <Modal.Body>{LoginForm()}</Modal.Body>
             <Modal.Footer>
                 <button 
                     className='btn btn-primary btn-lg rounded-pill'
@@ -218,7 +223,7 @@ export default function LandingPage(props) {
         </Modal>
         <Modal show={regModalShow} onHide={() => handleModal('register')}>
             <Modal.Header closeButton>Register New Account</Modal.Header>
-            <Modal.Body><RegisterForm /></Modal.Body>
+            <Modal.Body>{RegisterForm()}</Modal.Body>
             <Modal.Footer>
                 <small id='usernameHelp' className='text-muted'>
                     By clicking Agree and Continue you agree to GCODEdeck's Terms of Service 

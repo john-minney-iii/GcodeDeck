@@ -1,4 +1,4 @@
-import { Component, useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/navbar";
 import { Modal } from "react-bootstrap";
 import '../assets/css/community.css';
@@ -18,7 +18,7 @@ export default function Community(props) {
     };
 
     return <div className='community-view'>
-        <Navbar authenticated={props.authenticated} />
+        <Navbar authenticated={props.authenticated} changeView={props.changeView} />
     </div>
 
 }

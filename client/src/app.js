@@ -9,6 +9,7 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            currentView: 'landing-page',
             username: '',
             token: '',
             authenticated: false
@@ -23,19 +24,26 @@ export default class App extends Component {
         });
     };
 
+    changeCurrentView = (value) => {
+        this.setState({ currentView: value});
+    };
+
+    chooseCurrentView = () => {
+        if (this.state.currentView === 'landing-page')
+            return <LandingPage 
+                authenticated={this.state.authenticated}
+                loginUser={this.loginUser}
+                changeView={this.changeCurrentView}
+            />
+        else if (this.state.currentView === 'community')
+            return <Community 
+                authenticated={this.state.authenticated}
+                changeView={this.changeCurrentView}
+            />
+        return <p>Idk Dawg</p>
+    };
+
     render() {
-        return(
-            <BrowserRouter>
-                <Routes>
-                    <Route path='/' element={<LandingPage 
-                        authenticated={this.state.authenticated}
-                        loginUser={this.loginUser}
-                    />} />
-                    <Route path='community/' element={<Community 
-                        authenticated={this.state.authenticated}
-                    />} />
-                </Routes>
-            </BrowserRouter>
-        );
+        return this.chooseCurrentView();
     }
 }

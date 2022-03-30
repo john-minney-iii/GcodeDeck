@@ -14,20 +14,10 @@ export default class Community extends Component {
         }
     }
 
-    handleModal = (which) => {
-        if (which === 'report') {
-            this.setState({ reportBugModalShow: !this.state.reportBugModalShow });
-        } else if (which === 'system') {
-            this.setState({ systemRequestModalShow: !this.state.systemRequestModalShow });
-        } else if (which === 'contact') {
-            this.setState({ contactModalShow: !this.state.contactModalShow });
-        }
-    };
-
     render() {
         return(
             <div>
-                <Navbar authenticated={this.state.authenticated} />
+                <Navbar authenticated={this.state.authenticated} changeView={props.changeView} />
                 <div className='main-container'>
                     <div className='container'>
                         <div className='row'>

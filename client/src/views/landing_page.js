@@ -189,7 +189,7 @@ export default function LandingPage(props) {
     };
 
     return <div className='landing-page'>
-        <Navbar authenticated={props.authenticated} />
+        <Navbar authenticated={props.authenticated} changeView={props.changeView} />
         <div className='main-container'>
             <div className='container'>
                 <div className='row'>

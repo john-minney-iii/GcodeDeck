@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import LandingPage from './views/landing_page';
+import Community from './views/community';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/app.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default class App extends Component {
     constructor(props) {
@@ -23,10 +25,17 @@ export default class App extends Component {
 
     render() {
         return(
-            <LandingPage 
-                authenticated={this.state.authenticated}
-                loginUser={this.loginUser}
-            />
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<LandingPage 
+                        authenticated={this.state.authenticated}
+                        loginUser={this.loginUser}
+                    />} />
+                    <Route path='community/' element={<Community 
+                        authenticated={this.state.authenticated}
+                    />} />
+                </Routes>
+            </BrowserRouter>
         );
     }
 }

@@ -3,6 +3,7 @@ import Navbar from "../components/navbar";
 import '../assets/css/landing-page.css';
 import HeroImage from '../assets/img/hero-image.webp';
 import { Modal } from "react-bootstrap";
+import axios from "axios";
 
 export default function LandingPage(props) {
     // States for modals
@@ -165,6 +166,13 @@ export default function LandingPage(props) {
         </div>
     </form>;
 
+    const loginSubmit = async () => {
+        await axios.post('http://localhost:8000/api/v1/user/auth', {
+            'username': username,
+            'password': pswd
+        });
+    };
+
     return <div className='landing-page'>
         <Navbar authenticated={props.authenticated} />
         <div className='main-container'>
@@ -182,40 +190,40 @@ export default function LandingPage(props) {
             </div>
         </div>
         <Modal show={loginModalShow} onHide={() => handleModal('login')}>
-                <Modal.Header closeButton>Login</Modal.Header>
-                <Modal.Body><LoginForm /></Modal.Body>
-                <Modal.Footer>
-                    <button 
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => handleModal('login')}
-                    >Cancel</button>
-                    <button 
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => {
-                            handleModal('login');
-                        }}
-                    >Login</button>
-                </Modal.Footer>
-            </Modal>
-            <Modal show={regModalShow} onHide={() => handleModal('register')}>
-                <Modal.Header closeButton>Register New Account</Modal.Header>
-                <Modal.Body><RegisterForm /></Modal.Body>
-                <Modal.Footer>
-                    <small id='usernameHelp' className='text-muted'>
-                        By clicking Agree and Continue you agree to GCODEdeck's Terms of Service 
-                        and Cookies and Privacy Policy
-                    </small>
-                    <button 
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => handleModal('register')}
-                    >Cancel</button>
-                    <button 
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => {
-                            handleModal('register');
-                        }}
-                    >Agree and Register</button>
-                </Modal.Footer>
-            </Modal>
+            <Modal.Header closeButton>Login</Modal.Header>
+            <Modal.Body><LoginForm /></Modal.Body>
+            <Modal.Footer>
+                <button 
+                    className='btn btn-primary btn-lg rounded-pill'
+                    onClick={() => handleModal('login')}
+                >Cancel</button>
+                <button 
+                    className='btn btn-primary btn-lg rounded-pill'
+                    onClick={() => {
+                        handleModal('login');
+                    }}
+                >Login</button>
+            </Modal.Footer>
+        </Modal>
+        <Modal show={regModalShow} onHide={() => handleModal('register')}>
+            <Modal.Header closeButton>Register New Account</Modal.Header>
+            <Modal.Body><RegisterForm /></Modal.Body>
+            <Modal.Footer>
+                <small id='usernameHelp' className='text-muted'>
+                    By clicking Agree and Continue you agree to GCODEdeck's Terms of Service 
+                    and Cookies and Privacy Policy
+                </small>
+                <button 
+                    className='btn btn-primary btn-lg rounded-pill'
+                    onClick={() => handleModal('register')}
+                >Cancel</button>
+                <button 
+                    className='btn btn-primary btn-lg rounded-pill'
+                    onClick={() => {
+                        handleModal('register');
+                    }}
+                >Agree and Register</button>
+            </Modal.Footer>
+        </Modal>
     </div>;
 }

@@ -159,8 +159,6 @@ export default function LandingPage(props) {
     </form>;
 
     const loginSubmit = async () => {
-        console.log(username);
-        console.log(pswd);
         axios.post('http://localhost:8000/api/v1/user/auth/', {
             'username': username,
             'password': pswd
@@ -171,11 +169,6 @@ export default function LandingPage(props) {
     };
 
     const registerSubmit = async () => {
-        console.log(username);
-        console.log(firstName);
-        console.log(lastName);
-        console.log(email);
-        console.log(pswd);
         axios.post('http://localhost:8000/api/v1/user/register/', {
             'username': username,
             'first_name': firstName,

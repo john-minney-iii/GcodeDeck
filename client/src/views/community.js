@@ -66,6 +66,51 @@ export default function Community(props) {
         </div>
     </form>
 
+    const ReportABugForm = () => <form>
+        <small id='usernameHelp' className='form-text text-muted'>Report a Bug</small>
+        <div className='form-group'>
+            <label htmlFor='usernameInput'>Username</label>
+            <input 
+                type='text' 
+                className='form-control' 
+                id='usernameInput'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+            />
+        </div>
+        <div className='form-group'>
+            <label htmlFor='emailInput'>Email</label>
+            <input 
+                type='email' 
+                className='form-control' 
+                id='emailInput' 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+        </div>
+        <div className='form-group'>
+            <label htmlFor='subjectInput'>Subject</label>
+            <input 
+                type='text' 
+                className='form-control' 
+                id='subjectInput' 
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+            />
+        </div>
+        <div className='form-group'>
+            <label htmlFor='messageInput'>Message</label>
+            <input 
+                type='textarea' 
+                className='form-control' 
+                id='messageInput' 
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                height={200}
+            />
+        </div>
+    </form>
+
     return <div className='community-view'>
         <Navbar authenticated={props.authenticated} changeView={props.changeView} />
         <div className='main-container'>
@@ -101,8 +146,8 @@ export default function Community(props) {
                 </div>
             </div>
             <Modal show={reportModalShow} onHide={() => handleModal('report')}>
-                <Modal.Header closeButton>This is a Modal Heading</Modal.Header>
-                <Modal.Body>This is a Modal Body</Modal.Body>
+                <Modal.Header closeButton>Report a Bug</Modal.Header>
+                <Modal.Body>{ReportABugForm()}</Modal.Body>
                 <Modal.Footer>
                     <button 
                         className='btn btn-primary btn-lg rounded-pill'

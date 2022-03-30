@@ -18,14 +18,6 @@ export default function LandingPage(props) {
     let username = '';
     let pswd = '';
 
-    const handleLogin = () => {
-
-    };
-
-    const handleRegister = () => {
-
-    };
-
     const handleModal = (which) => {
         if (which === 'login')
             setLoginModalShow(!loginModalShow);
@@ -167,9 +159,27 @@ export default function LandingPage(props) {
     </form>;
 
     const loginSubmit = async () => {
-        await axios.post('http://localhost:8000/api/v1/user/auth', {
+        console.log(username);
+        console.log(pswd);
+        axios.post('http://localhost:8000/api/v1/user/auth/', {
             'username': username,
             'password': pswd
+        }).then(res => {
+            if (res.status === 200)
+                props.loginUser(username, res.data.token);
+        });
+    };
+
+    const registerSubmit = async () => {
+        axios.post('http://localhost:8000/api/v1/user/register/', {
+            'username': username,
+            'first_name': firstName,
+            'last_name': lastName,
+            'email': email,
+            'password': pswd
+        }).then(res => {
+            if (res.status === 201)
+                loginSubmit(username, res.data.token);
         });
     };
 
@@ -201,6 +211,7 @@ export default function LandingPage(props) {
                     className='btn btn-primary btn-lg rounded-pill'
                     onClick={() => {
                         handleModal('login');
+                        loginSubmit();
                     }}
                 >Login</button>
             </Modal.Footer>
@@ -221,6 +232,7 @@ export default function LandingPage(props) {
                     className='btn btn-primary btn-lg rounded-pill'
                     onClick={() => {
                         handleModal('register');
+                        registerSubmit();
                     }}
                 >Agree and Register</button>
             </Modal.Footer>

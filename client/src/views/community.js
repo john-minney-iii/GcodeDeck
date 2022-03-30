@@ -31,6 +31,41 @@ export default function Community(props) {
         setMessage('');
     };
 
+    const ContactRequestForms = (msg) => <form>
+        <small id='usernameHelp' className='form-text text-muted'>{msg}</small>
+        <div className='form-group'>
+            <label htmlFor='usernameInput'>Username</label>
+            <input 
+                type='text' 
+                className='form-control' 
+                id='usernameInput'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+            />
+        </div>
+        <div className='form-group'>
+            <label htmlFor='emailInput'>Email</label>
+            <input 
+                type='email' 
+                className='form-control' 
+                id='emailInput' 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+        </div>
+        <div className='form-group'>
+            <label htmlFor='messageInput'>Message</label>
+            <input 
+                type='textarea' 
+                className='form-control' 
+                id='messageInput' 
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                height={200}
+            />
+        </div>
+    </form>
+
     return <div className='community-view'>
         <Navbar authenticated={props.authenticated} changeView={props.changeView} />
         <div className='main-container'>
@@ -80,8 +115,8 @@ export default function Community(props) {
                 </Modal.Footer>
             </Modal>
             <Modal show={systemModalShow} onHide={() => handleModal('system')}>
-                <Modal.Header closeButton>This is a Modal Heading</Modal.Header>
-                <Modal.Body>This is a Modal Body</Modal.Body>
+                <Modal.Header closeButton>System Request</Modal.Header>
+                <Modal.Body>{ContactRequestForms('Got an idea for a feature? Let us know!')}</Modal.Body>
                 <Modal.Footer>
                     <button 
                         className='btn btn-primary btn-lg rounded-pill'
@@ -94,8 +129,8 @@ export default function Community(props) {
                 </Modal.Footer>
             </Modal>
             <Modal show={contactModalShow} onHide={() => handleModal('contact')}>
-                <Modal.Header closeButton>This is a Modal Heading</Modal.Header>
-                <Modal.Body>This is a Modal Body</Modal.Body>
+                <Modal.Header closeButton>Contact Us</Modal.Header>
+                <Modal.Body>{ContactRequestForms('Send us a message!')}</Modal.Body>
                 <Modal.Footer>
                     <button 
                         className='btn btn-primary btn-lg rounded-pill'

@@ -11,7 +11,6 @@ export default function Community(props) {
     // States for forms
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
 
     const handleModal = (which) => {
@@ -27,7 +26,6 @@ export default function Community(props) {
     const resetFormStates = () => {
         setUsername('');
         setEmail('');
-        setSubject('');
         setMessage('');
     };
 
@@ -52,6 +50,18 @@ export default function Community(props) {
                 alert('Thanks for the system request!');
         })
     };
+
+    const submitBugReport = async () => {
+        axios.post('http://localhost:8000/api/v1/community/bugReport/', {
+            'username': username,
+            'email': email,
+            'content': message
+        }).then(res => {
+            if (res.status === 201)
+                alert('Thanks for the bug report!');
+        })
+    };
+
 
     const ContactRequestForms = (msg) => <form>
         <small id='usernameHelp' className='form-text text-muted'>{msg}</small>
@@ -111,16 +121,6 @@ export default function Community(props) {
             />
         </div>
         <div className='form-group'>
-            <label htmlFor='subjectInput'>Subject</label>
-            <input 
-                type='text' 
-                className='form-control' 
-                id='subjectInput' 
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-            />
-        </div>
-        <div className='form-group'>
             <label htmlFor='messageInput'>Message</label>
             <input 
                 type='textarea' 
@@ -174,7 +174,10 @@ export default function Community(props) {
                     >Cancel</button>
                     <button 
                         className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => handleModal('report')}
+                        onClick={() => {
+                            handleModal('report');
+                            submitBugReport();
+                        }}
                     >Submit</button>
                 </Modal.Footer>
             </Modal>

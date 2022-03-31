@@ -1,53 +1,59 @@
 import React, { Component } from 'react';
 import LandingPage from './views/landing_page';
-import AboutUs from './views/about_us';
 import Community from './views/community';
+import AboutUs from './views/about_us';
 import GenHome from './views/gen-home';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './assets/css/app.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import './assets/css/app.css';  
 
 export default class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentView: 'landing-page',
+            token: '',
+            authenticated: false
+        };
+    }
 
-    deleteOnClick = () => {
-        console.log('Delete Clicked');
-        axios.post('/api/v1/user/delete/', {
-            "username": "test",
-            "password": "testpass",
-            "token": this.state.token
-        }, {
-            headers: {
-                "Authorization": "TOKEN " + this.state.token
-            }
-        }).then(res => {
-            if (res.status === 200) {
-                this.setState(
-                    {
-                        username: '',
-                        token: '',
-                        loggedIn: false
-                    }
-                );
-            }
+    loginUser = (token) => {
+        this.setState({
+            token: token,
+            authenticated: true
         });
     };
 
-    data = () => {
-        console.log('Username: ' + this.state.username);
-        console.log('Token: ' + this.state.token);
+    changeCurrentView = (value) => {
+        this.setState({ currentView: value});
+    };
+
+    chooseCurrentView = () => {
+        if (this.state.currentView === 'landing-page')
+            return <LandingPage 
+                authenticated={this.state.authenticated}
+                loginUser={this.loginUser}
+                changeView={this.changeCurrentView}
+            />
+        else if (this.state.currentView === 'about-us')
+            return <AboutUs 
+                authenticated={this.state.authenticated}
+                changeView={this.changeCurrentView} 
+            />
+        else if (this.state.currentView === 'community')
+            return <Community 
+                authenticated={this.state.authenticated}
+                changeView={this.changeCurrentView}
+            />
+        else if (this.state.currentView === 'gen-home')
+            return <GenHome 
+                authenticated={this.state.authenticated}
+                changeView={this.changeCurrentView}
+            />
+        return <p>Idk Dawg</p>
     };
 
     render() {
-        return(
-            <BrowserRouter>
-                <Routes>
-                    <Route path='/' element={<LandingPage />} />
-                    <Route path='about-us/' element={<AboutUs/>} />
-                    <Route path='community/' element={<Community authenticated={false} />} />
-                    <Route path='gen-home/' element={<GenHome/>} />
-                </Routes>
-            </BrowserRouter>
-        );
+        return this.chooseCurrentView();
     }
 }

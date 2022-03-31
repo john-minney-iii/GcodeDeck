@@ -1,109 +1,221 @@
-import React, { Component } from 'react';
-import Navbar from '../components/navbar';
-import { Modal } from 'react-bootstrap';
+import { useState } from "react";
+import Navbar from "../components/navbar";
+import { Modal } from "react-bootstrap";
+import axios from "axios";
 import '../assets/css/community.css';
 
-export default class Community extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            authenticated: false,
-            reportBugModalShow: false,
-            systemRequestModalShow: false,
-            contactModalShow: false,
-        }
-    }
+export default function Community(props) {
+    const [reportModalShow, setReportModalShow] = useState(false);
+    const [systemModalShow, setSystemModalShow] = useState(false);
+    const [contactModalShow, setContactModalShow] = useState(false);
+    // States for forms
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
 
-    handleModal = (which) => {
-        if (which === 'report') {
-            this.setState({ reportBugModalShow: !this.state.reportBugModalShow });
-        } else if (which === 'system') {
-            this.setState({ systemRequestModalShow: !this.state.systemRequestModalShow });
-        } else if (which === 'contact') {
-            this.setState({ contactModalShow: !this.state.contactModalShow });
-        }
+    const handleModal = (which) => {
+        if (which === 'report')
+            setReportModalShow(!reportModalShow);
+        else if (which === 'system')
+            setSystemModalShow(!systemModalShow);
+        else if (which === 'contact')
+            setContactModalShow(!contactModalShow);
+        resetFormStates();
     };
 
-    render() {
-        return(
-            <div>
-                <Navbar authenticated={this.state.authenticated} />
-                <div className='main-container'>
-                    <div className='container'>
-                        <div className='row'>
-                            <div className='col-lg community-text-container'>
-                                <h1>GCODEdeck Community</h1>
-                                <p>
-                                    We would love for you to connect with the GCODEdeck community!
-                                    Here you can find our release notes and you can submit Bug Reports,
-                                    System Requests, or just leave us a message. We hope you enjoy your stay!
-                                </p>
-                            </div>
-                            <div className='col-lg community-buttons-container'>
-                                <div>
-                                    <button
-                                        className='btn btn-primary btn-lg rounded-pill mx-2 my-2 w-36'
-                                    >Release Notes</button>
-                                    <button
-                                        className='btn btn-primary btn-lg rounded-pill w-36'
-                                        onClick={() => this.handleModal('report')}
-                                    >Report a Bug</button>
-                                    <button
-                                        className='btn btn-primary btn-lg rounded-pill mx-2 w-36'
-                                        onClick={() => this.handleModal('system')}
-                                    >System Request</button>
-                                    <button
-                                        className='btn btn-primary btn-lg rounded-pill w-36'
-                                        onClick={() => this.handleModal('contact')}
-                                    >Contact Us</button>
-                                </div>
-                            </div>
+    const resetFormStates = () => {
+        setUsername('');
+        setEmail('');
+        setMessage('');
+    };
+
+    const submitContactRequest = async () => {
+        axios.post('http://localhost:8000/api/v1/community/contactUs/', {
+            'username': username,
+            'email': email,
+            'content': message
+        }).then(res => {
+            if (res.status === 201)
+                alert('Thanks for reaching out!');
+        })
+    };
+
+    const submitSystemRequest = async () => {
+        axios.post('http://localhost:8000/api/v1/community/systemRequest/', {
+            'username': username,
+            'email': email,
+            'content': message
+        }).then(res => {
+            if (res.status === 201)
+                alert('Thanks for the system request!');
+        })
+    };
+
+    const submitBugReport = async () => {
+        axios.post('http://localhost:8000/api/v1/community/bugReport/', {
+            'username': username,
+            'email': email,
+            'content': message
+        }).then(res => {
+            if (res.status === 201)
+                alert('Thanks for the bug report!');
+        })
+    };
+
+
+    const ContactRequestForms = (msg) => <form>
+        <small id='usernameHelp' className='form-text text-muted'>{msg}</small>
+        <div className='form-group'>
+            <label htmlFor='usernameInput'>Username</label>
+            <input 
+                type='text' 
+                className='form-control' 
+                id='usernameInput'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+            />
+        </div>
+        <div className='form-group'>
+            <label htmlFor='emailInput'>Email</label>
+            <input 
+                type='email' 
+                className='form-control' 
+                id='emailInput' 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+        </div>
+        <div className='form-group'>
+            <label htmlFor='messageInput'>Message</label>
+            <input 
+                type='textarea' 
+                className='form-control' 
+                id='messageInput' 
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                height={200}
+            />
+        </div>
+    </form>
+
+    const ReportABugForm = () => <form>
+        <small id='usernameHelp' className='form-text text-muted'>Report a Bug</small>
+        <div className='form-group'>
+            <label htmlFor='usernameInput'>Username</label>
+            <input 
+                type='text' 
+                className='form-control' 
+                id='usernameInput'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+            />
+        </div>
+        <div className='form-group'>
+            <label htmlFor='emailInput'>Email</label>
+            <input 
+                type='email' 
+                className='form-control' 
+                id='emailInput' 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+        </div>
+        <div className='form-group'>
+            <label htmlFor='messageInput'>Message</label>
+            <input 
+                type='textarea' 
+                className='form-control' 
+                id='messageInput' 
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                height={200}
+            />
+        </div>
+    </form>
+
+    return <div className='community-view'>
+        <Navbar authenticated={props.authenticated} changeView={props.changeView} />
+        <div className='main-container'>
+            <div className='container'>
+                <div className='row'>
+                    <div className='col-lg community-text-container'>
+                        <h1>GCODEdeck Community</h1>
+                        <p>
+                            We would love for you to connect with the GCODEdeck community!
+                            Here you can find our release notes and you can submit Bug Reports,
+                            System Requests, or just leave us a message. We hope you enjoy your stay!
+                        </p>
+                    </div>
+                    <div className='col-lg community-buttons-container'>
+                        <div>
+                            <button
+                                className='btn btn-primary btn-lg rounded-pill w-36'
+                                onClick={() => handleModal('report')}
+                            >Report a Bug</button>
+                            <button
+                                className='btn btn-primary btn-lg rounded-pill mx-2 w-36'
+                                onClick={() => handleModal('system')}
+                            >System Request</button>
+                            <button
+                                className='btn btn-primary btn-lg rounded-pill w-36'
+                                onClick={() => handleModal('contact')}
+                            >Contact Us</button>
                         </div>
                     </div>
-                    <Modal show={this.state.reportBugModalShow} onHide={() => this.handleModal('report')}>
-                        <Modal.Header closeButton>This is a Modal Heading</Modal.Header>
-                        <Modal.Body>This is a Modal Body</Modal.Body>
-                        <Modal.Footer>
-                            <button 
-                                className='btn btn-primary btn-lg rounded-pill'
-                                onClick={() => this.handleModal('report')}
-                            >Cancel</button>
-                            <button 
-                                className='btn btn-primary btn-lg rounded-pill'
-                                onClick={() => this.handleModal('report')}
-                            >Submit</button>
-                        </Modal.Footer>
-                    </Modal>
-                    <Modal show={this.state.systemRequestModalShow} onHide={() => this.handleModal('system')}>
-                        <Modal.Header closeButton>This is a Modal Heading</Modal.Header>
-                        <Modal.Body>This is a Modal Body</Modal.Body>
-                        <Modal.Footer>
-                            <button 
-                                className='btn btn-primary btn-lg rounded-pill'
-                                onClick={() => this.handleModal('system')}
-                            >Cancel</button>
-                            <button 
-                                className='btn btn-primary btn-lg rounded-pill'
-                                onClick={() => this.handleModal('system')}
-                            >Submit</button>
-                        </Modal.Footer>
-                    </Modal>
-                    <Modal show={this.state.contactModalShow} onHide={() => this.handleModal('contact')}>
-                        <Modal.Header closeButton>This is a Modal Heading</Modal.Header>
-                        <Modal.Body>This is a Modal Body</Modal.Body>
-                        <Modal.Footer>
-                            <button 
-                                className='btn btn-primary btn-lg rounded-pill'
-                                onClick={() => this.handleModal('contact')}
-                            >Cancel</button>
-                            <button 
-                                className='btn btn-primary btn-lg rounded-pill'
-                                onClick={() => this.handleModal('contact')}
-                            >Submit</button>
-                        </Modal.Footer>
-                    </Modal>
                 </div>
             </div>
-        );
-    }
+            <Modal show={reportModalShow} onHide={() => handleModal('report')}>
+                <Modal.Header closeButton>Report a Bug</Modal.Header>
+                <Modal.Body>{ReportABugForm()}</Modal.Body>
+                <Modal.Footer>
+                    <button 
+                        className='btn btn-primary btn-lg rounded-pill'
+                        onClick={() => handleModal('report')}
+                    >Cancel</button>
+                    <button 
+                        className='btn btn-primary btn-lg rounded-pill'
+                        onClick={() => {
+                            handleModal('report');
+                            submitBugReport();
+                        }}
+                    >Submit</button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={systemModalShow} onHide={() => handleModal('system')}>
+                <Modal.Header closeButton>System Request</Modal.Header>
+                <Modal.Body>{ContactRequestForms('Got an idea for a feature? Let us know!')}</Modal.Body>
+                <Modal.Footer>
+                    <button 
+                        className='btn btn-primary btn-lg rounded-pill'
+                        onClick={() => handleModal('system')}
+                    >Cancel</button>
+                    <button 
+                        className='btn btn-primary btn-lg rounded-pill'
+                        onClick={() => {
+                            handleModal('system');
+                            submitSystemRequest();
+                        }}
+                    >Submit</button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={contactModalShow} onHide={() => handleModal('contact')}>
+                <Modal.Header closeButton>Contact Us</Modal.Header>
+                <Modal.Body>{ContactRequestForms('Send us a message!')}</Modal.Body>
+                <Modal.Footer>
+                    <button 
+                        className='btn btn-primary btn-lg rounded-pill'
+                        onClick={() => handleModal('contact')}
+                    >Cancel</button>
+                    <button 
+                        className='btn btn-primary btn-lg rounded-pill'
+                        onClick={() => {
+                            handleModal('contact');
+                            submitContactRequest();
+                        }}
+                    >Submit</button>
+                </Modal.Footer>
+            </Modal>
+        </div>
+    </div>
+
 }

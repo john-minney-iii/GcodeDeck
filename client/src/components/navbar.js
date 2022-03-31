@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 
 export default function Navbar(props) {
     if (props.authenticated) {
@@ -10,11 +9,10 @@ export default function Navbar(props) {
                 </button>
                 <div className="collapse navbar-collapse mx-2" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-auto">
-                        <a href="/" className="nav-item nav-link active" id="homeNavLink">Home</a>
-                        <a href="/" className="nav-item nav-link" id="myProgramsNavLink">My Programs</a>
-                        <a href="/" className="nav-item nav-link" id="myToolsNavLink">My Tools</a>
-                        <a href="/community/" className="nav-item nav-link" id="communityNavLink">Community</a>
-                        <a href='/' className="nav-item nav-link" id="accountNavLink">Account</a>
+                        <button className='nav-item nav-link active' onClick={() => props.changeView('landing-page')}>Home</button>
+                        <button className='nav-item nav-link' onClick={() => props.changeView('my-programs')}>My Programs</button>
+                        <button className='nav-item nav-link' onClick={() => props.changeView('community')}>Community</button>
+                        <button className='nav-item nav-link' onClick={() => props.changeView('account')}>Account</button>
                     </div>
                 </div>
             </nav>
@@ -28,9 +26,9 @@ export default function Navbar(props) {
                 </button>
                 <div className="collapse navbar-collapse mx-2" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-auto">
-                        <a href="/" className="nav-item nav-link active" id="homeNavLink">Home</a>
-                        <a href="/about-us/" className="nav-item nav-link" id="aboutusNavLink">About Us</a>
-                        <a href="/community/" className="nav-item nav-link" id="communityNavLink">Community</a>
+                        <button className='nav-item nav-link active' onClick={() => props.changeView('landing-page')}>Home</button>
+                        <button className='nav-item nav-link' onClick={() => props.changeView('about-us')}>About Us</button>
+                        <button className='nav-item nav-link' onClick={() => props.changeView('community')}>Community</button>
                     </div>
                 </div>
             </nav>

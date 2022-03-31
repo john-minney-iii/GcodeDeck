@@ -31,6 +31,28 @@ export default function Community(props) {
         setMessage('');
     };
 
+    const submitContactRequest = async () => {
+        axios.post('http://localhost:8000/api/v1/community/contactUs/', {
+            'username': username,
+            'email': email,
+            'content': message
+        }).then(res => {
+            if (res.status === 201)
+                alert('Thanks for reaching out!');
+        })
+    };
+
+    const submitSystemRequest = async () => {
+        axios.post('http://localhost:8000/api/v1/community/systemRequest/', {
+            'username': username,
+            'email': email,
+            'content': message
+        }).then(res => {
+            if (res.status === 201)
+                alert('Thanks for the system request!');
+        })
+    };
+
     const ContactRequestForms = (msg) => <form>
         <small id='usernameHelp' className='form-text text-muted'>{msg}</small>
         <div className='form-group'>
@@ -166,7 +188,10 @@ export default function Community(props) {
                     >Cancel</button>
                     <button 
                         className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => handleModal('system')}
+                        onClick={() => {
+                            handleModal('system');
+                            submitSystemRequest();
+                        }}
                     >Submit</button>
                 </Modal.Footer>
             </Modal>
@@ -180,7 +205,10 @@ export default function Community(props) {
                     >Cancel</button>
                     <button 
                         className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => handleModal('contact')}
+                        onClick={() => {
+                            handleModal('contact');
+                            submitContactRequest();
+                        }}
                     >Submit</button>
                 </Modal.Footer>
             </Modal>

@@ -127,9 +127,6 @@ export default function Community(props) {
                     <div className='col-lg community-buttons-container'>
                         <div>
                             <button
-                                className='btn btn-primary btn-lg rounded-pill mx-2 my-2 w-36'
-                            >Release Notes</button>
-                            <button
                                 className='btn btn-primary btn-lg rounded-pill w-36'
                                 onClick={() => handleModal('report')}
                             >Report a Bug</button>

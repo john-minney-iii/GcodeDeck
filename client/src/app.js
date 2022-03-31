@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LandingPage from './views/landing_page';
 import Community from './views/community';
+import AboutUs from './views/about_us';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/app.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -32,6 +33,11 @@ export default class App extends Component {
                 authenticated={this.state.authenticated}
                 loginUser={this.loginUser}
                 changeView={this.changeCurrentView}
+            />
+        else if (this.state.currentView === 'about-us')
+            return <AboutUs 
+                authenticated={this.state.authenticated}
+                changeView={this.changeCurrentView} 
             />
         else if (this.state.currentView === 'community')
             return <Community 

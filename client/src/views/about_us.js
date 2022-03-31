@@ -14,7 +14,7 @@ constructor(props) {
     return (
       <div>
         <div className="AboutUs">
-          <Navbar authenticated={this.state.authenticated} />
+          <Navbar authenticated={this.props.authenticated} changeView={this.props.changeView} />
         </div>
         <div className='m-5'>
           <div className="main">

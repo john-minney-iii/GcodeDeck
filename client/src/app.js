@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import LandingPage from './views/landing_page';
 import Community from './views/community';
 import AboutUs from './views/about_us';
+import GenHome from './views/gen-home';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './assets/css/app.css';
+import './assets/css/app.css';  
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default class App extends Component {
@@ -41,6 +42,11 @@ export default class App extends Component {
             />
         else if (this.state.currentView === 'community')
             return <Community 
+                authenticated={this.state.authenticated}
+                changeView={this.changeCurrentView}
+            />
+        else if (this.state.currentView === 'gen-home')
+            return <GenHome 
                 authenticated={this.state.authenticated}
                 changeView={this.changeCurrentView}
             />

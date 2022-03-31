@@ -12,7 +12,6 @@ export default function Navbar(props) {
                     <div className="navbar-nav ms-auto">
                         <button className='nav-item nav-link active' onClick={() => props.changeView('landing-page')}>Home</button>
                         <button className='nav-item nav-link' onClick={() => props.changeView('my-programs')}>My Programs</button>
-                        <button className='nav-item nav-link' onClick={() => props.changeView('my-tools')}>My Tools</button>
                         <button className='nav-item nav-link' onClick={() => props.changeView('community')}>Community</button>
                         <button className='nav-item nav-link' onClick={() => props.changeView('account')}>Account</button>
                     </div>

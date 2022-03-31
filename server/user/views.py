@@ -1,3 +1,4 @@
+from django.forms import PasswordInput
 from .serializers import UserSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -44,6 +45,22 @@ class CheckToken(APIView):
                 {'error': True, 'error_msg': e},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
+class ChangePassword(APIView):
+    permissions_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = User.objects.get(username=request.data['username'])
+        username = request.data['username']
+        current_pass = request.data['currentPassword']
+        new_pass = request.data['newPassword']
+        user_auth = authenticate(username = username, password=current_pass)
+        if user_auth is not None:
+            user.set_password(new_pass)
+            user.save()
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_401_BAD_REQUEST)
 
 class DeleteUser(APIView):
     permissions_classes = [IsAuthenticated]

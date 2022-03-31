@@ -3,7 +3,7 @@ import LandingPage from './views/landing_page';
 import Community from './views/community';
 import AboutUs from './views/about_us';
 import GenHome from './views/gen-home';
-import axios from 'axios';
+import Account from './views/account';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/app.css';  
 
@@ -22,6 +22,15 @@ export default class App extends Component {
             token: token,
             authenticated: true
         });
+    };
+
+    logoutUser = () => {
+        this.setState({
+            token: '',
+            authenticated: false
+        });
+        this.changeCurrentView('landing-page');
+        alert('Logged Out');
     };
 
     changeCurrentView = (value) => {
@@ -49,6 +58,13 @@ export default class App extends Component {
             return <GenHome 
                 authenticated={this.state.authenticated}
                 changeView={this.changeCurrentView}
+            />
+        else if (this.state.currentView === 'account')
+            return <Account 
+                authenticated={this.state.authenticated}
+                changeView={this.changeCurrentView}
+                token={this.state.token}
+                logOut={this.logoutUser}
             />
         return <p>Idk Dawg</p>
     };

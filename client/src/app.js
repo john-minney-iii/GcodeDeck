@@ -5,7 +5,6 @@ import AboutUs from './views/about_us';
 import GenHome from './views/gen-home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/app.css';  
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default class App extends Component {
     constructor(props) {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import LandingPage from './views/landing_page';
 import AboutUs from './views/about_us';
 import Community from './views/community';
+import GenHome from './views/gen-home';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/app.css';
@@ -43,7 +44,8 @@ export default class App extends Component {
                 <Routes>
                     <Route path='/' element={<LandingPage />} />
                     <Route path='about-us/' element={<AboutUs/>} />
-                    <Route path='community/' element={<Community />} />
+                    <Route path='community/' element={<Community authenticated={false} />} />
+                    <Route path='gen-home/' element={<GenHome/>} />
                 </Routes>
             </BrowserRouter>
         );

@@ -3,6 +3,7 @@ import LandingPage from './views/landing_page';
 import Community from './views/community';
 import AboutUs from './views/about_us';
 import GenHome from './views/gen-home';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/app.css';  
 

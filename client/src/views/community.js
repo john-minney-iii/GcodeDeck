@@ -7,7 +7,7 @@ export default class Community extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            authenticated: this.props.authenticated,
+            authenticated: false,
             reportBugModalShow: false,
             systemRequestModalShow: false,
             contactModalShow: false,

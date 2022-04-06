@@ -36,11 +36,11 @@ export default function LandingPage(props) {
     };
 
     const AuthenticatedCallToActions = () => {
-        if (props.authenticated) 
+        if (props.authenticated)
             return(
                 <div>
                     <button className="btn btn-primary btn-lg rounded-pill mx-2">My Programs</button>
-                    <button 
+                    <button
                         className="btn btn-outline-primary btn-lg rounded-pill"
                         onClick={() => props.changeView('gen-home')}
                     >Create a new program</button>
@@ -54,14 +54,18 @@ export default function LandingPage(props) {
             return <img src={HeroImage} className="w-75" alt="cnc router" />;
         return(
             <div>
-                <button 
+                <button
                     className="btn btn-primary btn-lg rounded-pill mx-2"
                     onClick={() => handleModal('login')}
                 >Login</button>
-                <button 
+                <button
                     className="btn btn-primary btn-lg rounded-pill"
                     onClick={() => handleModal('register')}
                 >Register</button>
+                <button
+                    className="btn btn-outline-primary btn-lg rounded-pill"
+                    onClick={() => props.changeView('gen-home')}
+                >Create a new program</button>
             </div>
         );
     };
@@ -69,9 +73,9 @@ export default function LandingPage(props) {
     const LoginForm = () => <form>
         <div className='form-group'>
             <label htmlFor='usernameInput'>Username</label>
-            <input 
-                type='text' 
-                className='form-control' 
+            <input
+                type='text'
+                className='form-control'
                 id='usernameInput'
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -79,10 +83,10 @@ export default function LandingPage(props) {
         </div>
         <div className='form-group'>
             <label htmlFor='passwordInput'>Password</label>
-            <input 
-                type='password' 
-                className='form-control' 
-                id='passwordInput' 
+            <input
+                type='password'
+                className='form-control'
+                id='passwordInput'
                 value={pswd}
                 onChange={(e) => setPswd(e.target.value)}
             />
@@ -92,30 +96,30 @@ export default function LandingPage(props) {
     const RegisterForm = () => <form>
         <div className='form-group'>
             <label htmlFor='firstNameInput'>First Name</label>
-            <input 
-                type='text' 
-                className='form-control' 
-                id='firstNameInput' 
+            <input
+                type='text'
+                className='form-control'
+                id='firstNameInput'
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
             />
         </div>
         <div className='form-group'>
             <label htmlFor='lastNameInput'>Last Name</label>
-            <input 
-                type='text' 
-                className='form-control' 
-                id='lastNameInput' 
+            <input
+                type='text'
+                className='form-control'
+                id='lastNameInput'
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
             />
         </div>
         <div className='form-group'>
             <label htmlFor='usernameInput'>Username</label>
-            <input 
-                type='text' 
-                className='form-control' 
-                id='usernameInput' 
+            <input
+                type='text'
+                className='form-control'
+                id='usernameInput'
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
@@ -125,36 +129,36 @@ export default function LandingPage(props) {
         </div>
         <div className='form-group'>
             <label htmlFor='emailInput'>Email</label>
-            <input 
-                type='email' 
-                className='form-control' 
-                id='emailInput' 
+            <input
+                type='email'
+                className='form-control'
+                id='emailInput'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
         </div>
         <div className='form-group'>
             <label htmlFor='pswdInput'>Password</label>
-            <input 
-                type='password' 
-                className='form-control' 
-                id='pswdInput' 
+            <input
+                type='password'
+                className='form-control'
+                id='pswdInput'
                 value={pswd}
                 onChange={(e) => setPswd(e.target.value)}
 
             />
             <small id='usernameHelp' className='form-text text-muted'>
                 Use a mix of letters, numbers, and symbols. Password cannot
-                be too similar to your other personal information, nor be a commonly 
+                be too similar to your other personal information, nor be a commonly
                 used password, nor be entirely numeric.
             </small>
         </div>
         <div className='form-group'>
             <label htmlFor='pswdConfInput'>Confirm Password</label>
-            <input 
-                type='password' 
-                className='form-control' 
-                id='pswdConfInput' 
+            <input
+                type='password'
+                className='form-control'
+                id='pswdConfInput'
                 value={regPswdConfirm}
                 onChange={(e) => setRegPswdConfirm(e.target.value)}
             />
@@ -204,11 +208,11 @@ export default function LandingPage(props) {
             <Modal.Header closeButton>Login</Modal.Header>
             <Modal.Body>{LoginForm()}</Modal.Body>
             <Modal.Footer>
-                <button 
+                <button
                     className='btn btn-primary btn-lg rounded-pill'
                     onClick={() => handleModal('login')}
                 >Cancel</button>
-                <button 
+                <button
                     className='btn btn-primary btn-lg rounded-pill'
                     onClick={() => {
                         handleModal('login');
@@ -222,14 +226,14 @@ export default function LandingPage(props) {
             <Modal.Body>{RegisterForm()}</Modal.Body>
             <Modal.Footer>
                 <small id='usernameHelp' className='text-muted'>
-                    By clicking Agree and Continue you agree to GCODEdeck's Terms of Service 
+                    By clicking Agree and Continue you agree to GCODEdeck's Terms of Service
                     and Cookies and Privacy Policy
                 </small>
-                <button 
+                <button
                     className='btn btn-primary btn-lg rounded-pill'
                     onClick={() => handleModal('register')}
                 >Cancel</button>
-                <button 
+                <button
                     className='btn btn-primary btn-lg rounded-pill'
                     onClick={() => {
                         handleModal('register');

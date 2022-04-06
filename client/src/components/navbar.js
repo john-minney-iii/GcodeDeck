@@ -9,10 +9,10 @@ export default function Navbar(props) {
                 </button>
                 <div className="collapse navbar-collapse mx-2" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-auto">
-                        <button className='nav-item nav-link active' onClick={() => props.changeView('landing-page')}>Home</button>
-                        <button className='nav-item nav-link' onClick={() => props.changeView('my-programs')}>My Programs</button>
-                        <button className='nav-item nav-link' onClick={() => props.changeView('community')}>Community</button>
-                        <button className='nav-item nav-link' onClick={() => props.changeView('account')}>Account</button>
+                        <button className='btn btn-link nav-item nav-link active' onClick={() => props.changeView('landing-page')}>Home</button>
+                        <button className='btn btn-link nav-item nav-link' onClick={() => props.changeView('my-programs')}>My Programs</button>
+                        <button className='btn btn-link nav-item nav-link' onClick={() => props.changeView('community')}>Community</button>
+                        <button className='btn btn-link nav-item nav-link' onClick={() => props.changeView('account')}>Account</button>
                     </div>
                 </div>
             </nav>
@@ -26,9 +26,9 @@ export default function Navbar(props) {
                 </button>
                 <div className="collapse navbar-collapse mx-2" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-auto">
-                        <button className='nav-item nav-link active' onClick={() => props.changeView('landing-page')}>Home</button>
-                        <button className='nav-item nav-link' onClick={() => props.changeView('about-us')}>About Us</button>
-                        <button className='nav-item nav-link' onClick={() => props.changeView('community')}>Community</button>
+                        <button className='btn btn-link nav-item nav-link active' onClick={() => props.changeView('landing-page')}>Home</button>
+                        <button className='btn btn-link nav-item nav-link' onClick={() => props.changeView('about-us')}>About Us</button>
+                        <button className='btn btn-link nav-item nav-link' onClick={() => props.changeView('community')}>Community</button>
                     </div>
                 </div>
             </nav>

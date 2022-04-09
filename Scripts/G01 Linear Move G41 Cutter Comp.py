@@ -56,8 +56,6 @@ class G41_LinearMove:
         else:
             self.yEnd = self.yEnd + (self.toolDiameter / 2)
 
-    def determineX
-
     def generateGCode(self):
         print(f'M06 T{self.toolNum}')  # change to the specified tool
         # Specify heigh offest, and apply to tool path

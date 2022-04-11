@@ -73,7 +73,7 @@ export default function GenHome(props) {
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
-                  onClick={() => handleModal('line')}
+                  onClick={() => handleModal('G01Modal')}
                   >
                   Line
                   </button>

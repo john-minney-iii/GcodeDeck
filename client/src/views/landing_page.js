@@ -90,6 +90,7 @@ export default function LandingPage(props) {
     </form>;
 
     const RegisterForm = () => <form>
+       
         <div className='form-group'>
             <label htmlFor='firstNameInput'>First Name</label>
             <input 
@@ -110,7 +111,7 @@ export default function LandingPage(props) {
                 onChange={(e) => setLastName(e.target.value)}
             />
         </div>
-        <div className='form-group'>
+        <div className='form-group mb-3'>
             <label htmlFor='usernameInput'>Username</label>
             <input 
                 type='text' 
@@ -143,7 +144,7 @@ export default function LandingPage(props) {
                 onChange={(e) => setPswd(e.target.value)}
 
             />
-            <small id='usernameHelp' className='form-text text-muted'>
+            <small id='usernameHelp' className='form-text text-muted mb-3'>
                 Use a mix of letters, numbers, and symbols. Password cannot
                 be too similar to your other personal information, nor be a commonly 
                 used password, nor be entirely numeric.

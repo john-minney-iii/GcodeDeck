@@ -25,7 +25,7 @@ export default function GenHome(props) {
                 className="btn btn-outline-primary btn-lg w-75"
                 data-toggle="modal"
                 data-target="#linetoolModal">
-                Line
+                Tool Change
                 </button>
             </div>
             <div className="radius-button py-3">
@@ -34,7 +34,7 @@ export default function GenHome(props) {
                 className="btn btn-outline-primary btn-lg w-75"
                 data-toggle="modal"
                 data-target="#radiustoolModal">
-                Radius
+                Spindle Command
                 </button>
             </div>
             <div className="circle-button py-3">
@@ -43,15 +43,44 @@ export default function GenHome(props) {
                 className="btn btn-outline-primary btn-lg w-75"
                 data-toggle="modal"
                 data-target="#circletoolModal">
-                Circle
+                Rapid Movement
             </button>
             </div>
-            <div className="-button py-3">
-                <button className="btn btn-outline-primary btn-lg w-75">Button</button>
+            <div className="circle-button py-3">
+                <button
+                type="button"
+                className="btn btn-outline-primary btn-lg w-75"
+                data-toggle="modal"
+                data-target="#linearModal">
+                Linear Movement
+            </button>
             </div>
-            <div className="-button py-3">
-                <button className="btn btn-outline-primary btn-lg w-75">Button</button>
+            <div className="circle-button py-3">
+                <button
+                type="button"
+                className="btn btn-outline-primary btn-lg w-75"
+                data-toggle="modal"
+                data-target="#drillingModal">
+                Drilling
+            </button>
             </div>
+            <div className="circle-button py-3">
+                <button
+                type="button"
+                className="btn btn-outline-primary btn-lg w-75"
+                data-toggle="modal"
+                data-target="#facingModal">
+                Facing Template
+            </button>
+            </div>
+            <div className="circle-button py-3">
+                <button
+                type="button"
+                className="btn btn-outline-primary btn-lg w-75"
+                data-toggle="modal"
+                data-target="#rectangleModal">
+                Rectangle Template
+            </button>
             </div>
             <div className="col-7">
             <div className="container-justify-content-start">
@@ -65,5 +94,6 @@ export default function GenHome(props) {
             </div>
         </div>
         </div>
+    </div>
     </div>;
 }

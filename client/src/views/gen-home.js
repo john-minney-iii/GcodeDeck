@@ -139,12 +139,12 @@ export default function GenHome(props) {
           </div>
       </div>
 
-      <Modal show={lineModalShow} onHide={() => handleModal('linearModal')}>
+      <Modal show={lineModalShow} onHide={() => handleModal('g01Modal')}>
           <Modal.Header closeButton>
           Linear Movement
           </Modal.Header>
           <Modal.Body>
-            {LinearForm()}
+            {LineForm()}
           </Modal.Body>
           <Modal.Footer>
               <button

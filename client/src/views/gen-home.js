@@ -73,7 +73,11 @@ export default function GenHome(props) {
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
+<<<<<<< HEAD
+                  onClick={() => handleModal('G01Modal')}
+=======
                   onClick={() => handleModal('toolChangeModal')}
+>>>>>>> 484e0e04d7c76e9e07d9376562807b955bfc0132
                   >
                   Tool Change
                   </button>

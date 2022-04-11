@@ -18,7 +18,7 @@ export default function GenHome(props) {
   };
 
 
-  const LineForm = () => <form>
+  const g01Form = () => <form>
         <div className="form-group">
           <label for="toolDiameter">Tool Diameter</label>
           <input type="" className="form-control" id="toolDiameter" />
@@ -144,7 +144,7 @@ export default function GenHome(props) {
           Linear Movement
           </Modal.Header>
           <Modal.Body>
-            {LineForm()}
+            {g01Form()}
           </Modal.Body>
           <Modal.Footer>
               <button

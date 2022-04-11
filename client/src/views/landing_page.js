@@ -23,6 +23,7 @@ export default function LandingPage(props) {
             setLoginModalShow(!loginModalShow);
         else if (which === 'register')
             setRegModalShow(!regModalShow);
+        else if (which === 'error')
         resetFormStates();
     };
 
@@ -71,9 +72,12 @@ export default function LandingPage(props) {
             <label htmlFor='usernameInput'>Username</label>
             <input 
                 type='text' 
+                errorMessage="Should only be 150 characters or fewer and contain only letters, digits and @/_/+/- only"
                 className='form-control' 
                 id='usernameInput'
                 value={username}
+                required={true}
+                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
                 onChange={(e) => setUsername(e.target.value)}
             />
         </div>
@@ -81,9 +85,12 @@ export default function LandingPage(props) {
             <label htmlFor='passwordInput'>Password</label>
             <input 
                 type='password' 
+                errorMessage="Use a mix of letters, numbers, and symbols. Password cannot be too similar to your other personal information, nor be a commonly used password, nor be entirely numeric."
                 className='form-control' 
                 id='passwordInput' 
                 value={pswd}
+                required={true}
+                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
                 onChange={(e) => setPswd(e.target.value)}
             />
         </div>
@@ -94,19 +101,25 @@ export default function LandingPage(props) {
             <label htmlFor='firstNameInput'>First Name</label>
             <input 
                 type='text' 
+                errorMessage="Should only be 150 characters or fewer and contain only letters, digits and @/_/+/- only"
                 className='form-control' 
                 id='firstNameInput' 
                 value={firstName}
+                required={true}
+                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
                 onChange={(e) => setFirstName(e.target.value)}
             />
         </div>
         <div className='form-group'>
             <label htmlFor='lastNameInput'>Last Name</label>
             <input 
-                type='text' 
+                type='text'
+                errorMessage="Should only be 150 characters or fewer and contain only letters, digits and @/_/+/- only" 
                 className='form-control' 
                 id='lastNameInput' 
                 value={lastName}
+                required={true}
+                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
                 onChange={(e) => setLastName(e.target.value)}
             />
         </div>
@@ -114,9 +127,12 @@ export default function LandingPage(props) {
             <label htmlFor='usernameInput'>Username</label>
             <input 
                 type='text' 
+                errorMessage="Should only be 150 characters or fewer and contain only letters, digits and @/_/+/- only"
                 className='form-control' 
                 id='usernameInput' 
                 value={username}
+                required={true}
+                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
                 onChange={(e) => setUsername(e.target.value)}
             />
             <small id='usernameHelp' className='form-text text-muted'>
@@ -127,9 +143,12 @@ export default function LandingPage(props) {
             <label htmlFor='emailInput'>Email</label>
             <input 
                 type='email' 
+                errorMessage="Should only be 150 characters or fewer and contain only letters, digits and @/_/+/- only"
                 className='form-control' 
                 id='emailInput' 
                 value={email}
+                required={true}
+                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
                 onChange={(e) => setEmail(e.target.value)}
             />
         </div>
@@ -137,9 +156,12 @@ export default function LandingPage(props) {
             <label htmlFor='pswdInput'>Password</label>
             <input 
                 type='password' 
+                errorMessage="Use a mix of letters, numbers, and symbols. Password cannot be too similar to your other personal information, nor be a commonly used password, nor be entirely numeric."
                 className='form-control' 
                 id='pswdInput' 
                 value={pswd}
+                required={true}
+                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
                 onChange={(e) => setPswd(e.target.value)}
 
             />
@@ -153,9 +175,12 @@ export default function LandingPage(props) {
             <label htmlFor='pswdConfInput'>Confirm Password</label>
             <input 
                 type='password' 
+                errorMessage="Use a mix of letters, numbers, and symbols. Password cannot be too similar to your other personal information, nor be a commonly used password, nor be entirely numeric."
                 className='form-control' 
                 id='pswdConfInput' 
                 value={regPswdConfirm}
+                required={true}
+                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
                 onChange={(e) => setRegPswdConfirm(e.target.value)}
             />
         </div>

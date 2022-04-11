@@ -69,31 +69,50 @@ export default function GenHome(props) {
           </div>
           <div className="row">
               <div className ="col">
-              <div className="line-button py-3">
+              <div className="toolChange-button py-3">
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
-                  onClick={() => handleModal('line')}
+                  onClick={() => handleModal('toolChangeModal')}
                   >
-                  Line
+                  Tool Change
                   </button>
               </div>
-              <div className="radius-button py-3">
+              <div className="spindleCommand-button py-3">
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
-                  onClick={() => handleModal('drill')}
+                  onClick={() => handleModal('spindleCommandModal')}
                   >
-                  Drill
+                  Spindle Command
                   </button>
               </div>
-              <div className="circle-button py-3">
+              <div className="G00-button py-3">
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
+                  onClick={() => handleModal('G00Modal')}
                   >
-                  Idk
-              </button>
+                  Rapid Movement (G00)
+                  </button>
+              </div>
+              <div className="G01-button py-3">
+                  <button
+                  type="button"
+                  className="btn btn-outline-primary btn-lg w-75"
+                  onClick={() => handleModal('G01Modal')}
+                  >
+                  Linear Movement (G01)
+                  </button>
+              </div>
+              <div className="drilling-button py-3">
+                  <button
+                  type="button"
+                  className="btn btn-outline-primary btn-lg w-75"
+                  onClick={() => handleModal('drillingModal')}
+                  >
+                  Drilling
+                  </button>
               </div>
               <div className="-button py-3">
                   <button className="btn btn-outline-primary btn-lg w-75">
@@ -120,12 +139,12 @@ export default function GenHome(props) {
           </div>
       </div>
 
-      <Modal show={lineModalShow} onHide={() => handleModal('line')}>
+      <Modal show={lineModalShow} onHide={() => handleModal('linearModal')}>
           <Modal.Header closeButton>
-          Line Tool
+          Linear Movement
           </Modal.Header>
           <Modal.Body>
-            {LineForm()}
+            {LinearForm()}
           </Modal.Body>
           <Modal.Footer>
               <button

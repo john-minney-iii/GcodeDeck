@@ -6,19 +6,19 @@ import axios from "axios";
 export default function GenHome(props) {
 
   // States for modals
-  const [lineModalShow, setLineModalShow] = useState(false);
+  const [G01ModalShow, setG01ModalShow] = useState(false);
   const [drillModalShow, setDrillModalShow] = useState(false);
 
   const handleModal = (which) => {
-      if (which === 'line')
-          setLineModalShow(!lineModalShow);
+      if (which === 'G01Modal')
+          setG01ModalShow(!G01ModalShow);
       else if (which === 'drill')
           setDrillModalShow(!drillModalShow);
       //resetFormStates();
   };
 
 
-  const LineForm = () => <form>
+  const G01Form = () => <form>
         <div className="form-group">
           <label for="toolDiameter">Tool Diameter</label>
           <input type="" className="form-control" id="toolDiameter" />
@@ -120,22 +120,22 @@ export default function GenHome(props) {
           </div>
       </div>
 
-      <Modal show={lineModalShow} onHide={() => handleModal('line')}>
+      <Modal show={G01ModalShow} onHide={() => handleModal('G01Modal')}>
           <Modal.Header closeButton>
           Line Tool
           </Modal.Header>
           <Modal.Body>
-            {LineForm()}
+            {G01Form()}
           </Modal.Body>
           <Modal.Footer>
               <button
                   className='btn btn-primary btn-lg rounded-pill'
-                  onClick={() => handleModal('line')}
+                  onClick={() => handleModal('G01Modal')}
               >Cancel</button>
               <button
                   className='btn btn-primary btn-lg rounded-pill'
                   onClick={() => {
-                      handleModal('line');
+                      handleModal('G01Modal');
                   }}
               >Submit</button>
           </Modal.Footer>

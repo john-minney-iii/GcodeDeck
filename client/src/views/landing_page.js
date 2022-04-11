@@ -161,7 +161,7 @@ export default function LandingPage(props) {
                 id='pswdInput' 
                 value={pswd}
                 required={true}
-                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
+                pattern= "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^*])[a-zA-z0-9!@#$%^*]{4,150}$"
                 onChange={(e) => setPswd(e.target.value)}
 
             />
@@ -180,7 +180,7 @@ export default function LandingPage(props) {
                 id='pswdConfInput' 
                 value={regPswdConfirm}
                 required={true}
-                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
+                pattern={pswd.value}
                 onChange={(e) => setRegPswdConfirm(e.target.value)}
             />
         </div>

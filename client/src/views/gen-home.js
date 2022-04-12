@@ -7,20 +7,33 @@ export default function GenHome(props) {
 
   // States for modals
   const [g01ModalShow, setg01ModalShow] = useState(false);
+  const [spindleModalShow, setSpindleModalShow] = useState(false);
   const [drillModalShow, setDrillModalShow] = useState(false);
-  const [spindleModalShow, setspindleModalShow] = useState(false);
 
   const handleModal = (which) => {
       if (which === 'g01Modal')
           setg01ModalShow(!g01ModalShow);
       else if (which === 'drill')
           setDrillModalShow(!drillModalShow);
-      else if (which === 'spindleModal')
-          setspindleModalShow(!spindleModalShow);
+      else if (which === 'spindleCommandModal')
+          setSpindleModalShow(!spindleModalShow);
       //resetFormStates();
   };
 
+  const spindleCommandForm = () => <form>
+        <div className="form-group">
+          <label for="axisOfMovement">Direction of Rotation: </label>
+          <select name="Axis" id="axis" className="form-control">
+              <option value="X">X</option>
+              <option value="Y">Y</option>
+              <option value="Z">Z</option>
+              <option value="XY">XY</option>
+          </select>
+          <input type="" className="form-control" id="" />
+        </div>
+      </form>;
 
+      
   const g01Form = () => <form>
         <div className="form-group">
           <label for="axisOfMovement">Axis of Movement: </label>
@@ -30,9 +43,12 @@ export default function GenHome(props) {
               <option value="Z">Z</option>
               <option value="XY">XY</option>
           </select>
-          <input type="" className="form-control" id="toolDiameter" />
+          <input type="" className="form-control" id="" />
         </div>
       </form>;
+
+    
+
 
 
   return (
@@ -67,7 +83,7 @@ export default function GenHome(props) {
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
-                  onClick={() => handleModal('spindleModal')}
+                  onClick={() => handleModal('spindleCommandModal')}
                   >
                   Spindle Command
                   </button>

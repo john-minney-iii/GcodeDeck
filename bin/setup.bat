@@ -10,6 +10,4 @@ echo Setting Up React App...
 start /b /wait cmd.exe /C "cd .. && cd client && npm install && exit"
 
 echo Project Setup Finished
-echo Press Any Key to Exit
-pause
 exit

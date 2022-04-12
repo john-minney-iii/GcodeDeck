@@ -19,7 +19,7 @@ the config dir. <br>
 > 1. `git clone git@github.com:john-minney-iii/GcodeDeck.git`
 5. Open the cloned file in your file explorer and work your way to 
 the bin folder
-6. Run the `setup.bat` file by double clicking on it. Once it has finished press any key to close the terminal.
+6. Run the `setup.bat` file by double clicking on it. Once it has finished it will close the terminal session.
 
 ---
 ### Running the project

@@ -6,46 +6,31 @@ import axios from "axios";
 export default function GenHome(props) {
 
   // States for modals
-  const [lineModalShow, setLineModalShow] = useState(false);
+  const [g01ModalShow, setg01ModalShow] = useState(false);
   const [drillModalShow, setDrillModalShow] = useState(false);
+  const [spindleModalShow, setspindleModalShow] = useState(false);
 
   const handleModal = (which) => {
-      if (which === 'line')
-          setLineModalShow(!lineModalShow);
+      if (which === 'g01Modal')
+          setg01ModalShow(!g01ModalShow);
       else if (which === 'drill')
           setDrillModalShow(!drillModalShow);
+      else if (which === 'spindleModal')
+          setspindleModalShow(!spindleModalShow);
       //resetFormStates();
   };
 
 
-  const LineForm = () => <form>
+  const g01Form = () => <form>
         <div className="form-group">
-          <label for="toolDiameter">Tool Diameter</label>
+          <label for="axisOfMovement">Axis of Movement: </label>
+          <select name="Axis" id="axis" className="form-control">
+              <option value="X">X</option>
+              <option value="Y">Y</option>
+              <option value="Z">Z</option>
+              <option value="XY">XY</option>
+          </select>
           <input type="" className="form-control" id="toolDiameter" />
-        </div>
-        <div className="form-group">
-          <label for="feedRate">feedRate</label>
-          <input type="" className="form-control" id="feedRate" />
-        </div>
-        <div className="form-group">
-          <label for="spindleSpeed">Offset</label>
-          <input type="" className="form-control" id="spindleSpeed" />
-        </div>
-        <div className="form-group">
-          <label for="x-start">X-Start</label>
-          <input type="" className="form-control" id="x-start" />
-        </div>
-        <div className="form-group">
-          <label for="y-start">Y-Start</label>
-          <input type="" classNameName="form-control" id="y-start" />
-        </div>
-        <div className="form-group">
-          <label for="x-end">X-End</label>
-          <input type="" className="form-control" id="x-end" />
-        </div>
-        <div className="form-group">
-          <label for="y-end">Y-End</label>
-          <input type="" className="form-control" id="y-end" />
         </div>
       </form>;
 
@@ -69,40 +54,67 @@ export default function GenHome(props) {
           </div>
           <div className="row">
               <div className ="col">
-              <div className="line-button py-3">
+              <div className="toolChange-button py-3">
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
-                  onClick={() => handleModal('line')}
+                  onClick={() => handleModal('toolChangeModal')}
                   >
-                  Line
+                  Tool Change
                   </button>
               </div>
-              <div className="radius-button py-3">
+              <div className="spindleCommand-button py-3">
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
-                  onClick={() => handleModal('drill')}
+                  onClick={() => handleModal('spindleModal')}
                   >
-                  Drill
+                  Spindle Command
                   </button>
               </div>
-              <div className="circle-button py-3">
+              <div className="G00-button py-3">
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
+                  onClick={() => handleModal('g00Modal')}
                   >
-                  Idk
-              </button>
-              </div>
-              <div className="-button py-3">
-                  <button className="btn btn-outline-primary btn-lg w-75">
-                  Template
+                  Rapid Movement (G00)
                   </button>
               </div>
-              <div className="-button py-3">
-                  <button className="btn btn-outline-primary btn-lg w-75">
-                  Template
+              <div className="G01-button py-3">
+                  <button
+                  type="button"
+                  className="btn btn-outline-primary btn-lg w-75"
+                  onClick={() => handleModal('g01Modal')}
+                  >
+                  Linear Movement (G01)
+                  </button>
+              </div>
+              <div className="drilling-button py-3">
+                  <button
+                  type="button"
+                  className="btn btn-outline-primary btn-lg w-75"
+                  onClick={() => handleModal('drillingModal')}
+                  >
+                  Drilling
+                  </button>
+              </div>
+              <div className="facingTemplate-button py-3">
+                  <button
+                  type="button"
+                  className="btn btn-outline-primary btn-lg w-75"
+                  onClick={() => handleModal('facingTemplateModal')}
+                  >
+                  Facing Template
+                  </button>
+              </div>
+              <div className="rectangleTemplate-button py-3">
+                  <button
+                  type="button"
+                  className="btn btn-outline-primary btn-lg w-75"
+                  onClick={() => handleModal('rectangleTemplateModal')}
+                  >
+                  Rectangle Template
                   </button>
               </div>
               </div>
@@ -120,28 +132,28 @@ export default function GenHome(props) {
           </div>
       </div>
 
-      <Modal show={lineModalShow} onHide={() => handleModal('line')}>
+      <Modal show={g01ModalShow} onHide={() => handleModal('g01Modal')}>
           <Modal.Header closeButton>
-          Line Tool
+          Linear Movement
           </Modal.Header>
           <Modal.Body>
-            {LineForm()}
+            {g01Form()}
           </Modal.Body>
           <Modal.Footer>
               <button
                   className='btn btn-primary btn-lg rounded-pill'
-                  onClick={() => handleModal('line')}
+                  onClick={() => handleModal('g01Modal')}
               >Cancel</button>
               <button
                   className='btn btn-primary btn-lg rounded-pill'
                   onClick={() => {
-                      handleModal('line');
+                      handleModal('g01Modal');
                   }}
               >Submit</button>
           </Modal.Footer>
       </Modal>
 
-      <Modal show={drillModalShow} onHide={() => handleModal('drill')}>
+      <Modal show={drillModalShow} onHide={() => handleModal('drillModal')}>
           <Modal.Header closeButton>
           Drill Tool
           </Modal.Header>
@@ -156,6 +168,27 @@ export default function GenHome(props) {
                   className='btn btn-primary btn-lg rounded-pill'
                   onClick={() => {
                       handleModal('drill');
+                  }}
+              >Submit</button>
+          </Modal.Footer>
+      </Modal>
+
+      <Modal show={spindleModalShow} onHide={() => handleModal('spindleModal')}>
+          <Modal.Header closeButton>
+          Spindle Command
+          </Modal.Header>
+          <Modal.Body>
+          {spindleCommandForm()}
+          </Modal.Body>
+          <Modal.Footer>
+              <button
+                  className='btn btn-primary btn-lg rounded-pill'
+                  onClick={() => handleModal('spindleModal')}
+              >Cancel</button>
+              <button
+                  className='btn btn-primary btn-lg rounded-pill'
+                  onClick={() => {
+                      handleModal('spindleModal');
                   }}
               >Submit</button>
           </Modal.Footer>

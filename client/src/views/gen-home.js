@@ -6,16 +6,21 @@ import axios from "axios";
 export default function GenHome(props) {
 
   // States for modals
+  const [g00ModalShow, setg00ModalShow] = useState(false);
   const [g01ModalShow, setg01ModalShow] = useState(false);
   const [spindleModalShow, setSpindleModalShow] = useState(false);
   const [drillModalShow, setDrillModalShow] = useState(false);
+  const [g01Choice, setG01Choice] = useState('X');
+  const [g00Choice, setG00Choice] = useState('X');
 
   const handleModal = (which) => {
       if (which === 'g01Modal')
           setg01ModalShow(!g01ModalShow);
       else if (which === 'drill')
           setDrillModalShow(!drillModalShow);
-      else if (which === 'spindleCommandModal')
+      else if (which === 'g00Modal')
+        setg00ModalShow(!g00ModalShow);
+      else if (which === 'spindleModal')
           setSpindleModalShow(!spindleModalShow);
       //resetFormStates();
   };
@@ -24,31 +29,101 @@ export default function GenHome(props) {
         <div className="form-group">
           <label for="axisOfMovement">Direction of Rotation: </label>
           <select name="Axis" id="axis" className="form-control">
-              <option value="X">X</option>
-              <option value="Y">Y</option>
-              <option value="Z">Z</option>
-              <option value="XY">XY</option>
+              <option value="CW (M03)">CW (M03)</option>
+              <option value="CCW (M04)">CCW (M04)</option>
           </select>
-          <input type="" className="form-control" id="" />
+          <label for="spindleSpeed">Spindle RPM:</label>
+          <input type="" className="form-control" id=""></input>
         </div>
       </form>;
 
-      
-  const g01Form = () => <form>
+    const g00Form = () => <form>
         <div className="form-group">
-          <label for="axisOfMovement">Axis of Movement: </label>
-          <select name="Axis" id="axis" className="form-control">
-              <option value="X">X</option>
-              <option value="Y">Y</option>
-              <option value="Z">Z</option>
-              <option value="XY">XY</option>
-          </select>
-          <input type="" className="form-control" id="" />
+            <label for="axisOfMovement">Axis of Movement: </label>    
+            <select name="Axis" id="axis" className="form-control" onChange={(e) => setG00Choice(e.target.value)}>
+                <option value="X">X</option>
+                <option value="Y">Y</option>
+                <option value="Z">Z</option>
+                <option value="XY">XY</option>
+            </select>
+            {g00FormHelper()}
         </div>
-      </form>;
+    </form>;
 
-    
+    const g00FormHelper = () =>  {
+        let posInput;
+        if (g00Choice === 'X')
+            posInput = <div>
+                <label htmlfor='x-pos-input'>X:</label>
+                <input className='form-control' name='x-pos-input' />
+            </div>;
+        else if (g00Choice === 'Y')
+            posInput = <div>
+                <label htmlfor='y-pos-input'>Y:</label>
+                <input className='form-control' name='y-pos-input' />
+            </div>;
+        else if (g00Choice === 'Z')
+            posInput = <div>
+                <label htmlfor='z-pos-input'>Z:</label>
+                <input className='form-control' name='z-pos-input' />
+            </div>;
+        else if (g00Choice === 'XY')
+            posInput = <div>
+                <label htmlfor='x-pos-input'>X:</label>
+                <input className='form-control' name='x-pos-input' />
+                <label htmlfor='y-pos-input'>Y:</label>
+                <input className='form-control' name='y-pos-input' />
+            </div>;
+        return <div>
+            <label htmlfor='feedrate-input'>Feedrate:</label>
+            <input type='text' className='form-control' name='feedrate-input' />
+            {posInput}
+        </div>;
+    };
 
+  const g01Form = () => <form>
+    <div className="form-group">
+        <label for="axisOfMovement">Axis of Movement: </label>    
+        <select name="Axis" id="axis" className="form-control" onChange={(e) => setG01Choice(e.target.value)}>
+            <option value="X">X</option>
+            <option value="Y">Y</option>
+            <option value="Z">Z</option>
+            <option value="XY">XY</option>
+        </select>
+        {g01FormHelper()}
+    </div>
+    </form>;
+
+  const g01FormHelper = () =>  {
+    let posInput;
+    if (g01Choice === 'X')
+        posInput = <div>
+            <label htmlfor='x-pos-input'>X:</label>
+            <input className='form-control' name='x-pos-input' />
+        </div>;
+    else if (g01Choice === 'Y')
+        posInput = <div>
+            <label htmlfor='y-pos-input'>Y:</label>
+            <input className='form-control' name='y-pos-input' />
+        </div>;
+    else if (g01Choice === 'Z')
+        posInput = <div>
+             <label htmlfor='z-pos-input'>Z:</label>
+            <input className='form-control' name='z-pos-input' />
+        </div>;
+    else if (g01Choice === 'XY')
+        posInput = <div>
+            <label htmlfor='x-pos-input'>X:</label>
+            <input className='form-control' name='x-pos-input' />
+            <label htmlfor='y-pos-input'>Y:</label>
+            <input className='form-control' name='y-pos-input' />
+        </div>;
+    return <div>
+        <label htmlfor='feedrate-input'>Feedrate:</label>
+        <input type='text' className='form-control' name='feedrate-input' />
+        {posInput}
+    </div>;
+  };
 
 
   return (
@@ -83,7 +158,7 @@ export default function GenHome(props) {
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
-                  onClick={() => handleModal('spindleCommandModal')}
+                  onClick={() => handleModal('spindleModal')}
                   >
                   Spindle Command
                   </button>
@@ -164,6 +239,27 @@ export default function GenHome(props) {
                   className='btn btn-primary btn-lg rounded-pill'
                   onClick={() => {
                       handleModal('g01Modal');
+                  }}
+              >Submit</button>
+          </Modal.Footer>
+      </Modal>
+
+      <Modal show={g00ModalShow} onHide={() => handleModal('g00Modal')}>
+          <Modal.Header closeButton>
+          Rapid Movement
+          </Modal.Header>
+          <Modal.Body>
+            {g00Form()}
+          </Modal.Body>
+          <Modal.Footer>
+              <button
+                  className='btn btn-primary btn-lg rounded-pill'
+                  onClick={() => handleModal('g00Modal')}
+              >Cancel</button>
+              <button
+                  className='btn btn-primary btn-lg rounded-pill'
+                  onClick={() => {
+                      handleModal('g00Modal');
                   }}
               >Submit</button>
           </Modal.Footer>

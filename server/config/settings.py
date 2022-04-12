@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Project Apps
     'user',
     'community',
+    'gcode',
 ]
 
 MIDDLEWARE = [

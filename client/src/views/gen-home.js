@@ -20,7 +20,13 @@ export default function GenHome(props) {
 
   const g01Form = () => <form>
         <div className="form-group">
-          <label for="toolDiameter">Tool Diameter</label>
+          <label for="axisOfMovement">Axis of Movement: </label>
+          <select name="Axis" id="axis" className="form-control">
+              <option value="X">X</option>
+              <option value="Y">Y</option>
+              <option value="Z">Z</option>
+              <option value="XY">XY</option>
+          </select>
           <input type="" className="form-control" id="toolDiameter" />
         </div>
       </form>;

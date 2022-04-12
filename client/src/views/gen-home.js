@@ -8,12 +8,15 @@ export default function GenHome(props) {
   // States for modals
   const [g01ModalShow, setg01ModalShow] = useState(false);
   const [drillModalShow, setDrillModalShow] = useState(false);
+  const [spindleModalShow, setspindleModalShow] = useState(false);
 
   const handleModal = (which) => {
       if (which === 'g01Modal')
           setg01ModalShow(!g01ModalShow);
       else if (which === 'drill')
           setDrillModalShow(!drillModalShow);
+      else if (which === 'spindleModal')
+          setspindleModalShow(!spindleModalShow);
       //resetFormStates();
   };
 
@@ -165,6 +168,27 @@ export default function GenHome(props) {
                   className='btn btn-primary btn-lg rounded-pill'
                   onClick={() => {
                       handleModal('drill');
+                  }}
+              >Submit</button>
+          </Modal.Footer>
+      </Modal>
+
+      <Modal show={spindleModalShow} onHide={() => handleModal('spindleModal')}>
+          <Modal.Header closeButton>
+          Spindle Command
+          </Modal.Header>
+          <Modal.Body>
+          {spindleCommandForm()}
+          </Modal.Body>
+          <Modal.Footer>
+              <button
+                  className='btn btn-primary btn-lg rounded-pill'
+                  onClick={() => handleModal('spindleModal')}
+              >Cancel</button>
+              <button
+                  className='btn btn-primary btn-lg rounded-pill'
+                  onClick={() => {
+                      handleModal('spindleModal');
                   }}
               >Submit</button>
           </Modal.Footer>

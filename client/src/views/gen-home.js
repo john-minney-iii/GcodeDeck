@@ -9,14 +9,17 @@ export default function GenHome(props) {
   const [g01ModalShow, setg01ModalShow] = useState(false);
   const [spindleModalShow, setSpindleModalShow] = useState(false);
   const [drillModalShow, setDrillModalShow] = useState(false);
+  const [toolChangeModalShow, setToolChangeModalShow] = useState(false);
 
   const handleModal = (which) => {
       if (which === 'g01Modal')
           setg01ModalShow(!g01ModalShow);
-      else if (which === 'drill')
+      else if (which === 'drillModal')
           setDrillModalShow(!drillModalShow);
       else if (which === 'spindleModal')
           setSpindleModalShow(!spindleModalShow);
+      else if (which === 'toolChangeModal')
+          setToolChangeModalShow(!toolChangeModalShow);
       //resetFormStates();
   };
 
@@ -29,6 +32,35 @@ export default function GenHome(props) {
           </select>
           <label for="spindleSpeed">Spindle RPM:</label>
           <input type="" className="form-control" id=""></input>
+        </div>
+      </form>;
+
+      const toolChangeForm = () => <form>
+        <div className="form-group">
+          <label for="Tool Number">Tool Number:</label>
+          <input type="" className="" id="" placeholder="Tool pocket Number"></input>
+          <label for="Notes">Notes:</label>
+          <input type="" className="" id="" placeholder="Notes about tool"></input>
+        </div>
+      </form>;
+      
+      const drillForm = () => <form>
+        <div className="form-group">
+          <label for="X Location">X:</label>
+          <input type="" className="" id="" placeholder="X Coordinate of hole"></input>
+          <br/>
+          <label for="Y Location">Y:</label>
+          <input type="" className="" id="" placeholder="y Coordinate of hole"></input>
+          <br/>
+          <label for="Z Location at bottom of hole">Z:</label>
+          <input type="" className="" id="" placeholder="Bottom of hole location"></input>
+          <br/>
+          <label for="R - reference plane (position above part)">R:</label>
+          <input type="" className="" id="" placeholder="Top of part + some clearance"></input>
+          <br/>
+          <label for="Q - Peck Depth">Q:</label>
+          <input type="" className="" id="" placeholder="Depth per peck"></input>
+          <br/>
         </div>
       </form>;
 
@@ -109,7 +141,7 @@ export default function GenHome(props) {
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
-                  onClick={() => handleModal('drillingModal')}
+                  onClick={() => handleModal('drillModal')}
                   >
                   Drilling
                   </button>
@@ -168,21 +200,43 @@ export default function GenHome(props) {
           </Modal.Footer>
       </Modal>
 
-      <Modal show={drillModalShow} onHide={() => handleModal('drillModal')}>
+      <Modal show={toolChangeModalShow} onHide={() => handleModal('toolChangeModal')}>
           <Modal.Header closeButton>
-          Drill Tool
+          Tool Change
           </Modal.Header>
           <Modal.Body>
+            {toolChangeForm()}
           </Modal.Body>
           <Modal.Footer>
               <button
                   className='btn btn-primary btn-lg rounded-pill'
-                  onClick={() => handleModal('drill')}
+                  onClick={() => handleModal('toolChangeModal')}
               >Cancel</button>
               <button
                   className='btn btn-primary btn-lg rounded-pill'
                   onClick={() => {
-                      handleModal('drill');
+                      handleModal('toolChangeModal');
+                  }}
+              >Submit</button>
+          </Modal.Footer>
+      </Modal>
+
+      <Modal show={drillModalShow} onHide={() => handleModal('drillModal')}>
+          <Modal.Header closeButton>
+          Peck Drilling
+          </Modal.Header>
+          <Modal.Body>
+          </Modal.Body>
+          {drillForm()}
+          <Modal.Footer>
+              <button
+                  className='btn btn-primary btn-lg rounded-pill'
+                  onClick={() => handleModal('drillModal')}
+              >Cancel</button>
+              <button
+                  className='btn btn-primary btn-lg rounded-pill'
+                  onClick={() => {
+                      handleModal('drillModal');
                   }}
               >Submit</button>
           </Modal.Footer>

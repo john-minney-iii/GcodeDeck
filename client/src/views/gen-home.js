@@ -10,6 +10,7 @@ export default function GenHome(props) {
   const [spindleModalShow, setSpindleModalShow] = useState(false);
   const [drillModalShow, setDrillModalShow] = useState(false);
   const [toolChangeModalShow, setToolChangeModalShow] = useState(false);
+  const [facingTemplateModalShow, setFacingTemplateModalShow] = useState(false)
 
   const handleModal = (which) => {
       if (which === 'g01Modal')
@@ -20,6 +21,8 @@ export default function GenHome(props) {
           setSpindleModalShow(!spindleModalShow);
       else if (which === 'toolChangeModal')
           setToolChangeModalShow(!toolChangeModalShow);
+      else if (which === 'facingTemplateModal')
+          setFacingTemplateModalShow(!facingTemplateModalShow); 
       //resetFormStates();
   };
 
@@ -32,6 +35,29 @@ export default function GenHome(props) {
           </select>
           <label for="spindleSpeed">Spindle RPM:</label>
           <input type="" className="form-control" id=""></input>
+        </div>
+      </form>;
+
+      const facingTemplateForm = () => <form>
+        <div className="form-group">
+          <label for="axisOfMovement">Tool Number:</label>
+          <input type="" className="" id="" placeholder="Tool number for facing"></input>
+          <label for="spindleSpeed">Spindle RPM:</label>
+          <input type="" className="form-control" id="" placeholder="Spindle RPM for facing"></input>
+          <label for="spindleSpeed">Feed Rate:</label>
+          <input type="" className="form-control" id="" placeholder="Feed Rate for Facing"></input>
+          <label for="spindleSpeed">Width:</label>
+          <input type="" className="form-control" id="" placeholder="Width (along x) for facing"></input>
+          <label for="spindleSpeed">Depth:</label>
+          <input type="" className="form-control" id="" placeholder="Depth (along y) for facing"></input>
+          <label for="spindleSpeed">Clearance: </label>
+          <input type="" className="form-control" id="" placeholder="Z clearance for facing (top of part + clearance)"></input>
+          <label for="spindleSpeed">DOC: </label>
+          <input type="" className="form-control" id="" placeholder="Depth of cut (how much are you taking off the top?)"></input>
+          <label for="spindleSpeed">Plunge Rate:</label>
+          <input type="" className="form-control" id="" placeholder="Feed Rate for Z moves"></input>
+          <label for="spindleSpeed">Stepover:</label>
+          <input type="" className="form-control" id="" placeholder="Amount tool moves over each pass until facing is completed"></input>
         </div>
       </form>;
 
@@ -216,6 +242,27 @@ export default function GenHome(props) {
                   className='btn btn-primary btn-lg rounded-pill'
                   onClick={() => {
                       handleModal('toolChangeModal');
+                  }}
+              >Submit</button>
+          </Modal.Footer>
+      </Modal>
+
+      <Modal show={facingTemplateModalShow} onHide={() => handleModal('facingTemplateModal')}>
+          <Modal.Header closeButton>
+          Facing Template
+          </Modal.Header>
+          <Modal.Body>
+          </Modal.Body>
+          {facingTemplateForm()}
+          <Modal.Footer>
+              <button
+                  className='btn btn-primary btn-lg rounded-pill'
+                  onClick={() => handleModal('facingTemplateModal')}
+              >Cancel</button>
+              <button
+                  className='btn btn-primary btn-lg rounded-pill'
+                  onClick={() => {
+                      handleModal('facingTemplateModal');
                   }}
               >Submit</button>
           </Modal.Footer>

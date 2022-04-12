@@ -7,7 +7,7 @@ db.sqlite3
 media
 
 # Django secrets file
-config/secrets.py
+# config/secrets.py
 
 # Backup files # 
 *.bak 

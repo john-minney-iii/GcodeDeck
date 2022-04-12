@@ -73,11 +73,7 @@ export default function GenHome(props) {
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
-<<<<<<< HEAD
-                  onClick={() => handleModal('G01Modal')}
-=======
                   onClick={() => handleModal('toolChangeModal')}
->>>>>>> 484e0e04d7c76e9e07d9376562807b955bfc0132
                   >
                   Tool Change
                   </button>
@@ -95,7 +91,7 @@ export default function GenHome(props) {
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
-                  onClick={() => handleModal('G00Modal')}
+                  onClick={() => handleModal('g00Modal')}
                   >
                   Rapid Movement (G00)
                   </button>
@@ -104,7 +100,7 @@ export default function GenHome(props) {
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
-                  onClick={() => handleModal('G01Modal')}
+                  onClick={() => handleModal('g01Modal')}
                   >
                   Linear Movement (G01)
                   </button>
@@ -164,7 +160,7 @@ export default function GenHome(props) {
           </Modal.Footer>
       </Modal>
 
-      <Modal show={drillModalShow} onHide={() => handleModal('drill')}>
+      <Modal show={drillModalShow} onHide={() => handleModal('drillModal')}>
           <Modal.Header closeButton>
           Drill Tool
           </Modal.Header>

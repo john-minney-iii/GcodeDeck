@@ -27,6 +27,8 @@ export default function GenHome(props) {
               <option value="CW (M03)">CW (M03)</option>
               <option value="CCW (M04)">CCW (M04)</option>
           </select>
+          <label for="spindleSpeed">Spindle RPM:</label>
+          <input type="" className="form-control" id=""></input>
         </div>
       </form>;
 

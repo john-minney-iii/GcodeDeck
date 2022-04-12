@@ -114,14 +114,22 @@ export default function GenHome(props) {
                   Drilling
                   </button>
               </div>
-              <div className="-button py-3">
-                  <button className="btn btn-outline-primary btn-lg w-75">
-                  Template
+              <div className="facingTemplate-button py-3">
+                  <button
+                  type="button"
+                  className="btn btn-outline-primary btn-lg w-75"
+                  onClick={() => handleModal('facingTemplateModal')}
+                  >
+                  Facing Template
                   </button>
               </div>
-              <div className="-button py-3">
-                  <button className="btn btn-outline-primary btn-lg w-75">
-                  Template
+              <div className="rectangleTemplate-button py-3">
+                  <button
+                  type="button"
+                  className="btn btn-outline-primary btn-lg w-75"
+                  onClick={() => handleModal('rectangleTemplateModal')}
+                  >
+                  Rectangle Template
                   </button>
               </div>
               </div>

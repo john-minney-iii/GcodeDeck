@@ -15,7 +15,7 @@ export default function GenHome(props) {
           setg01ModalShow(!g01ModalShow);
       else if (which === 'drill')
           setDrillModalShow(!drillModalShow);
-      else if (which === 'spindleCommandModal')
+      else if (which === 'spindleModal')
           setSpindleModalShow(!spindleModalShow);
       //resetFormStates();
   };
@@ -24,16 +24,13 @@ export default function GenHome(props) {
         <div className="form-group">
           <label for="axisOfMovement">Direction of Rotation: </label>
           <select name="Axis" id="axis" className="form-control">
-              <option value="X">X</option>
-              <option value="Y">Y</option>
-              <option value="Z">Z</option>
-              <option value="XY">XY</option>
+              <option value="CW (M03)">CW (M03)</option>
+              <option value="CCW (M04)">CCW (M04)</option>
           </select>
-          <input type="" className="form-control" id="" />
         </div>
       </form>;
 
-      
+
   const g01Form = () => <form>
         <div className="form-group">
           <label for="axisOfMovement">Axis of Movement: </label>
@@ -83,7 +80,7 @@ export default function GenHome(props) {
                   <button
                   type="button"
                   className="btn btn-outline-primary btn-lg w-75"
-                  onClick={() => handleModal('spindleCommandModal')}
+                  onClick={() => handleModal('spindleModal')}
                   >
                   Spindle Command
                   </button>

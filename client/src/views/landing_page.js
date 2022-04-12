@@ -4,19 +4,21 @@ import '../assets/css/landing-page.css';
 import HeroImage from '../assets/img/hero-image.webp';
 import { Modal } from "react-bootstrap";
 import axios from "axios";
+import FormInput from "./FormInput";
 
 export default function LandingPage(props) {
     // States for modals
     const [regModalShow, setRegModalShow] = useState(false);
     const [loginModalShow, setLoginModalShow] = useState(false);
-    // Values for reg form
-    const [firstName, setFirstName] = useState();
-    const [lastName, setLastName] = useState();
-    const [email, setEmail] = useState();
-    const [regPswdConfirm, setRegPswdConfirm] = useState();
-    // Values for login and reg form
-    const [username, setUsername] = useState();
-    const [pswd, setPswd] = useState();
+    //login and reg values
+    const [values, setValues] = useState({
+        firstName: "",
+        lastName: "",
+        username: "",
+        email: "",
+        pswd: "",
+        regPswdConfirm: "",
+      });
 
     const handleModal = (which) => {
         if (which === 'login')
@@ -28,12 +30,7 @@ export default function LandingPage(props) {
     };
 
     const resetFormStates = () => {
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setPswd('');
-        setRegPswdConfirm('');
-        setUsername('');
+        setValues('');
     };
 
     const AuthenticatedCallToActions = () => {
@@ -66,130 +63,76 @@ export default function LandingPage(props) {
             </div>
         );
     };
-
-    const LoginForm = () => <form>
-        <div className='form-group'>
-            <label htmlFor='usernameInput'>Username</label>
-            <input 
-                type='text' 
-                errorMessage="Should only be 150 characters or fewer and contain only letters, digits and @/_/+/- only"
-                className='form-control' 
-                id='usernameInput'
-                value={username}
-                required={true}
-                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-        </div>
-        <div className='form-group'>
-            <label htmlFor='passwordInput'>Password</label>
-            <input 
-                type='password' 
-                errorMessage="Use a mix of letters, numbers, and symbols. Password cannot be too similar to your other personal information, nor be a commonly used password, nor be entirely numeric."
-                className='form-control' 
-                id='passwordInput' 
-                value={pswd}
-                required={true}
-                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
-                onChange={(e) => setPswd(e.target.value)}
-            />
-        </div>
-    </form>;
-
-    const RegisterForm = () => <form>
-        <div className='form-group'>
-            <label htmlFor='firstNameInput'>First Name</label>
-            <input 
-                type='text' 
-                errorMessage="Should only be 150 characters or fewer and contain only letters, digits and @/_/+/- only"
-                className='form-control' 
-                id='firstNameInput' 
-                value={firstName}
-                required={true}
-                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
-                onChange={(e) => setFirstName(e.target.value)}
-            />
-        </div>
-        <div className='form-group'>
-            <label htmlFor='lastNameInput'>Last Name</label>
-            <input 
-                type='text'
-                errorMessage="Should only be 150 characters or fewer and contain only letters, digits and @/_/+/- only" 
-                className='form-control' 
-                id='lastNameInput' 
-                value={lastName}
-                required={true}
-                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
-                onChange={(e) => setLastName(e.target.value)}
-            />
-        </div>
-        <div className='form-group'>
-            <label htmlFor='usernameInput'>Username</label>
-            <input 
-                type='text' 
-                errorMessage="Should only be 150 characters or fewer and contain only letters, digits and @/_/+/- only"
-                className='form-control' 
-                id='usernameInput' 
-                value={username}
-                required={true}
-                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <small id='usernameHelp' className='form-text text-muted'>
-                150 characters or fewer. Letters, digits and @/_/+/- only
-            </small>
-        </div>
-        <div className='form-group'>
-            <label htmlFor='emailInput'>Email</label>
-            <input 
-                type='email' 
-                errorMessage="Should only be 150 characters or fewer and contain only letters, digits and @/_/+/- only"
-                className='form-control' 
-                id='emailInput' 
-                value={email}
-                required={true}
-                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-        </div>
-        <div className='form-group'>
-            <label htmlFor='pswdInput'>Password</label>
-            <input 
-                type='password' 
-                errorMessage="Use a mix of letters, numbers, and symbols. Password cannot be too similar to your other personal information, nor be a commonly used password, nor be entirely numeric."
-                className='form-control' 
-                id='pswdInput' 
-                value={pswd}
-                required={true}
-                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
-                onChange={(e) => setPswd(e.target.value)}
-
-            />
-            <small id='usernameHelp' className='form-text text-muted'>
-                Use a mix of letters, numbers, and symbols. Password cannot
-                be too similar to your other personal information, nor be a commonly 
-                used password, nor be entirely numeric.
-            </small>
-        </div>
-        <div className='form-group'>
-            <label htmlFor='pswdConfInput'>Confirm Password</label>
-            <input 
-                type='password' 
-                errorMessage="Use a mix of letters, numbers, and symbols. Password cannot be too similar to your other personal information, nor be a commonly used password, nor be entirely numeric."
-                className='form-control' 
-                id='pswdConfInput' 
-                value={regPswdConfirm}
-                required={true}
-                pattern={"^[A-Za-z0-9@_+-.]{1,150}"}
-                onChange={(e) => setRegPswdConfirm(e.target.value)}
-            />
-        </div>
-    </form>;
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const inputs = [
+        {
+            id: 1,
+            name: "firstName",
+            type: "text",
+            errorMessage:
+                "You must enter your first name",
+            placeholder: "First Name",
+            pattern: "^[A-Za-z0-9-]{1,150}$",
+            required: true,
+        },
+        {
+            id: 2,
+            name: "lastName",
+            type: "text",
+            errorMessage:
+                "You must enter your last name",
+            placeholder: "Last Name",
+            pattern: "^[A-Za-z0-9-]{1,150}$",
+            required: true,
+        },
+        {
+          id: 3,
+          name: "username",
+          type: "text",
+          errorMessage:
+            "You must enter a username that meets the criteria below",
+          placeholder: "Username",
+          pattern: "^[A-Za-z0-9@_+-]{1,150}$",
+          required: true,
+        },
+        {
+          id: 4,
+          name: "email",
+          type: "email",
+          errorMessage: "A valid email address must be entered",
+          placeholder: "Email",
+          required: true,
+        },
+        {
+          id: 5,
+          name: "password",
+          type: "password",
+          placeholder: "Password",
+          errorMessage:
+            "Please enter a password that matches the criteria stated below",
+          pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{3,150}$`,
+          required: true,
+        },
+        {
+          id: 6,
+          name: "confirmPassword",
+          type: "password",
+          errorMessage: "Passwords don't match",
+          placeholder: "Confirm Password",
+          pattern: values.password,
+          required: true,
+        },
+      ];
+    
+      const onChange = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value });
+      };
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const loginSubmit = async () => {
         axios.post('http://localhost:8000/api/v1/user/auth/', {
-            'username': username,
-            'password': pswd
+            'username': inputs.username,
+            'password': inputs.pswd
         }).then(res => {
             if (res.status === 200)
                 props.loginUser(res.data.token);
@@ -198,11 +141,11 @@ export default function LandingPage(props) {
 
     const registerSubmit = async () => {
         axios.post('http://localhost:8000/api/v1/user/register/', {
-            'username': username,
-            'first_name': firstName,
-            'last_name': lastName,
-            'email': email,
-            'password': pswd
+            'username': inputs.username,
+            'first_name': inputs.firstName,
+            'last_name': inputs.lastName,
+            'email': inputs.email,
+            'password': inputs.pswd
         }).then(res => {
             if (res.status === 201)
                 loginSubmit(res.data.token);
@@ -227,7 +170,16 @@ export default function LandingPage(props) {
         </div>
         <Modal show={loginModalShow} onHide={() => handleModal('login')}>
             <Modal.Header closeButton>Login</Modal.Header>
-            <Modal.Body>{LoginForm()}</Modal.Body>
+            <Modal.Body>
+                    {inputs.map((input) => (
+                    <FormInput
+                        key={input.id[1,2]}
+                        {...input}
+                        value={values[input.name]}
+                        onChange={onChange}
+                    />
+                    ))}
+            </Modal.Body>
             <Modal.Footer>
                 <button 
                     className='btn btn-primary btn-lg rounded-pill'
@@ -244,7 +196,17 @@ export default function LandingPage(props) {
         </Modal>
         <Modal show={regModalShow} onHide={() => handleModal('register')}>
             <Modal.Header closeButton>Register New Account</Modal.Header>
-            <Modal.Body>{RegisterForm()}</Modal.Body>
+            <Modal.Body>
+                    <h1>Register</h1>
+                    {inputs.map((input) => (
+                    <FormInput
+                        key={input.id}
+                        {...input}
+                        value={values[input.name]}
+                        onChange={onChange}
+                    />
+                    ))}
+            </Modal.Body>
             <Modal.Footer>
                 <small id='usernameHelp' className='text-muted'>
                     By clicking Agree and Continue you agree to GCODEdeck's Terms of Service 
@@ -257,7 +219,7 @@ export default function LandingPage(props) {
                 <button 
                     className='btn btn-primary btn-lg rounded-pill'
                     onClick={() => {
-                        handleModal('register');
+                        //handleModal('register');
                         registerSubmit();
                     }}
                 >Agree and Register</button>

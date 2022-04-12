@@ -6,12 +6,12 @@ import axios from "axios";
 export default function GenHome(props) {
 
   // States for modals
-  const [lineModalShow, setLineModalShow] = useState(false);
+  const [g01ModalShow, setg01ModalShow] = useState(false);
   const [drillModalShow, setDrillModalShow] = useState(false);
 
   const handleModal = (which) => {
-      if (which === 'line')
-          setLineModalShow(!lineModalShow);
+      if (which === 'g01Modal')
+          setg01ModalShow(!g01ModalShow);
       else if (which === 'drill')
           setDrillModalShow(!drillModalShow);
       //resetFormStates();
@@ -22,30 +22,6 @@ export default function GenHome(props) {
         <div className="form-group">
           <label for="toolDiameter">Tool Diameter</label>
           <input type="" className="form-control" id="toolDiameter" />
-        </div>
-        <div className="form-group">
-          <label for="feedRate">feedRate</label>
-          <input type="" className="form-control" id="feedRate" />
-        </div>
-        <div className="form-group">
-          <label for="spindleSpeed">Offset</label>
-          <input type="" className="form-control" id="spindleSpeed" />
-        </div>
-        <div className="form-group">
-          <label for="x-start">X-Start</label>
-          <input type="" className="form-control" id="x-start" />
-        </div>
-        <div className="form-group">
-          <label for="y-start">Y-Start</label>
-          <input type="" classNameName="form-control" id="y-start" />
-        </div>
-        <div className="form-group">
-          <label for="x-end">X-End</label>
-          <input type="" className="form-control" id="x-end" />
-        </div>
-        <div className="form-group">
-          <label for="y-end">Y-End</label>
-          <input type="" className="form-control" id="y-end" />
         </div>
       </form>;
 
@@ -147,7 +123,7 @@ export default function GenHome(props) {
           </div>
       </div>
 
-      <Modal show={lineModalShow} onHide={() => handleModal('g01Modal')}>
+      <Modal show={g01ModalShow} onHide={() => handleModal('g01Modal')}>
           <Modal.Header closeButton>
           Linear Movement
           </Modal.Header>
@@ -157,12 +133,12 @@ export default function GenHome(props) {
           <Modal.Footer>
               <button
                   className='btn btn-primary btn-lg rounded-pill'
-                  onClick={() => handleModal('line')}
+                  onClick={() => handleModal('g01Modal')}
               >Cancel</button>
               <button
                   className='btn btn-primary btn-lg rounded-pill'
                   onClick={() => {
-                      handleModal('line');
+                      handleModal('g01Modal');
                   }}
               >Submit</button>
           </Modal.Footer>

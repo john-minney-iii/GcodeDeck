@@ -17,28 +17,17 @@ the config dir. <br>
     <br>**Note:** Make sure you add git to your path so it can be used from CMD. Also have it checkout line endings as-is and commit Unix style line
 4. Open a Command Window in the directory you keep your projects and follow these commands
 > 1. `git clone git@github.com:john-minney-iii/GcodeDeck.git`
-> 1. `cd GcodeDeck`
-> 1. `py -3.10 -m venv .venv`
-> 1. `.venv\Scripts\activate.bat`
-5. You are now working within your python virtual environment. Follow these next sets of commands
-> 1. `cd server` 
-> 1. `python -m pip install --upgrade pip`
-> 1. `pip install --upgrade setuptools`
-> 1. `git checkout master`
-> 1. `python -m pip install -r requirements.txt`
-6. Now to install dependences for the react app. Follow these commands
-> 1. `cd ..`
-> 1. `cd client`
-> 1. `npm install`
+5. Open the cloned file in your file explorer and work your way to 
+the bin folder
+6. Run the `setup.bat` file by double clicking on it. Once it has finished press any key to close the terminal.
 
 ---
 ### Running the project
-To run a local version of the project you need to start both the django server and the react client. This can be done using two different terminal sessions.<br>
-In one terminal session follow these commands (make sure you are in the server dir and activated the virtual env)
-> `python manage.py runserver`<br>
+To run the project run the `run.bat` file in the bin directory
+by double clicking on it.
 
-In another terminal session follow these commands (make sure you are in the client dir)
-> `npm start`
+You can close the project by using Ctrl+C in both terminals that
+where opened by the script.
 
 ---
 ### Updating Project Dependencies

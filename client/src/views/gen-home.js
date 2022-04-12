@@ -9,6 +9,7 @@ export default function GenHome(props) {
   const [g01ModalShow, setg01ModalShow] = useState(false);
   const [spindleModalShow, setSpindleModalShow] = useState(false);
   const [drillModalShow, setDrillModalShow] = useState(false);
+  const [g01Choice, setG01Choice] = useState('X');
 
   const handleModal = (which) => {
       if (which === 'g01Modal')
@@ -34,20 +35,48 @@ export default function GenHome(props) {
 
 
   const g01Form = () => <form>
-        <div className="form-group">
-          <label for="axisOfMovement">Axis of Movement: </label>
-          <select name="Axis" id="axis" className="form-control">
-              <option value="X">X</option>
-              <option value="Y">Y</option>
-              <option value="Z">Z</option>
-              <option value="XY">XY</option>
-          </select>
-          <input type="" className="form-control" id="" />
-        </div>
-      </form>;
+    <div className="form-group">
+        <label for="axisOfMovement">Axis of Movement: </label>    
+        <select name="Axis" id="axis" className="form-control" onChange={(e) => setG01Choice(e.target.value)}>
+            <option value="X">X</option>
+            <option value="Y">Y</option>
+            <option value="Z">Z</option>
+            <option value="XY">XY</option>
+        </select>
+        {g01FormHelper()}
+    </div>
+    </form>;
 
-    
-
+  const g01FormHelper = () =>  {
+    let posInput;
+    if (g01Choice === 'X')
+        posInput = <div>
+            <label htmlfor='x-pos-input'>X:</label>
+            <input className='form-control' name='x-pos-input' />
+        </div>;
+    else if (g01Choice === 'Y')
+        posInput = <div>
+            <label htmlfor='y-pos-input'>Y:</label>
+            <input className='form-control' name='y-pos-input' />
+        </div>;
+    else if (g01Choice === 'Z')
+        posInput = <div>
+             <label htmlfor='z-pos-input'>Z:</label>
+            <input className='form-control' name='z-pos-input' />
+        </div>;
+    else if (g01Choice === 'XY')
+        posInput = <div>
+            <label htmlfor='x-pos-input'>X:</label>
+            <input className='form-control' name='x-pos-input' />
+            <label htmlfor='y-pos-input'>Y:</label>
+            <input className='form-control' name='y-pos-input' />
+        </div>;
+    return <div>
+        <label htmlfor='feedrate-input'>Feedrate:</label>
+        <input type='text' className='form-control' name='feedrate-input' />
+        {posInput}
+    </div>;
+  };
 
 
   return (

@@ -15,6 +15,10 @@ export default function GenHome(props) {
   const [g01Choice, setG01Choice] = useState('X');
   const [g00Choice, setG00Choice] = useState('X');
 
+  // States for linear movement
+  const [g01FeedRate, setG01FeedRate] = useState(0);
+  const [g01Pos, setG01Pos] = useState(0);
+
   const handleModal = (which) => {
       if (which === 'g01Modal')
           setg01ModalShow(!g01ModalShow);
@@ -139,6 +143,17 @@ export default function GenHome(props) {
         </div>;
     };
 
+    const g01FormSubmit = async () => {
+        axios.post('http://localhost:8000/api/v1/gcode/linearMovement/', {
+            'feedrate': g01FeedRate,
+            'axis': g01Choice,
+            'pos': g01Pos
+        }).then(res => {
+            if (res.status === 200)
+                console.log(res.data);
+        })
+    };
+
     const g01Form = () => <form>
         <div className="form-group">
             <label for="axisOfMovement">Axis of Movement: </label>    
@@ -157,28 +172,28 @@ const g01FormHelper = () =>  {
     if (g01Choice === 'X')
         posInput = <div>
             <label htmlfor='x-pos-input'>X:</label>
-            <input className='form-control' name='x-pos-input' />
+            <input className='form-control' name='x-pos-input' onChange={(e) => setG01Pos(e.target.value)} />
         </div>;
     else if (g01Choice === 'Y')
         posInput = <div>
             <label htmlfor='y-pos-input'>Y:</label>
-            <input className='form-control' name='y-pos-input' />
+            <input className='form-control' name='y-pos-input' onChange={(e) => setG01Pos(e.target.value)} />
         </div>;
     else if (g01Choice === 'Z')
         posInput = <div>
              <label htmlfor='z-pos-input'>Z:</label>
-            <input className='form-control' name='z-pos-input' />
+            <input className='form-control' name='z-pos-input' onChange={(e) => setG01Pos(e.target.value)} />
         </div>;
     else if (g01Choice === 'XY')
         posInput = <div>
             <label htmlfor='x-pos-input'>X:</label>
-            <input className='form-control' name='x-pos-input' />
+            <input className='form-control' name='x-pos-input' onChange={(e) => setG01Pos(e.target.value)} />
             <label htmlfor='y-pos-input'>Y:</label>
-            <input className='form-control' name='y-pos-input' />
+            <input className='form-control' name='y-pos-input' onChange={(e) => setG01Pos(e.target.value)} />
         </div>;
     return <div>
         <label htmlfor='feedrate-input'>Feedrate:</label>
-        <input type='text' className='form-control' name='feedrate-input' />
+        <input type='text' className='form-control' name='feedrate-input' onChange={(e) => setG01FeedRate(e.target.value)} />
         {posInput}
     </div>;
   };
@@ -296,6 +311,7 @@ const g01FormHelper = () =>  {
                   className='btn btn-primary btn-lg rounded-pill'
                   onClick={() => {
                       handleModal('g01Modal');
+                      g01FormSubmit();
                   }}
               >Submit</button>
           </Modal.Footer>

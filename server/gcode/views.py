@@ -2,10 +2,10 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 class ToolChange(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def post(self, request):
         try:
@@ -17,7 +17,7 @@ class ToolChange(APIView):
             )
 
 class SpindleCommand(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def post(self, request):
         try:
@@ -29,7 +29,7 @@ class SpindleCommand(APIView):
             )
 
 class RapidMovement(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def post(self, request):
         try:
@@ -41,11 +41,17 @@ class RapidMovement(APIView):
             )
 
 class LinearMovement(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def post(self, request):
         try:
-            pass
+            feed_rate = request.data['feedrate']
+            axis = request.data['axis']
+            pos = request.data['pos']
+            return Response(
+                'Answer goes here',
+                status=status.HTTP_200_OK
+            )
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},
@@ -53,7 +59,7 @@ class LinearMovement(APIView):
             )
 
 class Drilling(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def post(self, request):
         try:
@@ -65,7 +71,7 @@ class Drilling(APIView):
             )
 
 class FacingTemplate(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def post(self, request):
         try:
@@ -77,7 +83,7 @@ class FacingTemplate(APIView):
             )
 
 class RectangleTemplate(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def post(self, request):
         try:

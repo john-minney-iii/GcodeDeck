@@ -49,7 +49,16 @@ class LinearMovement(APIView):
             axis = request.data['axis']
             pos = request.data['pos']
             pos2 = request.data['pos2']
-            print(f'Axis: {axis}, F: {feed_rate}, Pos: {pos}, Pos2: {pos2}')
+            safeStart = "G54 G17 G90 G20"
+            if axis == "X":
+                g01 = f'G01 X{pos} F{feed_rate}'
+            elif axis == "Y":
+                g01 = f'G01 Y{pos} F{feed_rate}'
+            elif axis == "Z":
+                g01 = f'G01 Y{pos} F{feed_rate}'
+            elif axis == "XY":
+                g01 =f'G01 X{pos} Y{pos2} F{feed_rate}'
+            print(safeStart, g01)
             return Response(
                 'Answer goes here',
                 status=status.HTTP_200_OK

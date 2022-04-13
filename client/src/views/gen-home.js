@@ -18,6 +18,7 @@ export default function GenHome(props) {
   // States for linear movement
   const [g01FeedRate, setG01FeedRate] = useState(0);
   const [g01Pos, setG01Pos] = useState(0);
+  const [g01Pos2, setG01Post2] = useState(0);
 
   const handleModal = (which) => {
       if (which === 'g01Modal')
@@ -147,7 +148,8 @@ export default function GenHome(props) {
         axios.post('http://localhost:8000/api/v1/gcode/linearMovement/', {
             'feedrate': g01FeedRate,
             'axis': g01Choice,
-            'pos': g01Pos
+            'pos': g01Pos,
+            'pos2': g01Pos2
         }).then(res => {
             if (res.status === 200)
                 console.log(res.data);
@@ -189,7 +191,7 @@ const g01FormHelper = () =>  {
             <label htmlfor='x-pos-input'>X:</label>
             <input className='form-control' name='x-pos-input' onChange={(e) => setG01Pos(e.target.value)} />
             <label htmlfor='y-pos-input'>Y:</label>
-            <input className='form-control' name='y-pos-input' onChange={(e) => setG01Pos(e.target.value)} />
+            <input className='form-control' name='y-pos-input' onChange={(e) => setG01Post2(e.target.value)} />
         </div>;
     return <div>
         <label htmlfor='feedrate-input'>Feedrate:</label>

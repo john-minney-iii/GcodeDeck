@@ -48,6 +48,8 @@ class LinearMovement(APIView):
             feed_rate = request.data['feedrate']
             axis = request.data['axis']
             pos = request.data['pos']
+            pos2 = request.data['pos2']
+            print(f'Axis: {axis}, F: {feed_rate}, Pos: {pos}, Pos2: {pos2}')
             return Response(
                 'Answer goes here',
                 status=status.HTTP_200_OK

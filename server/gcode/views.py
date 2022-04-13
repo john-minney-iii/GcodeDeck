@@ -12,6 +12,11 @@ class ToolChange(APIView):
             tool_number = request.data['toolNumber']
             cutter_compensation = request.data['cutterCompensation']
             notes = request.data['notes']
+            safeStart = "G54 G90 G17 G20; (Safe Start)"
+            toolChange = f'M06 T{tool_number} ; (Load Tool #{tool_number} into spindle)'
+            toolOffset = f'G43 H{tool_number} ; (Load Positive Tool Height Offset for tool {tool_number})'
+            if cutter_compensation != "None":
+                cutterComp = f'{cutter_compensation} D{tool_number}'
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},
@@ -27,6 +32,7 @@ class SpindleCommand(APIView):
             spindleRpm = request.data['spindleRpm']
         except Exception as e:
             return Response(
+
                 {'error': True, 'error_msg': e},
                 status=status.HTTP_400_BAD_REQUEST
             )

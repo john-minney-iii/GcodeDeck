@@ -79,6 +79,12 @@ export default function GenHome(props) {
         <div className="form-group">
           <label for="Tool Number">Tool Number:</label>
           <input type="" className="" id="" placeholder="Tool pocket Number"></input>
+          <label for="Tool Number">Cutter Compensation:</label>
+          <select name="Cutter Compensation" id="axis" className="form-control">
+              <option value="G40">None (G40)</option>
+              <option value="G41">Left (G41)</option>
+              <option value="G42">Right (G42)</option>
+          </select>
           <label for="Notes">Notes:</label>
           <input type="" className="" id="" placeholder="Notes about tool"></input>
         </div>

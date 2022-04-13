@@ -21,6 +21,7 @@ export default function GenHome(props) {
   const [g01Pos2, setG01Post2] = useState(0);
 
   const handleModal = (which) => {
+      setG01Choice('X');
       if (which === 'g01Modal')
           setg01ModalShow(!g01ModalShow);
       else if (which === 'g00Modal')

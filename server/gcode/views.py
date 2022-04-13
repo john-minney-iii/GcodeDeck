@@ -49,18 +49,20 @@ class LinearMovement(APIView):
             axis = request.data['axis']
             pos = request.data['pos']
             pos2 = request.data['pos2']
-            safeStart = "G54 G17 G90 G20"
+            # safeStart = "G54 G17 G90 G20"
             if axis == "X":
-                g01 = f'G01 X{pos} F{feed_rate}'
+                g01 = f'G01 X{float(pos)} F{float(feed_rate)}'
             elif axis == "Y":
-                g01 = f'G01 Y{pos} F{feed_rate}'
+                g01 = f'G01 Y{float(pos)} F{float(feed_rate)}'
             elif axis == "Z":
-                g01 = f'G01 Y{pos} F{feed_rate}'
+                g01 = f'G01 Y{float(pos)} F{float(feed_rate)}'
             elif axis == "XY":
-                g01 =f'G01 X{pos} Y{pos2} F{feed_rate}'
-            print(safeStart, g01)
+                g01 =f'G01 X{float(pos)} Y{float(pos2)} F{float(feed_rate)}'
+            else:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+            # print(g01)
             return Response(
-                'Answer goes here',
+                g01,
                 status=status.HTTP_200_OK
             )
         except Exception as e:

@@ -20,6 +20,9 @@ export default function GenHome(props) {
   const [g01Pos, setG01Pos] = useState(0);
   const [g01Pos2, setG01Post2] = useState(0);
 
+  // State for gcode file
+  const[gcode, setGcode] = useState('');
+
   const handleModal = (which) => {
       setG01Choice('X');
       if (which === 'g01Modal')
@@ -153,7 +156,11 @@ export default function GenHome(props) {
             'pos2': g01Pos2
         }).then(res => {
             if (res.status === 200)
-                console.log(res.data);
+                if (gcode.length !== 0)
+                    setGcode(gcode + ',' + res.data);
+                else
+                    setGcode(res.data);
+            console.log(gcode);
         })
     };
 
@@ -209,13 +216,13 @@ const g01FormHelper = () =>  {
           <div className ="container-justify-content-start py-2">
           <div className="row">
               <div className ="col">
-              Tool Path Options
+                Tool Path Options
               </div>
               <div className="col-7">
-              Graphical Output
+                Graphical Output
               </div>
               <div className="col">
-              Real-Time GCODE Gen
+                Real-Time GCODE Gen
               </div>
           </div>
           <div className="row">
@@ -291,7 +298,9 @@ const g01FormHelper = () =>  {
               </div>
               <div className="col">
               <div className="container-justify-content-start">
-                  Placeholder for GCODE Gen
+                  <div>
+                    {gcode.split(',').map(line => <p className='m-0'>{line}</p>)}
+                  </div>
               </div>
               </div>
           </div>

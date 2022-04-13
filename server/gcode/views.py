@@ -9,7 +9,9 @@ class ToolChange(APIView):
 
     def post(self, request):
         try:
-            pass
+            tool_number = request.data['toolNumber']
+            cutter_compensation = request.data['cutterCompensation']
+            notes = request.data['notes']
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},
@@ -21,7 +23,8 @@ class SpindleCommand(APIView):
 
     def post(self, request):
         try:
-            pass
+            direction_of_rotation = request.data['directionOfRotation']
+            spindleRpm = request.data['spindleRpm']
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},
@@ -33,7 +36,10 @@ class RapidMovement(APIView):
 
     def post(self, request):
         try:
-            pass
+            feed_rate = request.data['feedrate']
+            axis = request.data['axis']
+            pos = request.data['pos']
+            pos2 = request.data['pos2']
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},
@@ -76,7 +82,11 @@ class Drilling(APIView):
 
     def post(self, request):
         try:
-            pass
+            x_pos = request.data['xPos']
+            y_pos = request.data['yPos']
+            z_pos = request.data['zPos']
+            reference = request.data['reference']
+            peck_depth = request.data['peckDepth']
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},
@@ -88,7 +98,15 @@ class FacingTemplate(APIView):
 
     def post(self, request):
         try:
-            pass
+            tool_number = request.data['toolNumber']
+            spindle_rpm = request.data['spindleRpm']
+            feed_rate = request.data['feed_rate']
+            width = request.data['width']
+            depth = request.data['depth']
+            clearance = request.data['request']
+            doc = request.data['doc']
+            plunge_rate = request.data['plunge_rate']
+            step_over = request.data['stepOver']
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},

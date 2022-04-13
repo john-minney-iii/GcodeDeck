@@ -293,14 +293,14 @@ const g01FormHelper = () =>  {
               </div>
               <div className="col-7">
               <div className="container-justify-content-start">
-                  Placeholder for graphical output
+                <div>
+                    {gcode.split(',').map(line => <p className='m-0'>{line}</p>)}
+                </div>
               </div>
               </div>
               <div className="col">
               <div className="container-justify-content-start">
-                  <div>
-                    {gcode.split(',').map(line => <p className='m-0'>{line}</p>)}
-                  </div>
+                  Placeholder
               </div>
               </div>
           </div>

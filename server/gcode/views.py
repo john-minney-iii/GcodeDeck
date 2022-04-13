@@ -100,12 +100,12 @@ class FacingTemplate(APIView):
         try:
             tool_number = request.data['toolNumber']
             spindle_rpm = request.data['spindleRpm']
-            feed_rate = request.data['feed_rate']
+            feed_rate = request.data['feedRate']
             width = request.data['width']
             depth = request.data['depth']
             clearance = request.data['request']
             doc = request.data['doc']
-            plunge_rate = request.data['plunge_rate']
+            plunge_rate = request.data['plungeRate']
             step_over = request.data['stepOver']
         except Exception as e:
             return Response(

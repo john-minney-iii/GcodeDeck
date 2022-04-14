@@ -62,21 +62,23 @@ export default function GenHome(props) {
         <div className="form-group">
             <label for="axisOfMovement">Tool Number:</label>
             <input type="" className="" id="" placeholder="Tool number for facing"></input>
+            <label for="CutterDiameter">Cutter Diameter:</label>
+            <input type="" className="" id="" placeholder="Tool number for facing"></input>
             <label for="spindleSpeed">Spindle RPM:</label>
             <input type="" className="form-control" id="" placeholder="Spindle RPM for facing"></input>
-            <label for="spindleSpeed">Feed Rate:</label>
+            <label for="FeedRate">Feed Rate:</label>
             <input type="" className="form-control" id="" placeholder="Feed Rate for Facing"></input>
-            <label for="spindleSpeed">Width:</label>
+            <label for="Width">Width:</label>
             <input type="" className="form-control" id="" placeholder="Width (along x) for facing"></input>
-            <label for="spindleSpeed">Depth:</label>
+            <label for="Depth">Depth:</label>
             <input type="" className="form-control" id="" placeholder="Depth (along y) for facing"></input>
-            <label for="spindleSpeed">Clearance: </label>
+            <label for="Clearance">Clearance: </label>
             <input type="" className="form-control" id="" placeholder="Z clearance for facing (top of part + clearance)"></input>
-            <label for="spindleSpeed">DOC: </label>
+            <label for="DOC">DOC: </label>
             <input type="" className="form-control" id="" placeholder="Depth of cut (how much are you taking off the top?)"></input>
-            <label for="spindleSpeed">Plunge Rate:</label>
+            <label for="PlungeRate">Plunge Rate:</label>
             <input type="" className="form-control" id="" placeholder="Feed Rate for Z moves"></input>
-            <label for="spindleSpeed">Stepover:</label>
+            <label for="Stepover">Stepover:</label>
             <input type="" className="form-control" id="" placeholder="Amount tool moves over each pass until facing is completed"></input>
         </div>
     </form>;
@@ -112,6 +114,9 @@ export default function GenHome(props) {
             <br />
             <label for="Q - Peck Depth">Q:</label>
             <input type="" className="" id="" placeholder="Depth per peck"></input>
+            <br />
+            <label for="FeedRate">Feed Rate:</label>
+            <input type="" className="" id="" placeholder="Drilling Feedrate"></input>
             <br />
         </div>
     </form>;

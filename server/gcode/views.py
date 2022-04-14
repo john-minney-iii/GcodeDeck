@@ -38,7 +38,10 @@ class SpindleCommand(APIView):
             direction_of_rotation = request.data['directionOfRotation']
             spindleRpm = request.data['spindleRpm']
             turnOnSpindle = f'{direction_of_rotation} S{spindleRpm}'
-            return Response(status=status.HTTP_200_OK)
+            return Response(
+                turnOnSpindle,
+                status=status.HTTP_200_OK
+            )
         except Exception as e:
             return Response(
 
@@ -124,7 +127,10 @@ class Drilling(APIView):
             goToHole = f'G00 X{x_pos} Y{y_pos} Z{z_pos} ; (Rapid to hole location @Z Reference Point)'
             peckDrill = f'G83 Z{z_pos} R{reference} Q{peck_depth} F{feed_rate} ; (G83 Peck Drill)'
             cancelCannedCycle = f'G80 ; (Cancel Canned Cycle)'
-            return Response(status=status.HTTP_200_OK)
+            return Response(
+                f'{sendZHome},{goToHole},{peckDrill},{cancelCannedCycle}',
+                status=status.HTTP_200_OK
+            )
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},

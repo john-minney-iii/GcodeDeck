@@ -1,3 +1,4 @@
+from json import tool
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -14,11 +15,14 @@ class ToolChange(APIView):
             cutter_compensation = request.data['cutterCompensation']
             notes = request.data['notes']
             safeStart = "G54 G90 G17 G20; (Safe Start)"
-            toolChange = f'M06 T{tool_number} ; (Load Tool #{tool_number} into spindle)'
+            toolChange = f'M06 T{tool_number} ; (Load Tool #{tool_number} Notes: {notes})'
             toolOffset = f'G43 H{tool_number} ; (Load Positive Tool Height Offset for tool {tool_number})'
             if cutter_compensation != "None":
                 cutterComp = f'{cutter_compensation} D{tool_number}'
-            return Response(status=status.HTTP_200_OK)
+            return Response(
+                f'{safeStart},{toolChange},{toolOffset},{cutterComp}',
+                status=status.HTTP_200_OK
+            )
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},

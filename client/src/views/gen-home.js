@@ -31,7 +31,7 @@ export default function GenHome(props) {
     const [toolNotes, setToolNotes] = useState('');
 
     // States for Spindle Command
-    const [spindleDirection, setSpindleDirection] = useState('');
+    const [spindleDirection, setSpindleDirection] = useState('CW');
     const [spindleRPM, setSpindleRPM] = useState(0);
 
     // State for gcode file
@@ -40,6 +40,7 @@ export default function GenHome(props) {
     const handleModal = (which) => {
         setG01Choice('X');
         setG00Choice('X');
+        setSpindleDirection('CW');
         if (which === 'g01Modal')
             setg01ModalShow(!g01ModalShow);
         else if (which === 'g00Modal')
@@ -72,11 +73,11 @@ export default function GenHome(props) {
         <div className="form-group">
             <label for="axisOfMovement">Direction of Rotation: </label>
             <select name="Axis" id="axis" className="form-control" onChange={(e) => setSpindleDirection(e.target.value)} >
-                <option value="CW (M03)">CW (M03)</option>
-                <option value="CCW (M04)">CCW (M04)</option>
+                <option value="CW">CW (M03)</option>
+                <option value="CCW">CCW (M04)</option>
             </select>
-            <label for="spindleSpeed" onChange={(e) => setSpindleRPM(e.target.value)}>Spindle RPM:</label>
-            <input type="" className="form-control" id=""></input>
+            <label for="spindleSpeed">Spindle RPM:</label>
+            <input type="" className="form-control" id="" onChange={(e) => setSpindleRPM(e.target.value)}></input>
         </div>
     </form>;
 

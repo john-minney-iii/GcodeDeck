@@ -156,19 +156,19 @@ class FacingTemplate(APIView):
             plunge_rate = request.data['plungeRate']
             step_over = request.data['stepOver']
             cutter_diameter = request.data['cutterDiameter']
-            x = -width
+            x = float(width) * -1
             y = 0
-            really_fucking_long_gcode = []
-            really_fucking_long_gcode.append(f'G00 X{width + cutter_diameter} Y0 Z{clearance}')
+            really_fucking_long_gcode = ''
+            really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y0 Z{float(clearance)}')
             # Z Depth of the facing operation @ programmed plungerate
             while x:
-                really_fucking_long_gcode.append(f',G01 Z{doc} F{plunge_rate}')
-                really_fucking_long_gcode.append(f',G01 X{0 - cutter_diameter} F{feed_rate}')
-                really_fucking_long_gcode.append(f',G01 Z{clearance} F{plunge_rate}')
-                if y < width*-1:
+                really_fucking_long_gcode += (f',G01 Z{doc} F{plunge_rate}')
+                really_fucking_long_gcode += (f',G01 X{0 - float(cutter_diameter)} F{feed_rate}')
+                really_fucking_long_gcode += (f',G01 Z{clearance} F{plunge_rate}')
+                if y < float(width)*-1:
                     break
-                really_fucking_long_gcode.append(f',G00 X{width + cutter_diameter} Y{y-step_over}')
-                y = y-step_over
+                really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y{y-float(step_over)}')
+                y = y-float(step_over)
             print(really_fucking_long_gcode)
             return Response(
                 really_fucking_long_gcode,

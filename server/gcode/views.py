@@ -17,6 +17,7 @@ class ToolChange(APIView):
             toolOffset = f'G43 H{tool_number} ; (Load Positive Tool Height Offset for tool {tool_number})'
             if cutter_compensation != "None":
                 cutterComp = f'{cutter_compensation} D{tool_number}'
+            return Response(status=status.HTTP_200_OK)
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},
@@ -31,6 +32,7 @@ class SpindleCommand(APIView):
             direction_of_rotation = request.data['directionOfRotation']
             spindleRpm = request.data['spindleRpm']
             turnOnSpindle = f'{direction_of_rotation} S{spindleRpm}'
+            return Response(status=status.HTTP_200_OK)
         except Exception as e:
             return Response(
 
@@ -106,6 +108,7 @@ class Drilling(APIView):
             peck_depth = request.data['peckDepth'] ##Hey dummy, add feedrate
             sendZHome = f'G28 Z'
             peckDrill = f'G83 Z{z_pos} R{reference} Q{peck_depth} #FeedRate ; (G83 Peck Drill)'
+            return Response(status=status.HTTP_200_OK)
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},
@@ -126,6 +129,7 @@ class FacingTemplate(APIView):
             doc = request.data['doc']
             plunge_rate = request.data['plungeRate']
             step_over = request.data['stepOver']
+            return Response(status=status.HTTP_200_OK)
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},
@@ -137,7 +141,7 @@ class RectangleTemplate(APIView):
 
     def post(self, request):
         try:
-            pass
+            return Response(status=status.HTTP_200_OK)
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},

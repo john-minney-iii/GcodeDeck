@@ -4,11 +4,11 @@ toolNum = 1
 spindleSpeed = 3000
 feedRate = 12
 width = 2
-length = 2
+depth = 4
 zStart = .1
 zEnd = -.005
 plungeRate = 3
-stepover = .250
+stepover = .1875
 
 # NOT USER PARAMETERS!!!!
 x = -width
@@ -26,7 +26,7 @@ while x:
     print(f'G01 Z{zEnd} F{plungeRate}')
     print(f'G01 X{0 - cutterDiameter} F{feedRate}')
     print(f'G01 Z{zStart} F{plungeRate}')
-    if y < width*-1:
+    if y < depth*-1:
         break
     print(f'G00 X{width + cutterDiameter} Y{y-stepover}')
     y = y-stepover

@@ -118,7 +118,7 @@ class Drilling(APIView):
             feed_rate = request.data['feedRate']
             sendZHome = f'G28 Z'
             goToHole = f'G00 X{x_pos} Y{y_pos} Z{z_pos} ; (Rapid to hole location @Z Reference Point)'
-            peckDrill = f'G83 Z{z_pos} R{reference} Q{peck_depth} #FeedRate ; (G83 Peck Drill)'
+            peckDrill = f'G83 Z{z_pos} R{reference} Q{peck_depth} F{feed_rate} ; (G83 Peck Drill)'
             cancelCannedCycle = f'G80 ; (Cancel Canned Cycle)'
             return Response(status=status.HTTP_200_OK)
         except Exception as e:
@@ -143,16 +143,16 @@ class FacingTemplate(APIView):
             plunge_rate = request.data['plungeRate']
             step_over = request.data['stepOver']
             cutter_diameter = request.data['cutterDiameter']
-
-            print(f'G00 X{width + cutterDiameter} Y0 Z{clearance}')
+            x = -width
+            print(f'G00 X{width + cutter_diameter} Y0 Z{clearance}')
             # Z Depth of the facing operation @ programmed plungerate
             while x:
                 print(f'G01 Z{doc} F{plunge_rate}')
-                print(f'G01 X{0 - cutterDiameter} F{feed_rate}')
+                print(f'G01 X{0 - cutter_diameter} F{feed_rate}')
                 print(f'G01 Z{clearance} F{plunge_rate}')
                 if y < width*-1:
                     break
-                print(f'G00 X{width + cutterDiameter} Y{y-step_over}')
+                print(f'G00 X{width + cutter_diameter} Y{y-step_over}')
                 y = y-step_over
             return Response(status=status.HTTP_200_OK)
         except Exception as e:

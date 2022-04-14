@@ -42,6 +42,18 @@ export default function GenHome(props) {
     const [drillPeckDepth, setDrillPeckDepth] = useState(0);
     const [drillFeedRate, setDrillFeedRate] = useState(0);
 
+    // States for Facing
+    const [faceToolNumber, setFaceToolNumber] = useState(0);
+    const [faceCutDiam, setCutDiam] = useState(0);
+    const [faceSpindleRPM, setfaceSpindleRPM] = useState(0);
+    const [faceFeedRate, setFaceFeedRate] = useState(0);
+    const [faceWidth, setFaceWidth] = useState(0);
+    const [faceDepth, setFaceDepth] = useState(0);
+    const [faceClearance, setFaceClearance] = useState(0);
+    const [faceDOC, setFaceDOC] = useState(0);
+    const [facePlunge, setFacePlunge] = useState(0);
+    const [faceStepOver, setFaceStepOver] = useState(0);
+
     // State for gcode file
     const [gcode, setGcode] = useState('');
 
@@ -89,28 +101,49 @@ export default function GenHome(props) {
         </div>
     </form>;
 
+    const facingTemplateFormSubmit = () => {
+        axios.post('http://localhost:8000/api/v1/gcode/facingTemplate/', {
+            'toolNumber': faceToolNumber,
+            'cutterDiameter': faceCutDiam,
+            'spindleRpm': faceSpindleRPM,
+            'feedRate': faceFeedRate,
+            'width': faceWidth,
+            'depth': faceDepth,
+            'clearance': faceClearance,
+            'doc': faceDOC,
+            'plungeRate': facePlunge,
+            'stepOver': faceStepOver
+        }).then(res => {
+            if (res.status === 200)
+                if (gcode.length !== 0)
+                    setGcode(gcode + ',' + res.data);
+                else
+                    setGcode(res.data);
+        });
+    };
+
     const facingTemplateForm = () => <form>
         <div className="form-group">
             <label for="axisOfMovement">Tool Number:</label>
-            <input type="" className="" id="" placeholder="Tool number for facing"></input>
+            <input type="" className="" id="" placeholder="Tool number for facing" onChange={(e) => setFaceToolNumber(e.target.value)}></input>
             <label for="CutterDiameter">Cutter Diameter:</label>
-            <input type="" className="" id="" placeholder="Tool number for facing"></input>
+            <input type="" className="" id="" placeholder="Tool number for facing" onChange={(e) => setCutDiam(e.target.value)}></input>
             <label for="spindleSpeed">Spindle RPM:</label>
-            <input type="" className="form-control" id="" placeholder="Spindle RPM for facing"></input>
+            <input type="" className="form-control" id="" placeholder="Spindle RPM for facing" onChange={(e) => setfaceSpindleRPM(e.target.value)}></input>
             <label for="FeedRate">Feed Rate:</label>
-            <input type="" className="form-control" id="" placeholder="Feed Rate for Facing"></input>
+            <input type="" className="form-control" id="" placeholder="Feed Rate for Facing" onChange={(e) => setFaceFeedRate(e.target.value)}></input>
             <label for="Width">Width:</label>
-            <input type="" className="form-control" id="" placeholder="Width (along x) for facing"></input>
+            <input type="" className="form-control" id="" placeholder="Width (along x) for facing" onChange={(e) => setFaceWidth(e.target.value)}></input>
             <label for="Depth">Depth:</label>
-            <input type="" className="form-control" id="" placeholder="Depth (along y) for facing"></input>
+            <input type="" className="form-control" id="" placeholder="Depth (along y) for facing" onChange={(e) => setFaceDepth(e.target.value)}></input>
             <label for="Clearance">Clearance: </label>
-            <input type="" className="form-control" id="" placeholder="Z clearance for facing (top of part + clearance)"></input>
+            <input type="" className="form-control" id="" placeholder="Z clearance for facing (top of part + clearance)" onChange={(e) => setFaceClearance(e.target.value)}></input>
             <label for="DOC">DOC: </label>
-            <input type="" className="form-control" id="" placeholder="Depth of cut (how much are you taking off the top?)"></input>
+            <input type="" className="form-control" id="" placeholder="Depth of cut (how much are you taking off the top?)" onChange={(e) => setFaceDOC(e.target.value)}></input>
             <label for="PlungeRate">Plunge Rate:</label>
-            <input type="" className="form-control" id="" placeholder="Feed Rate for Z moves"></input>
+            <input type="" className="form-control" id="" placeholder="Feed Rate for Z moves" onChange={(e) => setFacePlunge(e.target.value)}></input>
             <label for="Stepover">Stepover:</label>
-            <input type="" className="form-control" id="" placeholder="Amount tool moves over each pass until facing is completed"></input>
+            <input type="" className="form-control" id="" placeholder="Amount tool moves over each pass until facing is completed" onChange={(e) => setFaceStepOver(e.target.value)}></input>
         </div>
     </form>;
 
@@ -483,6 +516,7 @@ export default function GenHome(props) {
                         className='btn btn-primary btn-lg rounded-pill'
                         onClick={() => {
                             handleModal('facingTemplateModal');
+                            facingTemplateFormSubmit();
                         }}
                     >Submit</button>
                 </Modal.Footer>

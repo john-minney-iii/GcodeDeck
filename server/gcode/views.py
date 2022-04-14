@@ -151,23 +151,29 @@ class FacingTemplate(APIView):
             feed_rate = request.data['feedRate']
             width = request.data['width']
             depth = request.data['depth']
-            clearance = request.data['request']
+            clearance = request.data['clearance']
             doc = request.data['doc']
             plunge_rate = request.data['plungeRate']
             step_over = request.data['stepOver']
             cutter_diameter = request.data['cutterDiameter']
             x = -width
-            print(f'G00 X{width + cutter_diameter} Y0 Z{clearance}')
+            y = 0
+            really_fucking_long_gcode = []
+            really_fucking_long_gcode.append(f'G00 X{width + cutter_diameter} Y0 Z{clearance}')
             # Z Depth of the facing operation @ programmed plungerate
             while x:
-                print(f'G01 Z{doc} F{plunge_rate}')
-                print(f'G01 X{0 - cutter_diameter} F{feed_rate}')
-                print(f'G01 Z{clearance} F{plunge_rate}')
+                really_fucking_long_gcode.append(f',G01 Z{doc} F{plunge_rate}')
+                really_fucking_long_gcode.append(f',G01 X{0 - cutter_diameter} F{feed_rate}')
+                really_fucking_long_gcode.append(f',G01 Z{clearance} F{plunge_rate}')
                 if y < width*-1:
                     break
-                print(f'G00 X{width + cutter_diameter} Y{y-step_over}')
+                really_fucking_long_gcode.append(f',G00 X{width + cutter_diameter} Y{y-step_over}')
                 y = y-step_over
-            return Response(status=status.HTTP_200_OK)
+            print(really_fucking_long_gcode)
+            return Response(
+                really_fucking_long_gcode,
+                status=status.HTTP_200_OK
+            )
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},

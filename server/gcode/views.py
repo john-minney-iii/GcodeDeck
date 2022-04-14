@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
+
 class ToolChange(APIView):
     permission_classes = [AllowAny]
 
@@ -24,6 +25,7 @@ class ToolChange(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
+
 class SpindleCommand(APIView):
     permission_classes = [AllowAny]
 
@@ -39,6 +41,7 @@ class SpindleCommand(APIView):
                 {'error': True, 'error_msg': e},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
 
 class RapidMovement(APIView):
     permission_classes = [AllowAny]
@@ -56,7 +59,7 @@ class RapidMovement(APIView):
             elif axis == "Z":
                 g01 = f'G00 Y{float(pos)} ; (G00 Rapid Move)'
             elif axis == "XY":
-                g01 =f'G00 X{float(pos)} Y{float(pos2)} ; (G01 Rapid Move)'
+                g01 = f'G00 X{float(pos)} Y{float(pos2)} ; (G01 Rapid Move)'
             else:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             return Response(
@@ -68,6 +71,7 @@ class RapidMovement(APIView):
                 {'error': True, 'error_msg': e},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
 
 class LinearMovement(APIView):
     permission_classes = [AllowAny]
@@ -86,7 +90,7 @@ class LinearMovement(APIView):
             elif axis == "Z":
                 g01 = f'G01 Y{float(pos)} F{float(feed_rate)} ; (G01 Linear Move)'
             elif axis == "XY":
-                g01 =f'G01 X{float(pos)} Y{float(pos2)} F{float(feed_rate)} ; (G01 Linear Move)'
+                g01 = f'G01 X{float(pos)} Y{float(pos2)} F{float(feed_rate)} ; (G01 Linear Move)'
             else:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             # print(g01)
@@ -100,6 +104,7 @@ class LinearMovement(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
+
 class Drilling(APIView):
     permission_classes = [AllowAny]
 
@@ -109,16 +114,18 @@ class Drilling(APIView):
             y_pos = request.data['yPos']
             z_pos = request.data['zPos']
             reference = request.data['reference']
-            peck_depth = request.data['peckDepth'] ##Hey dummy, add feedrate
+            peck_depth = request.data['peckDepth']  # Hey dummy, add feedrate
             sendZHome = f'G28 Z'
             goToHole = f'G00 X{x_pos} Y{y_pos} Z{z_pos} ; (Rapid to hole location @Z Reference Point)'
             peckDrill = f'G83 Z{z_pos} R{reference} Q{peck_depth} #FeedRate ; (G83 Peck Drill)'
+            cancelCannedCycle = f'G80 ; (Cancel Canned Cycle)'
             return Response(status=status.HTTP_200_OK)
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
 
 class FacingTemplate(APIView):
     permission_classes = [AllowAny]
@@ -133,7 +140,18 @@ class FacingTemplate(APIView):
             clearance = request.data['request']
             doc = request.data['doc']
             plunge_rate = request.data['plungeRate']
-            step_over = request.data['stepOver']
+            step_over = request.data['stepOver'] #Add Cutter Diameter
+
+            print(f'G00 X{width + cutterDiameter} Y0 Z{clearance}')
+            # Z Depth of the facing operation @ programmed plungerate
+            while x:
+                print(f'G01 Z{doc} F{plunge_rate}')
+                print(f'G01 X{0 - cutterDiameter} F{feed_rate}')
+                print(f'G01 Z{clearance} F{plunge_rate}')
+                if y < width*-1:
+                    break
+                print(f'G00 X{width + cutterDiameter} Y{y-step_over}')
+                y = y-step_over
             return Response(status=status.HTTP_200_OK)
         except Exception as e:
             return Response(

@@ -37,7 +37,10 @@ class SpindleCommand(APIView):
         try:
             direction_of_rotation = request.data['directionOfRotation']
             spindleRpm = request.data['spindleRpm']
-            turnOnSpindle = f'{direction_of_rotation} S{spindleRpm}'
+            if direction_of_rotation == "CW":
+                turnOnSpindle = f'M03 S{spindleRpm} ; (Turn on Spindle CW)'
+            elif direction_of_rotation == "CCW":
+                turnOnSpindle = f'M04 S{spindleRpm} ; (Turn on Spindle CCW)'
             return Response(
                 turnOnSpindle,
                 status=status.HTTP_200_OK

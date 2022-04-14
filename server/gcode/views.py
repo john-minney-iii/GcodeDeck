@@ -114,7 +114,8 @@ class Drilling(APIView):
             y_pos = request.data['yPos']
             z_pos = request.data['zPos']
             reference = request.data['reference']
-            peck_depth = request.data['peckDepth']  # Hey dummy, add feedrate
+            peck_depth = request.data['peckDepth']
+            feed_rate = request.data['feedRate']
             sendZHome = f'G28 Z'
             goToHole = f'G00 X{x_pos} Y{y_pos} Z{z_pos} ; (Rapid to hole location @Z Reference Point)'
             peckDrill = f'G83 Z{z_pos} R{reference} Q{peck_depth} #FeedRate ; (G83 Peck Drill)'
@@ -140,7 +141,8 @@ class FacingTemplate(APIView):
             clearance = request.data['request']
             doc = request.data['doc']
             plunge_rate = request.data['plungeRate']
-            step_over = request.data['stepOver'] #Add Cutter Diameter
+            step_over = request.data['stepOver']
+            cutter_diameter = request.data['cutterDiameter']
 
             print(f'G00 X{width + cutterDiameter} Y0 Z{clearance}')
             # Z Depth of the facing operation @ programmed plungerate

@@ -18,7 +18,7 @@ class ToolChange(APIView):
             toolChange = f'M06 T{tool_number} ; (Load Tool #{tool_number} Notes: {notes})'
             toolOffset = f'G43 H{tool_number} ; (Load Positive Tool Height Offset for tool {tool_number})'
             if cutter_compensation != "None":
-                cutterComp = f'{cutter_compensation} D{tool_number}'
+                cutterComp = f'{cutter_compensation} D{tool_number}; (Enable Cutter Compensation)'
             return Response(
                 f'{safeStart},{toolChange},{toolOffset},{cutterComp}',
                 status=status.HTTP_200_OK

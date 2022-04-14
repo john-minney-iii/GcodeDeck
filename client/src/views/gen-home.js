@@ -25,6 +25,11 @@ export default function GenHome(props) {
     const [g00Pos, setG00Pos] = useState(0);
     const [g00Pos2, setG00Pos2] = useState(0);
 
+    // States for tool change
+    const [toolNumber, setToolNumber] = useState(0);
+    const [cutterCompensation, setCutterCompensation] = useState(0);
+    const [toolNotes, setToolNotes] = useState('');
+
     // State for gcode file
     const [gcode, setGcode] = useState('');
 
@@ -83,18 +88,32 @@ export default function GenHome(props) {
         </div>
     </form>;
 
+    const toolFormSubmit = () => {
+        axios.post('http://localhost:8000/api/v1/gcode/toolChange/', {
+            'toolNumber': toolNumber,
+            'cutterCompensation': cutterCompensation,
+            'notes': toolNotes
+        }).then(res => {
+            if (res.status === 200)
+                if (gcode.length !== 0)
+                    setGcode(gcode + ',' + res.data);
+                else
+                    setGcode(res.data);
+        });
+    };
+
     const toolChangeForm = () => <form>
         <div className="form-group">
             <label for="Tool Number">Tool Number:</label>
-            <input type="" className="" id="" placeholder="Tool pocket Number"></input>
+            <input type="" className="" id="" placeholder="Tool pocket Number" onChange={(e) => setToolNumber(e.target.value)}></input>
             <label for="Tool Number">Cutter Compensation:</label>
-            <select name="Cutter Compensation" id="axis" className="form-control">
+            <select name="Cutter Compensation" id="axis" className="form-control" onChange={(e) => setCutterCompensation(e.target.value)}>
                 <option value="G40">None (G40)</option>
                 <option value="G41">Left (G41)</option>
                 <option value="G42">Right (G42)</option>
             </select>
             <label for="Notes">Notes:</label>
-            <input type="" className="" id="" placeholder="Notes about tool"></input>
+            <input type="" className="" id="" placeholder="Notes about tool" onChange={(e) => setToolNotes(e.target.value)}></input>
         </div>
     </form>;
 
@@ -122,7 +141,6 @@ export default function GenHome(props) {
     </form>;
 
     const g00FormSubmit = async () => {
-        console.log('Hi');
         axios.post('http://localhost:8000/api/v1/gcode/rapidMovement/', {
             'feedrate': g00FeedRate,
             'axis': g00Choice,
@@ -134,7 +152,7 @@ export default function GenHome(props) {
                     setGcode(gcode + ',' + res.data);
                 else
                     setGcode(res.data);
-        })
+        });
     };
 
     const g00Form = () => <form>
@@ -378,6 +396,7 @@ export default function GenHome(props) {
                         className='btn btn-primary btn-lg rounded-pill'
                         onClick={() => {
                             handleModal('toolChangeModal');
+                            toolFormSubmit();
                         }}
                     >Submit</button>
                 </Modal.Footer>

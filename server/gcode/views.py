@@ -92,7 +92,6 @@ class LinearMovement(APIView):
             axis = request.data['axis']
             pos = request.data['pos']
             pos2 = request.data['pos2']
-            # safeStart = "G54 G17 G90 G20"
             if axis == "X":
                 g01 = f'G01 X{float(pos)} F{float(feed_rate)} ; (G01 Linear Move)'
             elif axis == "Y":
@@ -159,15 +158,18 @@ class FacingTemplate(APIView):
             x = float(width) * -1
             y = 0
             really_fucking_long_gcode = ''
-            really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y0 Z{float(clearance)}')
+            really_fucking_long_gcode += (f',G54 G90 G17 G20; (Safe Start)')
+            really_fucking_long_gcode += (f',M06 T{tool_number} ; (Switch to correct tool)')
+            really_fucking_long_gcode += (f',M03 S{spindle_rpm} ; (Turn on Spindle)')
+            really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y0 Z{float(clearance)} ; (Rapid Move)')
             # Z Depth of the facing operation @ programmed plungerate
             while x:
-                really_fucking_long_gcode += (f',G01 Z{doc} F{plunge_rate}')
-                really_fucking_long_gcode += (f',G01 X{0 - float(cutter_diameter)} F{feed_rate}')
-                really_fucking_long_gcode += (f',G01 Z{clearance} F{plunge_rate}')
-                if y < float(width)*-1:
+                really_fucking_long_gcode += (f',G01 Z{-1 * float(doc)} F{plunge_rate} ; (Linear Move)')
+                really_fucking_long_gcode += (f',G01 X{0 - float(cutter_diameter)} F{feed_rate} ; (Linear Move)')
+                really_fucking_long_gcode += (f',G01 Z{clearance} F{plunge_rate} ; (Linear Move)')
+                if y < float(depth)*-1:
                     break
-                really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y{y-float(step_over)}')
+                really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y{y-float(step_over)} ; (Rapid Move)')
                 y = y-float(step_over)
             print(really_fucking_long_gcode)
             return Response(

@@ -30,6 +30,10 @@ export default function GenHome(props) {
     const [cutterCompensation, setCutterCompensation] = useState(0);
     const [toolNotes, setToolNotes] = useState('');
 
+    // States for Spindle Command
+    const [spindleDirection, setSpindleDirection] = useState('');
+    const [spindleRPM, setSpindleRPM] = useState(0);
+
     // State for gcode file
     const [gcode, setGcode] = useState('');
 
@@ -51,14 +55,27 @@ export default function GenHome(props) {
         //resetFormStates();
     };
 
+    const spindleCommandFormSubmit = () => {
+        axios.post('http://localhost:8000/api/v1/gcode/spindleCommand/', {
+            'directionOfRotation': spindleDirection,
+            'spindleRpm': spindleRPM
+        }).then(res => {
+            if (res.status === 200)
+                if (gcode.length !== 0)
+                    setGcode(gcode + ',' + res.data);
+                else
+                    setGcode(res.data);
+        });
+    };
+
     const spindleCommandForm = () => <form>
         <div className="form-group">
             <label for="axisOfMovement">Direction of Rotation: </label>
-            <select name="Axis" id="axis" className="form-control">
+            <select name="Axis" id="axis" className="form-control" onChange={(e) => setSpindleDirection(e.target.value)} >
                 <option value="CW (M03)">CW (M03)</option>
                 <option value="CCW (M04)">CCW (M04)</option>
             </select>
-            <label for="spindleSpeed">Spindle RPM:</label>
+            <label for="spindleSpeed" onChange={(e) => setSpindleRPM(e.target.value)}>Spindle RPM:</label>
             <input type="" className="form-control" id=""></input>
         </div>
     </form>;
@@ -482,6 +499,7 @@ export default function GenHome(props) {
                         className='btn btn-primary btn-lg rounded-pill'
                         onClick={() => {
                             handleModal('spindleModal');
+                            spindleCommandFormSubmit();
                         }}
                     >Submit</button>
                 </Modal.Footer>

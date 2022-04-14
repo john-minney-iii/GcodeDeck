@@ -105,6 +105,7 @@ class Drilling(APIView):
             reference = request.data['reference']
             peck_depth = request.data['peckDepth'] ##Hey dummy, add feedrate
             sendZHome = f'G28 Z'
+            goToHole = f'G00 X{x_pos} Y{y_pos} Z{z_pos} ; (Rapid to hole location @Z Reference Point)'
             peckDrill = f'G83 Z{z_pos} R{reference} Q{peck_depth} #FeedRate ; (G83 Peck Drill)'
         except Exception as e:
             return Response(

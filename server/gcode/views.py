@@ -30,6 +30,7 @@ class SpindleCommand(APIView):
         try:
             direction_of_rotation = request.data['directionOfRotation']
             spindleRpm = request.data['spindleRpm']
+            turnOnSpindle = f'{direction_of_rotation} S{spindleRpm}'
         except Exception as e:
             return Response(
 
@@ -46,6 +47,16 @@ class RapidMovement(APIView):
             axis = request.data['axis']
             pos = request.data['pos']
             pos2 = request.data['pos2']
+            if axis == "X":
+                g01 = f'G00 X{float(pos)} ; (G00 Rapid Move)'
+            elif axis == "Y":
+                g01 = f'G00 Y{float(pos)} ; (G00 Rapid Move)'
+            elif axis == "Z":
+                g01 = f'G00 Y{float(pos)} ; (G00 Rapid Move)'
+            elif axis == "XY":
+                g01 =f'G00 X{float(pos)} Y{float(pos2)} ; (G01 Rapid Move)'
+            else:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},
@@ -92,7 +103,9 @@ class Drilling(APIView):
             y_pos = request.data['yPos']
             z_pos = request.data['zPos']
             reference = request.data['reference']
-            peck_depth = request.data['peckDepth']
+            peck_depth = request.data['peckDepth'] ##Hey dummy, add feedrate
+            sendZHome = f'G28 Z'
+            peckDrill = f'G83 Z{z_pos} R{reference} Q{peck_depth} #FeedRate ; (G83 Peck Drill)'
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},

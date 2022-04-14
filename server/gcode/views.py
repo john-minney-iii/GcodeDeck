@@ -59,6 +59,10 @@ class RapidMovement(APIView):
                 g01 =f'G00 X{float(pos)} Y{float(pos2)} ; (G01 Rapid Move)'
             else:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                g01,
+                status=status.HTTP_200_OK
+            )
         except Exception as e:
             return Response(
                 {'error': True, 'error_msg': e},

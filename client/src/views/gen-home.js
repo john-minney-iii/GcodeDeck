@@ -34,6 +34,14 @@ export default function GenHome(props) {
     const [spindleDirection, setSpindleDirection] = useState('CW');
     const [spindleRPM, setSpindleRPM] = useState(0);
 
+    // States for Drilling
+    const [drillXPos, setDrillXPos] = useState(0);
+    const [drillYPos, setDrillYPos] = useState(0);
+    const [drillZPos, setDrillZPos] = useState(0);
+    const [drillRef, setDrillRef] = useState(0);
+    const [drillPeckDepth, setDrillPeckDepth] = useState(0);
+    const [drillFeedRate, setDrillFeedRate] = useState(0);
+
     // State for gcode file
     const [gcode, setGcode] = useState('');
 
@@ -135,25 +143,42 @@ export default function GenHome(props) {
         </div>
     </form>;
 
+    const drillFormSubmit = () => {
+        axios.post('http://localhost:8000/api/v1/gcode/drilling/', {
+            'xPos': drillXPos,
+            'yPos': drillYPos,
+            'zPos': drillZPos,
+            'reference': drillRef,
+            'peckDepth': drillPeckDepth,
+            'feedRate': drillFeedRate
+        }).then(res => {
+            if (res.status === 200)
+                if (gcode.length !== 0)
+                    setGcode(gcode + ',' + res.data);
+                else
+                    setGcode(res.data);
+        });
+    };
+
     const drillForm = () => <form>
         <div className="form-group">
             <label for="X Location">X:</label>
-            <input type="" className="" id="" placeholder="X Coordinate of hole"></input>
+            <input type="" className="" id="" placeholder="X Coordinate of hole" onChange={(e) => setDrillXPos(e.target.value)}></input>
             <br />
             <label for="Y Location">Y:</label>
-            <input type="" className="" id="" placeholder="y Coordinate of hole"></input>
+            <input type="" className="" id="" placeholder="y Coordinate of hole" onChange={(e) => setDrillYPos(e.target.value)}></input>
             <br />
             <label for="Z Location at bottom of hole">Z:</label>
-            <input type="" className="" id="" placeholder="Bottom of hole location"></input>
+            <input type="" className="" id="" placeholder="Bottom of hole location" onChange={(e) => setDrillZPos(e.target.value)}></input>
             <br />
             <label for="R - reference plane (position above part)">R:</label>
-            <input type="" className="" id="" placeholder="Top of part + some clearance"></input>
+            <input type="" className="" id="" placeholder="Top of part + some clearance" onChange={(e) => setDrillRef(e.target.value)}></input>
             <br />
             <label for="Q - Peck Depth">Q:</label>
-            <input type="" className="" id="" placeholder="Depth per peck"></input>
+            <input type="" className="" id="" placeholder="Depth per peck" onChange={(e) => setDrillPeckDepth(e.target.value)}></input>
             <br />
             <label for="FeedRate">Feed Rate:</label>
-            <input type="" className="" id="" placeholder="Drilling Feedrate"></input>
+            <input type="" className="" id="" placeholder="Drilling Feedrate" onChange={(e) => setDrillFeedRate(e.target.value)}></input>
             <br />
         </div>
     </form>;
@@ -479,6 +504,7 @@ export default function GenHome(props) {
                         className='btn btn-primary btn-lg rounded-pill'
                         onClick={() => {
                             handleModal('drillModal');
+                            drillFormSubmit();
                         }}
                     >Submit</button>
                 </Modal.Footer>

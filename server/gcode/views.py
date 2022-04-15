@@ -169,7 +169,7 @@ class FacingTemplate(APIView):
                 really_fucking_long_gcode += (f',G01 Z{clearance} F{plunge_rate} ; (Linear Move)')
                 if y < float(depth)*-1:
                     break
-                really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y{y-float(step_over)} ; (Rapid Move)')
+                really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y{round(y-float(step_over), 4)} ; (Rapid Move)')
                 y = y-float(step_over)
             print(really_fucking_long_gcode)
             return Response(

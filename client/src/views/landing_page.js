@@ -64,7 +64,7 @@ export default function LandingPage(props) {
         );
     };
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    const inputs = [
+    const regFirstName = [
         {
             id: 1,
             name: "firstName",
@@ -75,6 +75,8 @@ export default function LandingPage(props) {
             pattern: "^[A-Za-z0-9-]{1,150}$",
             required: true,
         },
+    ];
+    const regLastName = [
         {
             id: 2,
             name: "lastName",
@@ -85,6 +87,8 @@ export default function LandingPage(props) {
             pattern: "^[A-Za-z0-9-]{1,150}$",
             required: true,
         },
+    ];
+    const regUsername = [
         {
           id: 3,
           name: "username",
@@ -95,6 +99,8 @@ export default function LandingPage(props) {
           pattern: "^[A-Za-z0-9@_+-]{1,150}$",
           required: true,
         },
+    ];
+    const regEmail = [
         {
           id: 4,
           name: "email",
@@ -103,6 +109,8 @@ export default function LandingPage(props) {
           placeholder: "Email",
           required: true,
         },
+    ];
+    const regPassword = [
         {
           id: 5,
           name: "password",
@@ -113,6 +121,8 @@ export default function LandingPage(props) {
           pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{3,150}$`,
           required: true,
         },
+    ];
+    const regConfPass = [
         {
           id: 6,
           name: "confirmPassword",
@@ -122,7 +132,32 @@ export default function LandingPage(props) {
           pattern: values.password,
           required: true,
         },
-      ];
+    ];
+
+    const logUsername = [
+        {
+            id: 1,
+            name: "username",
+            type: "text",
+            errorMessage:
+              "Please enter a username",
+            placeholder: "Username",
+            pattern: "^[A-Za-z0-9@_+-]{1,150}$",
+            required: true,
+        },
+    ];
+    const logPassword = [
+        {
+            id: 2,
+            name: "password",
+            type: "password",
+            placeholder: "Password",
+            errorMessage:
+              "Please enter a password",
+            pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{3,150}$`,
+            required: true,
+          },
+    ];
     
       const onChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
@@ -131,8 +166,8 @@ export default function LandingPage(props) {
 
     const loginSubmit = async () => {
         axios.post('http://localhost:8000/api/v1/user/auth/', {
-            'username': inputs.username,
-            'password': inputs.pswd
+            'username': logUsername.username,
+            'password': logPassword.pswd
         }).then(res => {
             if (res.status === 200)
                 props.loginUser(res.data.token);
@@ -141,11 +176,11 @@ export default function LandingPage(props) {
 
     const registerSubmit = async () => {
         axios.post('http://localhost:8000/api/v1/user/register/', {
-            'username': inputs.username,
-            'first_name': inputs.firstName,
-            'last_name': inputs.lastName,
-            'email': inputs.email,
-            'password': inputs.pswd
+            'username': regUsername.username,
+            'first_name': regFirstName.firstName,
+            'last_name': regLastName.lastName,
+            'email': regEmail.email,
+            'password': regPassword.pswd
         }).then(res => {
             if (res.status === 201)
                 loginSubmit(res.data.token);
@@ -171,7 +206,8 @@ export default function LandingPage(props) {
         <Modal show={loginModalShow} onHide={() => handleModal('login')}>
             <Modal.Header closeButton>Login</Modal.Header>
             <Modal.Body>
-                    {inputs.map((input) => (
+                <div className = "form-control">
+                    {logUsername.map((input) => (
                     <FormInput
                         key={input.id[1,2]}
                         {...input}
@@ -179,6 +215,16 @@ export default function LandingPage(props) {
                         onChange={onChange}
                     />
                     ))}
+                    <p></p>
+                    {logPassword.map((input) => (
+                    <FormInput
+                        key={input.id[1,2]}
+                        {...input}
+                        value={values[input.name]}
+                        onChange={onChange}
+                    />
+                    ))}
+                </div>
             </Modal.Body>
             <Modal.Footer>
                 <button 
@@ -197,15 +243,68 @@ export default function LandingPage(props) {
         <Modal show={regModalShow} onHide={() => handleModal('register')}>
             <Modal.Header closeButton>Register New Account</Modal.Header>
             <Modal.Body>
-                    <h1>Register</h1>
-                    {inputs.map((input) => (
-                    <FormInput
-                        key={input.id}
-                        {...input}
-                        value={values[input.name]}
-                        onChange={onChange}
-                    />
-                    ))}
+                    <div className = "form-control">
+                        {regFirstName.map((input) => (
+                        <FormInput
+                            key={input.id}
+                            {...input}
+                            value={values[input.name]}
+                            onChange={onChange}
+                        />
+                        ))}
+                        <p></p>
+                        {regLastName.map((input) => (
+                        <FormInput
+                            key={input.id}
+                            {...input}
+                            value={values[input.name]}
+                            onChange={onChange}
+                        />
+                        ))}
+                        <p></p>
+                        {regUsername.map((input) => (
+                        <FormInput
+                            key={input.id}
+                            {...input}
+                            value={values[input.name]}
+                            onChange={onChange}
+                        />
+                        ))}
+                        <small id='usernameHelp' className='form-text text-muted'>
+                            150 characters or fewer. Letters, digits
+                            asn @/_/+/- only.
+                        </small>
+                        {regEmail.map((input) => (
+                        <FormInput
+                            key={input.id}
+                            {...input}
+                            value={values[input.name]}
+                            onChange={onChange}
+                        />
+                        ))}
+                        <p></p>
+                        {regPassword.map((input) => (
+                        <FormInput
+                            key={input.id}
+                            {...input}
+                            value={values[input.name]}
+                            onChange={onChange}
+                        />
+                        ))}
+                        <small id='usernameHelp' className='form-text text-muted'>
+                            Use a mix of letters, numbers, and symbols. Password cannot
+                            be too similar to your other personal information, nor be a commonly
+                            used password, nor be entirely numeric.
+                        </small>
+                        {regConfPass.map((input) => (
+                        <FormInput
+                            key={input.id}
+                            {...input}
+                            value={values[input.name]}
+                            onChange={onChange}
+                        />
+                        ))}
+                    </div>
             </Modal.Body>
             <Modal.Footer>
                 <small id='usernameHelp' className='text-muted'>
@@ -219,7 +318,7 @@ export default function LandingPage(props) {
                 <button 
                     className='btn btn-primary btn-lg rounded-pill'
                     onClick={() => {
-                        //handleModal('register');
+                        handleModal('register');
                         registerSubmit();
                     }}
                 >Agree and Register</button>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../assets/css/landing-page.css"
 
-const FormInput = (props) => {
+const InputForm = (props) => {
   const [focused, setFocused] = useState(false);
   const { label, errorMessage, onChange, id, ...inputProps } = props;
 
@@ -10,7 +10,7 @@ const FormInput = (props) => {
   };
 
   return (
-    <div className="formInput">
+    <div className="InputForm">
       <label>{label}</label>
       <input
         {...inputProps}
@@ -26,4 +26,4 @@ const FormInput = (props) => {
   );
 };
 
-export default FormInput;
+export default InputForm;

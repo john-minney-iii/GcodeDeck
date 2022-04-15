@@ -4,7 +4,7 @@ import '../assets/css/landing-page.css';
 import HeroImage from '../assets/img/hero-image.webp';
 import { Modal } from "react-bootstrap";
 import axios from "axios";
-import FormInput from "./FormInput";
+import InputForm from "./InputForm";
 
 export default function LandingPage(props) {
     // States for modals
@@ -208,7 +208,7 @@ export default function LandingPage(props) {
             <Modal.Body>
                 <div className = "form-control">
                     {logUsername.map((input) => (
-                    <FormInput
+                    <InputForm
                         key={input.id[1,2]}
                         {...input}
                         value={values[input.name]}
@@ -217,7 +217,7 @@ export default function LandingPage(props) {
                     ))}
                     <p></p>
                     {logPassword.map((input) => (
-                    <FormInput
+                    <InputForm
                         key={input.id[1,2]}
                         {...input}
                         value={values[input.name]}
@@ -245,7 +245,7 @@ export default function LandingPage(props) {
             <Modal.Body>
                     <div className = "form-control">
                         {regFirstName.map((input) => (
-                        <FormInput
+                        <InputForm
                             key={input.id}
                             {...input}
                             value={values[input.name]}
@@ -254,7 +254,7 @@ export default function LandingPage(props) {
                         ))}
                         <p></p>
                         {regLastName.map((input) => (
-                        <FormInput
+                        <InputForm
                             key={input.id}
                             {...input}
                             value={values[input.name]}
@@ -263,7 +263,7 @@ export default function LandingPage(props) {
                         ))}
                         <p></p>
                         {regUsername.map((input) => (
-                        <FormInput
+                        <InputForm
                             key={input.id}
                             {...input}
                             value={values[input.name]}
@@ -275,7 +275,7 @@ export default function LandingPage(props) {
                             asn @/_/+/- only.
                         </small>
                         {regEmail.map((input) => (
-                        <FormInput
+                        <InputForm
                             key={input.id}
                             {...input}
                             value={values[input.name]}
@@ -284,7 +284,7 @@ export default function LandingPage(props) {
                         ))}
                         <p></p>
                         {regPassword.map((input) => (
-                        <FormInput
+                        <InputForm
                             key={input.id}
                             {...input}
                             value={values[input.name]}
@@ -297,7 +297,7 @@ export default function LandingPage(props) {
                             used password, nor be entirely numeric.
                         </small>
                         {regConfPass.map((input) => (
-                        <FormInput
+                        <InputForm
                             key={input.id}
                             {...input}
                             value={values[input.name]}

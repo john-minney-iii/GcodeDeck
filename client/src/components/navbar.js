@@ -10,7 +10,6 @@ export default function Navbar(props) {
                 <div className="collapse navbar-collapse mx-2" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-auto">
                         <button className='btn btn-link nav-item nav-link active' onClick={() => props.changeView('landing-page')}>Home</button>
-                        <button className='btn btn-link nav-item nav-link' onClick={() => props.changeView('my-programs')}>My Programs</button>
                         <button className='btn btn-link nav-item nav-link' onClick={() => props.changeView('community')}>Community</button>
                         <button className='btn btn-link nav-item nav-link' onClick={() => props.changeView('account')}>Account</button>
                     </div>

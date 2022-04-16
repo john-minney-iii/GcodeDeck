@@ -166,26 +166,34 @@ export default function LandingPage(props) {
     </form>;
 
     const loginSubmit = async () => {
-        axios.post('http://localhost:8000/api/v1/user/auth/', {
-            'username': username,
-            'password': pswd
-        }).then(res => {
-            if (res.status === 200)
-                props.loginUser(res.data.token);
-        });
+        if (username == '' || pswd == '') {
+            alert('Please fill out the login form');
+        } else {
+            axios.post('http://localhost:8000/api/v1/user/auth/', {
+                'username': username,
+                'password': pswd
+            }).then(res => {
+                if (res.status === 200)
+                    props.loginUser(res.data.token);
+            });
+        }
     };
 
     const registerSubmit = async () => {
-        axios.post('http://localhost:8000/api/v1/user/register/', {
-            'username': username,
-            'first_name': firstName,
-            'last_name': lastName,
-            'email': email,
-            'password': pswd
-        }).then(res => {
-            if (res.status === 201)
-                loginSubmit(res.data.token);
-        });
+        if (username === '' || firstName === '' || lastName === '' || email === '' || pswd === '') {
+            alert('Please fill out the register form');
+        } else {
+            axios.post('http://localhost:8000/api/v1/user/register/', {
+                'username': username,
+                'first_name': firstName,
+                'last_name': lastName,
+                'email': email,
+                'password': pswd
+            }).then(res => {
+                if (res.status === 201)
+                    loginSubmit(res.data.token);
+            });
+        }
     };
 
     return <div className='landing-page'>

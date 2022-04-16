@@ -39,7 +39,6 @@ export default function LandingPage(props) {
         if (props.authenticated)
             return(
                 <div>
-                    <button className="btn btn-primary btn-lg rounded-pill mx-2">My Programs</button>
                     <button
                         className="btn btn-outline-primary btn-lg rounded-pill"
                         onClick={() => props.changeView('gen-home')}

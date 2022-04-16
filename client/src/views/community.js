@@ -30,36 +30,48 @@ export default function Community(props) {
     };
 
     const submitContactRequest = async () => {
-        axios.post('http://localhost:8000/api/v1/community/contactUs/', {
-            'username': username,
-            'email': email,
-            'content': message
-        }).then(res => {
-            if (res.status === 201)
-                alert('Thanks for reaching out!');
-        })
+        if (username == '' || email == '' || message == '') {
+            alert('Please fill out the information');
+        } else {
+            axios.post('http://localhost:8000/api/v1/community/contactUs/', {
+                'username': username,
+                'email': email,
+                'content': message
+            }).then(res => {
+                if (res.status === 201)
+                    alert('Thanks for reaching out!');
+            })
+        }
     };
 
     const submitSystemRequest = async () => {
-        axios.post('http://localhost:8000/api/v1/community/systemRequest/', {
-            'username': username,
-            'email': email,
-            'content': message
-        }).then(res => {
-            if (res.status === 201)
-                alert('Thanks for the system request!');
-        })
+        if (username == '' || email == '' || message == '') {
+            alert('Please fill out the information');
+        } else {
+            axios.post('http://localhost:8000/api/v1/community/systemRequest/', {
+                'username': username,
+                'email': email,
+                'content': message
+            }).then(res => {
+                if (res.status === 201)
+                    alert('Thanks for the system request!');
+            })
+        }
     };
 
     const submitBugReport = async () => {
-        axios.post('http://localhost:8000/api/v1/community/bugReport/', {
-            'username': username,
-            'email': email,
-            'content': message
-        }).then(res => {
-            if (res.status === 201)
-                alert('Thanks for the bug report!');
-        })
+        if (username == '' || email == '' || message == '') {
+            alert('Please fill out the information');
+        } else {
+            axios.post('http://localhost:8000/api/v1/community/bugReport/', {
+                'username': username,
+                'email': email,
+                'content': message
+            }).then(res => {
+                if (res.status === 201)
+                    alert('Thanks for the bug report!');
+            })
+        }
     };
 
 

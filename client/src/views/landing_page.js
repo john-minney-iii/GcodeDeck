@@ -39,7 +39,6 @@ export default function LandingPage(props) {
         if (props.authenticated)
             return(
                 <div>
-                    <button className="btn btn-primary btn-lg rounded-pill mx-2">My Programs</button>
                     <button
                         className="btn btn-outline-primary btn-lg rounded-pill"
                         onClick={() => props.changeView('gen-home')}
@@ -166,26 +165,46 @@ export default function LandingPage(props) {
     </form>;
 
     const loginSubmit = async () => {
-        axios.post('http://localhost:8000/api/v1/user/auth/', {
-            'username': username,
-            'password': pswd
-        }).then(res => {
-            if (res.status === 200)
-                props.loginUser(res.data.token);
-        });
+        if (username == '' || pswd == '') {
+            alert('Please fill out the login form');
+        } else {
+            let worked = false;
+            axios.post('http://localhost:8000/api/v1/user/auth/', {
+                'username': username,
+                'password': pswd
+            }).then(res => {
+                if (res.status === 200) {
+                    props.loginUser(res.data.token);
+                    worked = true;
+                }
+            }).then(() => {
+                if (!worked)
+                    alert('Login faild. Please try again');
+            });
+        }
     };
 
     const registerSubmit = async () => {
-        axios.post('http://localhost:8000/api/v1/user/register/', {
-            'username': username,
-            'first_name': firstName,
-            'last_name': lastName,
-            'email': email,
-            'password': pswd
-        }).then(res => {
-            if (res.status === 201)
-                loginSubmit(res.data.token);
-        });
+        if (username === '' || firstName === '' || lastName === '' || email === '' || pswd === '') {
+            alert('Please fill out the register form');
+        } else {
+            let worked = false;
+            axios.post('http://localhost:8000/api/v1/user/register/', {
+                'username': username,
+                'first_name': firstName,
+                'last_name': lastName,
+                'email': email,
+                'password': pswd
+            }).then(res => {
+                if (res.status === 201) {
+                    loginSubmit(res.data.token);
+                    worked = true;
+                }
+            }).then(() => {
+                if (!worked)
+                    alert('Register failed. Please try again.');
+            });
+        }
     };
 
     return <div className='landing-page'>

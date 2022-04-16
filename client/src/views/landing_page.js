@@ -169,12 +169,18 @@ export default function LandingPage(props) {
         if (username == '' || pswd == '') {
             alert('Please fill out the login form');
         } else {
+            let worked = false;
             axios.post('http://localhost:8000/api/v1/user/auth/', {
                 'username': username,
                 'password': pswd
             }).then(res => {
-                if (res.status === 200)
+                if (res.status === 200) {
                     props.loginUser(res.data.token);
+                    worked = true;
+                }
+            }).then(() => {
+                if (!worked)
+                    alert('Login faild. Please try again');
             });
         }
     };
@@ -183,6 +189,7 @@ export default function LandingPage(props) {
         if (username === '' || firstName === '' || lastName === '' || email === '' || pswd === '') {
             alert('Please fill out the register form');
         } else {
+            let worked = false;
             axios.post('http://localhost:8000/api/v1/user/register/', {
                 'username': username,
                 'first_name': firstName,
@@ -190,8 +197,13 @@ export default function LandingPage(props) {
                 'email': email,
                 'password': pswd
             }).then(res => {
-                if (res.status === 201)
+                if (res.status === 201) {
                     loginSubmit(res.data.token);
+                    worked = true;
+                }
+            }).then(() => {
+                if (!worked)
+                    alert('Register failed. Please try again.');
             });
         }
     };

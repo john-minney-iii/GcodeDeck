@@ -127,7 +127,7 @@ class Drilling(APIView):
             feed_rate = request.data['feedRate']
             sendZHome = f'G28 Z ; (Home Z to Prevent Crash)'
             goToHole = f'G00 X{x_pos} Y{y_pos} Z{z_pos} ; (Rapid to hole location @Z Reference Point)'
-            peckDrill = f'G83 Z{z_pos} R{reference} Q{peck_depth} F{feed_rate} ; (G83 Peck Drill)'
+            peckDrill = f'G83 G99 Z{z_pos} R{reference} Q{peck_depth} F{feed_rate} ; (G83 Peck Drill)'
             cancelCannedCycle = f'G80 ; (Cancel Canned Cycle)'
             return Response(
                 f'{sendZHome},{goToHole},{peckDrill},{cancelCannedCycle}',
@@ -169,7 +169,7 @@ class FacingTemplate(APIView):
                 really_fucking_long_gcode += (f',G01 Z{clearance} F{plunge_rate} ; (Linear Move)')
                 if y < float(depth)*-1:
                     break
-                really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y{y-float(step_over)} ; (Rapid Move)')
+                really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y{round(y-float(step_over), 4)} ; (Rapid Move)')
                 y = y-float(step_over)
             print(really_fucking_long_gcode)
             return Response(

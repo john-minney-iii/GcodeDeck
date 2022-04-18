@@ -14,11 +14,12 @@ class ToolChange(APIView):
             tool_number = request.data['toolNumber']
             cutter_compensation = request.data['cutterCompensation']
             notes = request.data['notes']
-            safeStart = "G54 G90 G17 G20; (Safe Start)"
+            safeStart = "G54 G90 G17 G20 G40; (Safe Start)"
             toolChange = f'M06 T{tool_number} ; (Load Tool #{tool_number} Notes: {notes})'
             toolOffset = f'G43 H{tool_number} ; (Load Positive Tool Height Offset for tool {tool_number})'
-            if cutter_compensation != "None":
-                cutterComp = f'{cutter_compensation} D{tool_number}; (Enable Cutter Compensation)'
+            cutterComp = f'(Cutter Compensation not enabled.)'
+            if cutter_compensation == 'G41' or cutter_compensation == 'G42':
+                cutterComp = f'{cutter_compensation} D{tool_number} ; (Enable Cutter Comp)'
             return Response(
                 f'{safeStart},{toolChange},{toolOffset},{cutterComp}',
                 status=status.HTTP_200_OK

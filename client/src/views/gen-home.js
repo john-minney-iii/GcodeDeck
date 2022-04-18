@@ -333,24 +333,21 @@ export default function GenHome(props) {
             <div className="m-5">
                 <Navbar authenticated={props.authenticated} changeView={props.changeView} />
                 <h2>GCODE Generation Home</h2>
-                <div className="container-justify-content-start py-2">
+                <div className="container-justify-content-start py-2" >
                     <div className="row">
                         <div className="col">
                             Tool Path Options
                         </div>
-                        <div className="col-7">
-                            Graphical Output
-                        </div>
-                        <div className="col">
-                            Real-Time GCODE Gen
+                        <div className="col-7 ">
+                            Real-Time GCODE Generation
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col">
+                        <div className="col-3">
                             <div className="toolChange-button py-3">
                                 <button
                                     type="button"
-                                    className="btn btn-outline-primary btn-lg w-75"
+                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('toolChangeModal')}
                                 >
                                     Tool Change
@@ -359,7 +356,7 @@ export default function GenHome(props) {
                             <div className="spindleCommand-button py-3">
                                 <button
                                     type="button"
-                                    className="btn btn-outline-primary btn-lg w-75"
+                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('spindleModal')}
                                 >
                                     Spindle Command
@@ -368,7 +365,7 @@ export default function GenHome(props) {
                             <div className="G00-button py-3">
                                 <button
                                     type="button"
-                                    className="btn btn-outline-primary btn-lg w-75"
+                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('g00Modal')}
                                 >
                                     Rapid Movement (G00)
@@ -377,7 +374,7 @@ export default function GenHome(props) {
                             <div className="G01-button py-3">
                                 <button
                                     type="button"
-                                    className="btn btn-outline-primary btn-lg w-75"
+                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('g01Modal')}
                                 >
                                     Linear Movement (G01)
@@ -386,7 +383,7 @@ export default function GenHome(props) {
                             <div className="drilling-button py-3">
                                 <button
                                     type="button"
-                                    className="btn btn-outline-primary btn-lg w-75"
+                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('drillModal')}
                                 >
                                     Drilling
@@ -395,7 +392,7 @@ export default function GenHome(props) {
                             <div className="facingTemplate-button py-3">
                                 <button
                                     type="button"
-                                    className="btn btn-outline-primary btn-lg w-75"
+                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('facingTemplateModal')}
                                 >
                                     Facing Template
@@ -404,7 +401,7 @@ export default function GenHome(props) {
                             <div className="rectangleTemplate-button py-3">
                                 <button
                                     type="button"
-                                    className="btn btn-outline-primary btn-lg w-75"
+                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('rectangleTemplateModal')}
                                 >
                                     Rectangle Template
@@ -413,20 +410,19 @@ export default function GenHome(props) {
                         </div>
                         <div className="col-7">
                             <div className="container-justify-content-start">
-                                <div>
-                                    {gcode.split(',').map((line, index) => <p 
-                                        contentEditable="true" 
+                                <div contentEditable="true">
+                                    {gcode.split(',').map((line, index) => <p  
                                         className='m-0'   
                                         onChange={(e) => changeGcode(index, e.target.value)}  
                                     >{line}</p>)}
                                 </div>
                             </div>
                         </div>
-                        <div className="col">
+                        {/* <div className="col">
                             <div className="container-justify-content-start">
                                 Placeholder
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

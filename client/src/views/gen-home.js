@@ -364,7 +364,7 @@ export default function GenHome(props) {
                             <div className="toolChange-button py-3">
                                 <button
                                     type="button"
-                                    className="btn btn-outline-primary btn-lg w-75"
+                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('toolChangeModal')}
                                 >
                                     Tool Change
@@ -373,7 +373,7 @@ export default function GenHome(props) {
                             <div className="spindleCommand-button py-3">
                                 <button
                                     type="button"
-                                    className="btn btn-outline-primary btn-lg w-75"
+                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('spindleModal')}
                                 >
                                     Spindle Command
@@ -382,7 +382,7 @@ export default function GenHome(props) {
                             <div className="G00-button py-3">
                                 <button
                                     type="button"
-                                    className="btn btn-outline-primary btn-lg w-75"
+                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('g00Modal')}
                                 >
                                     Rapid Movement (G00)
@@ -391,7 +391,7 @@ export default function GenHome(props) {
                             <div className="G01-button py-3">
                                 <button
                                     type="button"
-                                    className="btn btn-outline-primary btn-lg w-75"
+                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('g01Modal')}
                                 >
                                     Linear Movement (G01)
@@ -400,7 +400,7 @@ export default function GenHome(props) {
                             <div className="drilling-button py-3">
                                 <button
                                     type="button"
-                                    className="btn btn-outline-primary btn-lg w-75"
+                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('drillModal')}
                                 >
                                     Drilling
@@ -409,7 +409,7 @@ export default function GenHome(props) {
                             <div className="facingTemplate-button py-3">
                                 <button
                                     type="button"
-                                    className="btn btn-outline-primary btn-lg w-75"
+                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('facingTemplateModal')}
                                 >
                                     Facing Template
@@ -418,7 +418,7 @@ export default function GenHome(props) {
                             <div className="rectangleTemplate-button py-3">
                                 <button
                                     type="button"
-                                    className="btn btn-outline-primary btn-lg w-75"
+                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('rectangleTemplateModal')}
                                 >
                                     Rectangle Template

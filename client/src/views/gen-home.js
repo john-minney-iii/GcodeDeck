@@ -347,20 +347,17 @@ export default function GenHome(props) {
             <div className="m-5">
                 <Navbar authenticated={props.authenticated} changeView={props.changeView} />
                 <h2>GCODE Generation Home</h2>
-                <div className="container-justify-content-start py-2">
+                <div className="container-justify-content-start py-2" >
                     <div className="row">
                         <div className="col">
                             Tool Path Options
                         </div>
-                        <div className="col-7">
-                            Graphical Output
-                        </div>
-                        <div className="col">
-                            Real-Time GCODE Gen
+                        <div className="col-7 " class="overflow-auto">
+                            Real-Time GCODE Generation
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col">
+                        <div className="col-3">
                             <div className="toolChange-button py-3">
                                 <button
                                     type="button"
@@ -436,11 +433,11 @@ export default function GenHome(props) {
                                 </div>
                             </div>
                         </div>
-                        <div className="col">
+                        {/* <div className="col">
                             <div className="container-justify-content-start">
                                 Placeholder
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

@@ -54,8 +54,9 @@ export default function GenHome(props) {
     const [facePlunge, setFacePlunge] = useState(0);
     const [faceStepOver, setFaceStepOver] = useState(0);
 
-    // State for gcode file
+    // State for gcode file flag
     const [gcode, setGcode] = useState('');
+    const [gcodeList, setGcodeList] = useState([]);
 
     const handleModal = (which) => {
         setG01Choice('X');
@@ -80,12 +81,9 @@ export default function GenHome(props) {
         axios.post('http://localhost:8000/api/v1/gcode/spindleCommand/', {
             'directionOfRotation': spindleDirection,
             'spindleRpm': spindleRPM
-        }).then(res => {
+        }).then(res => { // flag
             if (res.status === 200)
-                if (gcode.length !== 0)
-                    setGcode(gcode + ',' + res.data);
-                else
-                    setGcode(res.data);
+                addGcodeBlock(res.data)
         });
     };
 
@@ -113,12 +111,9 @@ export default function GenHome(props) {
             'doc': faceDOC,
             'plungeRate': facePlunge,
             'stepOver': faceStepOver
-        }).then(res => {
+        }).then(res => { // flag
             if (res.status === 200)
-                if (gcode.length !== 0)
-                    setGcode(gcode + ',' + res.data);
-                else
-                    setGcode(res.data);
+                addGcodeBlock(res.data)
         });
     };
 
@@ -152,12 +147,9 @@ export default function GenHome(props) {
             'toolNumber': toolNumber,
             'cutterCompensation': cutterCompensation,
             'notes': toolNotes
-        }).then(res => {
+        }).then(res => { // flag
             if (res.status === 200)
-                if (gcode.length !== 0)
-                    setGcode(gcode + ',' + res.data);
-                else
-                    setGcode(res.data);
+                addGcodeBlock(res.data)
         });
     };
 
@@ -184,12 +176,9 @@ export default function GenHome(props) {
             'reference': drillRef,
             'peckDepth': drillPeckDepth,
             'feedRate': drillFeedRate
-        }).then(res => {
+        }).then(res => { // flag
             if (res.status === 200)
-                if (gcode.length !== 0)
-                    setGcode(gcode + ',' + res.data);
-                else
-                    setGcode(res.data);
+                addGcodeBlock(res.data)
         });
     };
 
@@ -222,12 +211,9 @@ export default function GenHome(props) {
             'axis': g00Choice,
             'pos': g00Pos,
             'pos2': g00Pos2
-        }).then(res => {
+        }).then(res => { // flag
             if (res.status === 200)
-                if (gcode.length !== 0)
-                    setGcode(gcode + ',' + res.data);
-                else
-                    setGcode(res.data);
+                addGcodeBlock(res.data)
         });
     };
 
@@ -281,13 +267,9 @@ export default function GenHome(props) {
             'axis': g01Choice,
             'pos': g01Pos,
             'pos2': g01Pos2
-        }).then(res => {
+        }).then(res => { // flag
             if (res.status === 200)
-                if (gcode.length !== 0)
-                    setGcode(gcode + ',' + res.data);
-                else
-                    setGcode(res.data);
-            console.log(gcode);
+                addGcodeBlock(res.data)
         })
     };
 
@@ -334,13 +316,17 @@ export default function GenHome(props) {
             {posInput}
         </div>;
     };
-
-    const changeGcode = (index, value) => {
-        let tempGcode = gcode.split(',');
-        tempGcode[index] = value;   
-        tempGcode.join(',');
-        setGcode(tempGcode);
-    };
+ 
+   const addGcodeBlock = (block) => {
+       if (gcodeList.length !== 0) {
+        let tempGcode = [...gcodeList];
+        console.log(tempGcode.length);
+        tempGcode.push([block]);
+        setGcodeList(tempGcode);
+       } else {
+           setGcodeList([[block]]);
+       }
+   };
 
     return (
         <div className='gen-home'>

@@ -335,6 +335,13 @@ export default function GenHome(props) {
         </div>;
     };
 
+    const changeGcode = (index, value) => {
+        let tempGcode = gcode.split(',');
+        tempGcode[index] = value;   
+        tempGcode.join(',');
+        setGcode(tempGcode);
+    };
+
     return (
         <div className='gen-home'>
             <div className="m-5">
@@ -421,7 +428,11 @@ export default function GenHome(props) {
                         <div className="col-7">
                             <div className="container-justify-content-start">
                                 <div>
-                                    {gcode.split(',').map(line => <p contentEditable="true" className='m-0'>{line}</p>)}
+                                    {gcode.split(',').map((line, index) => <p 
+                                        contentEditable="true" 
+                                        className='m-0'   
+                                        onChange={(e) => changeGcode(index, e.target.value)}  
+                                    >{line}</p>)}
                                 </div>
                             </div>
                         </div>

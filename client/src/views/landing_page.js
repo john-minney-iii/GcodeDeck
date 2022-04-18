@@ -165,7 +165,7 @@ export default function LandingPage(props) {
     </form>;
 
     const loginSubmit = async () => {
-        if (username == '' || pswd == '') {
+        if (username === '' || pswd === '') {
             alert('Please fill out the login form');
         } else {
             let worked = false;

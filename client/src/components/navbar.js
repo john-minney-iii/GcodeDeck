@@ -1,9 +1,15 @@
 
 export default function Navbar(props) {
+
+    const buttonSytle = {
+        color: 'black',
+        textDecoration: 'none'
+    };
+
     if (props.authenticated) {
         return(
             <nav className="navbar navbar-expand-lg navbar-light">
-                <a className="navbar-brand mx-2" href="/">GCODEdeck</a>
+                <button className='btn btn-link' style={buttonSytle} onClick={() => props.changeView('landing-page')}>GCODEdeck</button>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

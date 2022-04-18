@@ -421,7 +421,7 @@ export default function GenHome(props) {
                         <div className="col-7">
                             <div className="container-justify-content-start">
                                 <div>
-                                    {gcode.split(',').map(line => <p className='m-0'>{line}</p>)}
+                                    {gcode.split(',').map(line => <p contentEditable="true" className='m-0'>{line}</p>)}
                                 </div>
                             </div>
                         </div>

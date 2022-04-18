@@ -352,7 +352,7 @@ export default function GenHome(props) {
                         <div className="col">
                             Tool Path Options
                         </div>
-                        <div className="col-7 " class="overflow-auto">
+                        <div className="col-7 ">
                             Real-Time GCODE Generation
                         </div>
                     </div>
@@ -424,9 +424,8 @@ export default function GenHome(props) {
                         </div>
                         <div className="col-7">
                             <div className="container-justify-content-start">
-                                <div>
-                                    {gcode.split(',').map((line, index) => <p 
-                                        contentEditable="true" 
+                                <div contentEditable="true">
+                                    {gcode.split(',').map((line, index) => <p  
                                         className='m-0'   
                                         onChange={(e) => changeGcode(index, e.target.value)}  
                                     >{line}</p>)}

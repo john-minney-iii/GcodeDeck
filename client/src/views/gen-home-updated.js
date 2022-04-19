@@ -8,7 +8,7 @@ export default function GenHome(props) {
     const [lastBlock, setLastBlock] = useState();
 
     // States for modals
-    const [rapidModalShow, setrapidModalShow]    = useState(false);
+    const [rapidModalShow, setrapidModalShow] = useState(false);
     const [linearModalShow, setlinearModalShow] = useState(false);
     const [spindleModalShow, setSpindleModalShow] = useState(false);
     const [drillModalShow, setDrillModalShow] = useState(false);
@@ -86,8 +86,18 @@ export default function GenHome(props) {
         }
     };
 
-    const printGcode = () => {
-        return <p>placeholder</p>;
+    const PrintGcode = () => {
+        let gcodeString = '';
+        gcodeList.forEach((block) => {
+            block.split(',').forEach((line) => gcodeString = gcodeString + line + '\n');
+        });
+        return <div>
+            <textarea
+                value={gcodeString}
+                rows={20}
+                cols={75}
+            />
+        </div>;
     };
 
     const consolePrintGcode = () => {
@@ -103,9 +113,19 @@ export default function GenHome(props) {
     };
 
     const gcodeRedo = () => {
-        let tempGcode = [...gcodeList];
-        tempGcode.push(lastBlock);
-        setGcodeList(tempGcode);
+        if (lastBlock) {
+            let tempGcode = [...gcodeList];
+            tempGcode.push(lastBlock);
+            setGcodeList(tempGcode);
+        }
+    };
+
+    const gcodeCopy = () => {
+        let gcodeString = '';
+        gcodeList.forEach((block) => {
+            block.split(',').forEach((line) => gcodeString = gcodeString + line + '\n');
+        });
+        navigator.clipboard.writeText(gcodeString);
     };
 
     // Form Submit Functions ---------------------------------------------
@@ -353,8 +373,8 @@ export default function GenHome(props) {
     // Main Return ---------------------------------------------------------------------------------------------------------------------------
     return (
         <div className='gen-home'>
+            <Navbar authenticated={props.authenticated} changeView={props.changeView} />
             <div className="m-5">
-                <Navbar authenticated={props.authenticated} changeView={props.changeView} />
                 <h2>GCODE Generation Home</h2>
                 <div className="container-justify-content-start py-2" >
                     <div className="row">
@@ -431,12 +451,14 @@ export default function GenHome(props) {
                                 </button>
                             </div>
                         </div>
-                        <div className="col-7">
-                            <div className="container-justify-content-start">
-                                {printGcode()}
-                                {/* <button onClick={() => consolePrintGcode()}>Click me bitch</button>
-                                <button onClick={() => gcodeUndo()}>Click me daddy</button>
-                                <button onClick={() => gcodeRedo()}>Click me redo</button> */}
+                        <div className="col-8">
+                            <div className="container-justify-content-start d-flex d-flex-inline">
+                                {PrintGcode()}
+                                <div className="ms-2">
+                                    <button className="btn btn-primary mb-2" onClick={() => gcodeUndo()}>Undo</button>
+                                    <button className="btn btn-primary mb-2" onClick={() => gcodeRedo()}>Redo</button>
+                                    <button className="btn btn-primary mb-2" onClick={() => gcodeCopy()}>Copy</button>
+                                </div>
                             </div>
                         </div>
                     </div>

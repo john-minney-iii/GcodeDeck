@@ -37,7 +37,7 @@ export default function LandingPage(props) {
 
     const AuthenticatedCallToActions = () => {
         if (props.authenticated)
-            return(
+            return (
                 <div>
                     <button
                         className="btn btn-outline-primary btn-lg rounded-pill"
@@ -51,7 +51,7 @@ export default function LandingPage(props) {
     const UnAuthenticatedCallToActions = () => {
         if (props.authenticated)
             return <img src={HeroImage} className="w-75" alt="cnc router" />;
-        return(
+        return (
             <div>
                 <button
                     className="btn btn-primary btn-lg rounded-pill mx-2"

@@ -5,6 +5,7 @@ import axios from "axios";
 
 export default function GenHome(props) {
     const [gcodeList, setGcodeList] = useState([]); // Gcode data struct
+    const [lastBlock, setLastBlock] = useState();
 
     // States for modals
     const [rapidModalShow, setrapidModalShow]    = useState(false);
@@ -85,6 +86,10 @@ export default function GenHome(props) {
         }
     };
 
+    const printGcode = () => {
+        return <p>placeholder</p>;
+    };
+
     const consolePrintGcode = () => {
         gcodeList.forEach((block) => {
             block.split(',').forEach((line) => console.log(line));
@@ -93,7 +98,13 @@ export default function GenHome(props) {
 
     const gcodeUndo = () => {
         let tempGcode = [...gcodeList];
-        tempGcode.pop();
+        setLastBlock(tempGcode.pop());
+        setGcodeList(tempGcode);
+    };
+
+    const gcodeRedo = () => {
+        let tempGcode = [...gcodeList];
+        tempGcode.push(lastBlock);
         setGcodeList(tempGcode);
     };
 
@@ -422,7 +433,10 @@ export default function GenHome(props) {
                         </div>
                         <div className="col-7">
                             <div className="container-justify-content-start">
-                                <button onClick={() => consolePrintGcode()}>Click me bitch</button>
+                                {printGcode()}
+                                {/* <button onClick={() => consolePrintGcode()}>Click me bitch</button>
+                                <button onClick={() => gcodeUndo()}>Click me daddy</button>
+                                <button onClick={() => gcodeRedo()}>Click me redo</button> */}
                             </div>
                         </div>
                     </div>

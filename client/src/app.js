@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LandingPage from './views/landing_page';
 import Community from './views/community';
 import AboutUs from './views/about_us';
-import GenHome from './views/gen-home';
+import GenHome from './views/gen-home-updated';
 import Account from './views/account';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/app.css';  

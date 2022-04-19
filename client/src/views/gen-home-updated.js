@@ -56,6 +56,11 @@ export default function GenHome(props) {
     const [facePlunge, setFacePlunge] = useState(0);
     const [faceStepOver, setFaceStepOver] = useState(0);
 
+    // Used for server posts
+    const [baseUrl, setBaseUrl] = useState(
+        (props.prod) ? 'https://minn4519.pythonanywhere.com/' : 'http://localhost:8000'
+    );
+
     const handleModal = (which) => {
         setLinearChoice('X');
         setRapidChoice('X');
@@ -131,7 +136,7 @@ export default function GenHome(props) {
     // Form Submit Functions ---------------------------------------------
 
     const toolChangeFormSubmit = () => {
-        axios.post('http://localhost:8000/api/v1/gcode/toolChange/', {
+        axios.post(baseUrl + '/api/v1/gcode/toolChange/', {
             'toolNumber': toolNumber,
             'cutterCompensation': cutterCompensation,
             'notes': toolNotes
@@ -142,7 +147,7 @@ export default function GenHome(props) {
     };
 
     const spindleCommandFormSubmit = () => {
-        axios.post('http://localhost:8000/api/v1/gcode/spindleCommand/', {
+        axios.post(baseUrl + '/api/v1/gcode/spindleCommand/', {
             'directionOfRotation': spindleDirection,
             'spindleRpm': spindleRPM
         }).then(res => { // flag
@@ -152,7 +157,7 @@ export default function GenHome(props) {
     };
 
     const drillFormSubmit = () => {
-        axios.post('http://localhost:8000/api/v1/gcode/drilling/', {
+        axios.post(baseUrl + '/api/v1/gcode/drilling/', {
             'xPos': drillXPos,
             'yPos': drillYPos,
             'zPos': drillZPos,
@@ -166,7 +171,7 @@ export default function GenHome(props) {
     };
 
     const rapidFormSubmit = async () => {
-        axios.post('http://localhost:8000/api/v1/gcode/rapidMovement/', {
+        axios.post(baseUrl + '/api/v1/gcode/rapidMovement/', {
             'feedrate': rapidFeedRate,
             'axis': rapidChoice,
             'pos': rapidPos,
@@ -178,7 +183,7 @@ export default function GenHome(props) {
     };
 
     const linearFormSubmit = async () => {
-        axios.post('http://localhost:8000/api/v1/gcode/linearMovement/', {
+        axios.post(baseUrl + '/api/v1/gcode/linearMovement/', {
             'feedrate': linearFeedRate,
             'axis': linearChoice,
             'pos': linearPos,
@@ -190,7 +195,7 @@ export default function GenHome(props) {
     };
 
     const facingTemplateFormSubmit = () => {
-        axios.post('http://localhost:8000/api/v1/gcode/facingTemplate/', {
+        axios.post(baseUrl + '/api/v1/gcode/facingTemplate/', {
             'toolNumber': faceToolNumber,
             'cutterDiameter': faceCutDiam,
             'spindleRpm': faceSpindleRPM,

@@ -23,6 +23,11 @@ export default function LandingPage(props) {
     const [username, setUsername] = useState();
     const [pswd, setPswd] = useState();
 
+    // Used for server posts
+    const [baseUrl, setBaseUrl] = useState(
+        (props.prod) ? 'https://minn4519.pythonanywhere.com/' : 'http://localhost:8000'
+    );
+
     const handleModal = (which) => {
         if (which === 'login')
             setLoginModalShow(!loginModalShow);
@@ -174,7 +179,7 @@ export default function LandingPage(props) {
             alert('Please fill out the login form');
         } else {
             let worked = false;
-            axios.post('http://localhost:8000/api/v1/user/auth/', {
+            axios.post(baseUrl + '/api/v1/user/auth/', {
                 'username': username,
                 'password': pswd
             }).then(res => {
@@ -194,7 +199,7 @@ export default function LandingPage(props) {
             alert('Please fill out the register form');
         } else {
             let worked = false;
-            axios.post('http://localhost:8000/api/v1/user/register/', {
+            axios.post(baseUrl + '/api/v1/user/register/', {
                 'username': username,
                 'first_name': firstName,
                 'last_name': lastName,

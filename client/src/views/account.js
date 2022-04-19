@@ -11,6 +11,11 @@ export default function Account(props) {
     const [newPswd, setNewPswd] = useState('');
     const [confNewPswd, setConfNewPswd] = useState('');
 
+    // Used for server posts
+    const [baseUrl, setBaseUrl] = useState(
+        (props.prod) ? 'https://minn4519.pythonanywhere.com/' : 'http://localhost:8000'
+    );
+
     const handleModal = (which) => {
         if (which === 'changePass')
             setChangePassModalShow(!changePassModalShow);
@@ -68,7 +73,7 @@ export default function Account(props) {
     </form>;
 
     const submitPasswordChange = async () => {
-        axios.post('http://localhost:8000/api/v1/user/changePass/', {
+        axios.post(baseUrl + '/api/v1/user/changePass/', {
             username: username,
             currentPassword: currentPswd,
             newPassword: newPswd

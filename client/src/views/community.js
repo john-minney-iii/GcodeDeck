@@ -13,6 +13,11 @@ export default function Community(props) {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
 
+    // Used for server posts
+    const [baseUrl, setBaseUrl] = useState(
+        (props.prod) ? 'https://minn4519.pythonanywhere.com/' : 'http://localhost:8000'
+    );
+
     const handleModal = (which) => {
         if (which === 'report')
             setReportModalShow(!reportModalShow);
@@ -33,7 +38,7 @@ export default function Community(props) {
         if (username == '' || email == '' || message == '') {
             alert('Please fill out the information');
         } else {
-            axios.post('http://localhost:8000/api/v1/community/contactUs/', {
+            axios.post(baseUrl + '/api/v1/community/contactUs/', {
                 'username': username,
                 'email': email,
                 'content': message
@@ -48,7 +53,7 @@ export default function Community(props) {
         if (username == '' || email == '' || message == '') {
             alert('Please fill out the information');
         } else {
-            axios.post('http://localhost:8000/api/v1/community/systemRequest/', {
+            axios.post(baseUrl + '/api/v1/community/systemRequest/', {
                 'username': username,
                 'email': email,
                 'content': message
@@ -63,7 +68,7 @@ export default function Community(props) {
         if (username == '' || email == '' || message == '') {
             alert('Please fill out the information');
         } else {
-            axios.post('http://localhost:8000/api/v1/community/bugReport/', {
+            axios.post(baseUrl + '/api/v1/community/bugReport/', {
                 'username': username,
                 'email': email,
                 'content': message

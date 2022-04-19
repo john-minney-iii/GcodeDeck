@@ -266,8 +266,6 @@ export default function GenHome(props) {
                 <input className='form-control' name='y-pos-input' onChange={(e) => setRapidPos2(e.target.value)} />
             </div>;
         return <div>
-            <label htmlfor='feedrate-input'>Feedrate:</label>
-            <input type='text' className='form-control' name='feedrate-input' onChange={(e) => setRapidFeedRate(e.target.value)} />
             {posInput}
         </div>;
     };

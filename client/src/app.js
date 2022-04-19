@@ -14,7 +14,7 @@ export default class App extends Component {
             currentView: 'landing-page',
             token: '',
             authenticated: false,
-            prod: true
+            prod: false
         };
     }
 

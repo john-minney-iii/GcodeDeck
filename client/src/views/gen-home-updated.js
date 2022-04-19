@@ -470,11 +470,11 @@ export default function GenHome(props) {
                             <div className="container-justify-content-start d-flex d-flex-inline">
                                 {PrintGcode()}
                                 <div className="ms-2">
-                                    <button className="btn btn-primary mb-2" onClick={() => gcodeClear()}>Clear</button>
-                                    <button className="btn btn-primary mb-2" onClick={() => gcodeUndo()}>Undo</button>
-                                    <button className="btn btn-primary mb-2" onClick={() => gcodeRedo()}>Redo</button>
-                                    <button className="btn btn-primary mb-2" onClick={() => gcodeCopy()}>Copy</button>
-                                    <button className="btn btn-primary mb-2" onClick={() => gcodeCopyLast()}>Copy Last Operation</button>
+                                    <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => gcodeClear()}>Clear</button>
+                                    <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => gcodeUndo()}>Undo</button>
+                                    <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => gcodeRedo()}>Redo</button>
+                                    <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => gcodeCopy()}>Copy</button>
+                                    <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => gcodeCopyLast()}>Copy Last</button>
                                 </div>
                             </div>
                         </div>

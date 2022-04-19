@@ -4,8 +4,9 @@ import { Modal } from "react-bootstrap";
 import axios from "axios";
 
 export default function GenHome(props) {
-    const [gcodeList, setGcodeList] = useState([]); // Gcode data struct
-    const [lastBlock, setLastBlock] = useState();
+    const [gcodeList, setGcodeList] = useState([]);         // Gcode data struct
+    const [lastBlockUndo, setLastBlockUndo] = useState();   // Used for redo
+    const [lastBlock, setLastBlock] = useState();           // Used to copy last operation
 
     // States for modals
     const [rapidModalShow, setrapidModalShow] = useState(false);
@@ -89,6 +90,7 @@ export default function GenHome(props) {
         } else {
             setGcodeList([block]);
         }
+        setLastBlock(block);
     };
 
     const PrintGcode = () => {
@@ -107,14 +109,14 @@ export default function GenHome(props) {
 
     const gcodeUndo = () => {
         let tempGcode = [...gcodeList];
-        setLastBlock(tempGcode.pop());
+        setLastBlockUndo(tempGcode.pop());
         setGcodeList(tempGcode);
     };
 
     const gcodeRedo = () => {
-        if (lastBlock) {
+        if (lastBlockUndo) {
             let tempGcode = [...gcodeList];
-            tempGcode.push(lastBlock);
+            tempGcode.push(lastBlockUndo);
             setGcodeList(tempGcode);
         }
     };
@@ -127,7 +129,19 @@ export default function GenHome(props) {
         navigator.clipboard.writeText(gcodeString);
     };
 
-    const gcodeClear = () => setGcodeList([]);
+    const gcodeClear = () => {
+        setGcodeList([]);
+        setLastBlockUndo();
+        setLastBlock();
+    };
+
+    const gcodeCopyLast = () => {
+        if (lastBlock) {
+            let tempGcode = [...gcodeList];
+            tempGcode.push(lastBlock);
+            setGcodeList(tempGcode);
+        }
+    };
 
     // Form Submit Functions ---------------------------------------------
 
@@ -460,6 +474,7 @@ export default function GenHome(props) {
                                     <button className="btn btn-primary mb-2" onClick={() => gcodeUndo()}>Undo</button>
                                     <button className="btn btn-primary mb-2" onClick={() => gcodeRedo()}>Redo</button>
                                     <button className="btn btn-primary mb-2" onClick={() => gcodeCopy()}>Copy</button>
+                                    <button className="btn btn-primary mb-2" onClick={() => gcodeCopyLast()}>Copy Last Operation</button>
                                 </div>
                             </div>
                         </div>

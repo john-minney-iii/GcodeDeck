@@ -13,7 +13,7 @@ export default function Account(props) {
 
     // Used for server posts
     const [baseUrl, setBaseUrl] = useState(
-        (props.prod) ? 'https://minn4519.pythonanywhere.com/' : 'http://localhost:8000'
+        (props.prod) ? 'https://minn4519.pythonanywhere.com' : 'http://localhost:8000'
     );
 
     const handleModal = (which) => {

@@ -180,49 +180,49 @@ export default function GenHome(props) {
 
     const toolChangeForm = () => <form>
         <div className="form-group">
-            <label for="Tool Number">Tool Number:</label>
+            <label htmlFor="Tool Number">Tool Number:</label>
             <input type="" className="" id="" placeholder="Tool pocket Number" onChange={(e) => setToolNumber(e.target.value)}></input>
-            <label for="Tool Number">Cutter Compensation:</label>
+            <label htmlFor="Tool Number">Cutter Compensation:</label>
             <select name="Cutter Compensation" id="axis" className="form-control" onChange={(e) => setCutterCompensation(e.target.value)}>
                 <option value="G40">None (G40)</option>
                 <option value="G41">Left (G41)</option>
                 <option value="G42">Right (G42)</option>
             </select>
-            <label for="Notes">Notes:</label>
+            <label htmlFor="Notes">Notes:</label>
             <input type="" className="" id="" placeholder="Notes about tool" onChange={(e) => setToolNotes(e.target.value)}></input>
         </div>
     </form>;
 
     const spindleCommandForm = () => <form>
         <div className="form-group">
-            <label for="axisOfMovement">Direction of Rotation: </label>
+            <label htmlFor="axisOfMovement">Direction of Rotation: </label>
             <select name="Axis" id="axis" className="form-control" onChange={(e) => setSpindleDirection(e.target.value)} >
                 <option value="CW">CW (M03)</option>
                 <option value="CCW">CCW (M04)</option>
             </select>
-            <label for="spindleSpeed">Spindle RPM:</label>
+            <label htmlFor="spindleSpeed">Spindle RPM:</label>
             <input type="" className="form-control" id="" onChange={(e) => setSpindleRPM(e.target.value)}></input>
         </div>
     </form>;
 
     const drillForm = () => <form>
         <div className="form-group">
-            <label for="X Location">X:</label>
+            <label htmlFor="X Location">X:</label>
             <input type="" className="" id="" placeholder="X Coordinate of hole" onChange={(e) => setDrillXPos(e.target.value)}></input>
             <br />
-            <label for="Y Location">Y:</label>
+            <label htmlFor="Y Location">Y:</label>
             <input type="" className="" id="" placeholder="y Coordinate of hole" onChange={(e) => setDrillYPos(e.target.value)}></input>
             <br />
-            <label for="Z Location at bottom of hole">Z:</label>
+            <label htmlFor="Z Location at bottom of hole">Z:</label>
             <input type="" className="" id="" placeholder="Bottom of hole location" onChange={(e) => setDrillZPos(e.target.value)}></input>
             <br />
-            <label for="R - reference plane (position above part)">R:</label>
+            <label htmlFor="R - reference plane (position above part)">R:</label>
             <input type="" className="" id="" placeholder="Top of part + some clearance" onChange={(e) => setDrillRef(e.target.value)}></input>
             <br />
-            <label for="Q - Peck Depth">Q:</label>
+            <label htmlFor="Q - Peck Depth">Q:</label>
             <input type="" className="" id="" placeholder="Depth per peck" onChange={(e) => setDrillPeckDepth(e.target.value)}></input>
             <br />
-            <label for="FeedRate">Feed Rate:</label>
+            <label htmlFor="FeedRate">Feed Rate:</label>
             <input type="" className="" id="" placeholder="Drilling Feedrate" onChange={(e) => setDrillFeedRate(e.target.value)}></input>
             <br />
         </div>
@@ -230,7 +230,7 @@ export default function GenHome(props) {
 
     const rapidForm = () => <form>
         <div className="form-group">
-            <label for="axisOfMovement">Axis of Movement: </label>
+            <label htmlFor="axisOfMovement">Axis of Movement: </label>
             <select name="Axis" id="axis" className="form-control" onChange={(e) => setRapidChoice(e.target.value)}>
                 <option value="X">X</option>
                 <option value="Y">Y</option>
@@ -274,7 +274,7 @@ export default function GenHome(props) {
 
     const linearForm = () => <form>
         <div className="form-group">
-            <label for="axisOfMovement">Axis of Movement: </label>
+            <label htmlFor="axisOfMovement">Axis of Movement: </label>
             <select name="Axis" id="axis" className="form-control" onChange={(e) => setLinearChoice(e.target.value)}>
                 <option value="X">X</option>
                 <option value="Y">Y</option>
@@ -318,25 +318,25 @@ export default function GenHome(props) {
 
     const facingTemplateForm = () => <form>
         <div className="form-group">
-            <label for="axisOfMovement">Tool Number:</label>
+            <label htmlFor="axisOfMovement">Tool Number:</label>
             <input type="" className="" id="" placeholder="Tool number for facing" onChange={(e) => setFaceToolNumber(e.target.value)}></input>
-            <label for="CutterDiameter">Cutter Diameter:</label>
+            <label htmlFor="CutterDiameter">Cutter Diameter:</label>
             <input type="" className="" id="" placeholder="Tool number for facing" onChange={(e) => setCutDiam(e.target.value)}></input>
-            <label for="spindleSpeed">Spindle RPM:</label>
+            <label htmlFor="spindleSpeed">Spindle RPM:</label>
             <input type="" className="form-control" id="" placeholder="Spindle RPM for facing" onChange={(e) => setfaceSpindleRPM(e.target.value)}></input>
-            <label for="FeedRate">Feed Rate:</label>
+            <label htmlFor="FeedRate">Feed Rate:</label>
             <input type="" className="form-control" id="" placeholder="Feed Rate for Facing" onChange={(e) => setFaceFeedRate(e.target.value)}></input>
-            <label for="Width">Width:</label>
+            <label htmlFor="Width">Width:</label>
             <input type="" className="form-control" id="" placeholder="Width (along x) for facing" onChange={(e) => setFaceWidth(e.target.value)}></input>
-            <label for="Depth">Depth:</label>
+            <label htmlFor="Depth">Depth:</label>
             <input type="" className="form-control" id="" placeholder="Depth (along y) for facing" onChange={(e) => setFaceDepth(e.target.value)}></input>
-            <label for="Clearance">Clearance: </label>
+            <label htmlFor="Clearance">Clearance: </label>
             <input type="" className="form-control" id="" placeholder="Z clearance for facing (top of part + clearance)" onChange={(e) => setFaceClearance(e.target.value)}></input>
-            <label for="DOC">DOC: </label>
+            <label htmlFor="DOC">DOC: </label>
             <input type="" className="form-control" id="" placeholder="Depth of cut (how much are you taking off the top?)" onChange={(e) => setFaceDOC(e.target.value)}></input>
-            <label for="PlungeRate">Plunge Rate:</label>
+            <label htmlFor="PlungeRate">Plunge Rate:</label>
             <input type="" className="form-control" id="" placeholder="Feed Rate for Z moves" onChange={(e) => setFacePlunge(e.target.value)}></input>
-            <label for="Stepover">Stepover:</label>
+            <label htmlFor="Stepover">Stepover:</label>
             <input type="" className="form-control" id="" placeholder="Amount tool moves over each pass until facing is completed" onChange={(e) => setFaceStepOver(e.target.value)}></input>
         </div>
     </form>;
@@ -424,7 +424,7 @@ export default function GenHome(props) {
                         </div>
                         <div className="col-7">
                             <div className="container-justify-content-start">
-                                <p>Gcode goes here</p>
+                                <button onClick={() => consolePrintGcode()}>Click me bitch</button>
                             </div>
                         </div>
                     </div>

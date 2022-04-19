@@ -105,12 +105,6 @@ export default function GenHome(props) {
         </div>;
     };
 
-    const consolePrintGcode = () => {
-        gcodeList.forEach((block) => {
-            block.split(',').forEach((line) => console.log(line));
-        });
-    };
-
     const gcodeUndo = () => {
         let tempGcode = [...gcodeList];
         setLastBlock(tempGcode.pop());
@@ -132,6 +126,8 @@ export default function GenHome(props) {
         });
         navigator.clipboard.writeText(gcodeString);
     };
+
+    const gcodeClear = () => setGcodeList([]);
 
     // Form Submit Functions ---------------------------------------------
 
@@ -460,6 +456,7 @@ export default function GenHome(props) {
                             <div className="container-justify-content-start d-flex d-flex-inline">
                                 {PrintGcode()}
                                 <div className="ms-2">
+                                    <button className="btn btn-primary mb-2" onClick={() => gcodeClear()}>Clear</button>
                                     <button className="btn btn-primary mb-2" onClick={() => gcodeUndo()}>Undo</button>
                                     <button className="btn btn-primary mb-2" onClick={() => gcodeRedo()}>Redo</button>
                                     <button className="btn btn-primary mb-2" onClick={() => gcodeCopy()}>Copy</button>

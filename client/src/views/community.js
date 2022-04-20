@@ -3,7 +3,7 @@ import Navbar from "../components/navbar";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 import '../assets/css/community.css';
-import InputForm from "./InputForm";
+import InputForm from "./old/InputForm";
 
 export default function Community(props) {
     const [reportModalShow, setReportModalShow] = useState(false);

@@ -26,7 +26,7 @@ SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'minn4519.pythonanywhere.com']
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Project Apps
     'user',
     'community',
+    'gcode',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'https://gcode-deck.vercel.app'
 ]
 
 REST_FRAMEWORK = {

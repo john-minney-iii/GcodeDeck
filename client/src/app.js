@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LandingPage from './views/landing_page';
 import Community from './views/community';
 import AboutUs from './views/about_us';
-import GenHome from './views/gen-home';
+import GenHome from './views/gen-home-updated';
 import Account from './views/account';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/app.css';  
@@ -13,7 +13,8 @@ export default class App extends Component {
         this.state = {
             currentView: 'landing-page',
             token: '',
-            authenticated: false
+            authenticated: false,
+            prod: false
         };
     }
 
@@ -43,6 +44,7 @@ export default class App extends Component {
                 authenticated={this.state.authenticated}
                 loginUser={this.loginUser}
                 changeView={this.changeCurrentView}
+                prod={this.state.prod}
             />
         else if (this.state.currentView === 'about-us')
             return <AboutUs 
@@ -53,11 +55,13 @@ export default class App extends Component {
             return <Community 
                 authenticated={this.state.authenticated}
                 changeView={this.changeCurrentView}
+                prod={this.state.prod}
             />
         else if (this.state.currentView === 'gen-home')
             return <GenHome 
                 authenticated={this.state.authenticated}
                 changeView={this.changeCurrentView}
+                prod={this.state.prod}
             />
         else if (this.state.currentView === 'account')
             return <Account 
@@ -65,6 +69,7 @@ export default class App extends Component {
                 changeView={this.changeCurrentView}
                 token={this.state.token}
                 logOut={this.logoutUser}
+                prod={this.state.prod}
             />
         return <p>Idk Dawg</p>
     };

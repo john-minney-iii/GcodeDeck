@@ -46,6 +46,7 @@ export default function GenHome(props) {
     const [linearPos2, setLinearPos2] = useState(0);
 
     // States for Facing
+    const [facingDir, setFacingDir] = useState(0);
     const [faceToolNumber, setFaceToolNumber] = useState(0);
     const [faceCutDiam, setCutDiam] = useState(0);
     const [faceSpindleRPM, setfaceSpindleRPM] = useState(0);
@@ -206,6 +207,7 @@ export default function GenHome(props) {
 
     const facingTemplateFormSubmit = () => {
         axios.post(baseUrl + '/api/v1/gcode/facingTemplate/', {
+            'faceDir': facingDir,
             'toolNumber': faceToolNumber,
             'cutterDiameter': faceCutDiam,
             'spindleRpm': faceSpindleRPM,
@@ -362,10 +364,15 @@ export default function GenHome(props) {
 
     const facingTemplateForm = () => <form>
         <div className="form-group">
-            <label htmlFor="axisOfMovement">Tool Number:</label>
+        <label htmlFor="facingDir">Facing Direction: </label>
+            <select name="direction" id="d" className="" onChange={(e) => setFacingDir(e.target.value)}>
+                <option value="Negative">Negative</option>
+                <option value="Positive">Positive</option>
+            </select>
+            <label htmlFor="ToolNumber">Tool Number:</label>
             <input type="" className="" id="" placeholder="Tool number for facing" onChange={(e) => setFaceToolNumber(e.target.value)}></input>
             <label htmlFor="CutterDiameter">Cutter Diameter:</label>
-            <input type="" className="" id="" placeholder="Tool number for facing" onChange={(e) => setCutDiam(e.target.value)}></input>
+            <input type="" className="" id="" placeholder="Cutter Diameter for facing" onChange={(e) => setCutDiam(e.target.value)}></input>
             <label htmlFor="spindleSpeed">Spindle RPM:</label>
             <input type="" className="form-control" id="" placeholder="Spindle RPM for facing" onChange={(e) => setfaceSpindleRPM(e.target.value)}></input>
             <label htmlFor="FeedRate">Feed Rate:</label>
@@ -435,7 +442,7 @@ export default function GenHome(props) {
                                     className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('linearModal')}
                                 >
-                                    Linear Movement (linear)
+                                    Linear Movement (G01)
                                 </button>
                             </div>
                             <div className="drilling-button py-3">

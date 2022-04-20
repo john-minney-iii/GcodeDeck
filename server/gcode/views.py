@@ -68,9 +68,9 @@ class RapidMovement(APIView):
             elif axis == "Y":
                 g01 = f'G00 Y{float(pos)} ; (G00 Rapid Move)'
             elif axis == "Z":
-                g01 = f'G00 Y{float(pos)} ; (G00 Rapid Move)'
+                g01 = f'G00 Z{float(pos)} ; (G00 Rapid Move)'
             elif axis == "XY":
-                g01 = f'G00 X{float(pos)} Y{float(pos2)} ; (G01 Rapid Move)'
+                g01 = f'G00 X{float(pos)} Y{float(pos2)} ; (G00 Rapid Move)'
             else:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             return Response(
@@ -146,6 +146,7 @@ class FacingTemplate(APIView):
 
     def post(self, request):
         try:
+            facingDirection = request.data['faceDir']
             tool_number = request.data['toolNumber']
             spindle_rpm = request.data['spindleRpm']
             feed_rate = request.data['feedRate']
@@ -164,14 +165,24 @@ class FacingTemplate(APIView):
             really_fucking_long_gcode += (f',M03 S{spindle_rpm} ; (Turn on Spindle)')
             really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y0 Z{float(clearance)} ; (Rapid Move)')
             # Z Depth of the facing operation @ programmed plungerate
-            while x:
-                really_fucking_long_gcode += (f',G01 Z{-1 * float(doc)} F{plunge_rate} ; (Linear Move)')
-                really_fucking_long_gcode += (f',G01 X{0 - float(cutter_diameter)} F{feed_rate} ; (Linear Move)')
-                really_fucking_long_gcode += (f',G01 Z{clearance} F{plunge_rate} ; (Linear Move)')
-                if y < float(depth)*-1:
-                    break
-                really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y{round(y-float(step_over), 4)} ; (Rapid Move)')
-                y = y-float(step_over)
+            if facingDirection == 'Positive':
+                while x:
+                    really_fucking_long_gcode += (f',G01 Z{-1 * float(doc)} F{plunge_rate} ; (Linear Move)')
+                    really_fucking_long_gcode += (f',G01 X{0 - float(cutter_diameter)} F{feed_rate} ; (Linear Move)')
+                    really_fucking_long_gcode += (f',G01 Z{clearance} F{plunge_rate} ; (Linear Move)')
+                    if y >= float(depth):
+                        break
+                    really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y{round(y+float(step_over), 4)} ; (Rapid Move)')
+                    y = y+float(step_over)
+            else:
+                while x:
+                    really_fucking_long_gcode += (f',G01 Z{-1 * float(doc)} F{plunge_rate} ; (Linear Move)')
+                    really_fucking_long_gcode += (f',G01 X{0 - float(cutter_diameter)} F{feed_rate} ; (Linear Move)')
+                    really_fucking_long_gcode += (f',G01 Z{clearance} F{plunge_rate} ; (Linear Move)')
+                    if y <= float(depth)*-1:
+                        break
+                    really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y{round(y-float(step_over), 4)} ; (Rapid Move)')
+                    y = y-float(step_over)
             print(really_fucking_long_gcode)
             return Response(
                 really_fucking_long_gcode,

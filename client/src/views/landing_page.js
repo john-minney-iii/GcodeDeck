@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from 'axios';
 
 // Components
 import LoginFormModal from "../components/login-form-modal";
@@ -10,9 +11,18 @@ export default function LandingPage(props) {
     const [loginModalShow, setLoginModalShow] = useState(false);
     const [registerModalShow, setRegisterModalShow] = useState(false);
 
-    // States for login form
-    const [loginUsername, setLoginUsername] = useState('');
-    const [loginPassword, setLoginPassword] = useState('');
+    // Form Submits
+
+    const loginSubmit = async (username, password) => {
+        if (username !== '' || password !== '') {
+            let finished = false;
+            console.log(username, password);
+        }
+    };
+
+    const registerSubmit = async () => {
+
+    };
 
     return <div className="landing-page">
         <div className="main-container">
@@ -25,7 +35,11 @@ export default function LandingPage(props) {
                 onClick={() => setRegisterModalShow(!registerModalShow)}
             >Register</button>
         </div>
-        <LoginFormModal show={loginModalShow} setShow={setLoginModalShow} />
+        <LoginFormModal 
+            show={loginModalShow} 
+            setShow={setLoginModalShow} 
+            loginSubmit={loginSubmit}
+        />
         <RegisterFormModal show={registerModalShow} setShow={setRegisterModalShow} />
     </div>;
 

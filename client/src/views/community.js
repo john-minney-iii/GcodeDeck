@@ -3,18 +3,20 @@ import Navbar from "../components/navbar";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 import '../assets/css/community.css';
-import InputForm from "./old/InputForm";
 
 export default function Community(props) {
     const [reportModalShow, setReportModalShow] = useState(false);
     const [systemModalShow, setSystemModalShow] = useState(false);
     const [contactModalShow, setContactModalShow] = useState(false);
     // States for forms
-    const [values, setValues] = useState({
-        username: "",
-        email: "",
-        message: "",
-      });
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+
+    // Used for server posts
+    const [baseUrl, setBaseUrl] = useState(
+        (props.prod) ? 'https://minn4519.pythonanywhere.com' : 'http://localhost:8000'
+    );
 
     const handleModal = (which) => {
         if (which === 'report')
@@ -27,150 +29,126 @@ export default function Community(props) {
     };
 
     const resetFormStates = () => {
-        setValues('');
+        setUsername('');
+        setEmail('');
+        setMessage('');
     };
-//////////////////////////////////////////////////////////////
-    const bugUsername = [
-        {
-            id: 1,
-            name: "username",
-            type: "text",
-            errorMessage:
-              "You must enter your username",
-            placeholder: "Username",
-            pattern: "^[A-Za-z0-9@_+-]{1,150}$",
-            required: true,
-          },
-    ];
-    const bugEmail = [
-        {
-            id: 1,
-            name: "email",
-            type: "email",
-            errorMessage: "A valid email address must be entered",
-            placeholder: "Email",
-            required: true,
-          },
-    ];
-    const bugMessage = [
-        {
-          id: 3,
-          name: "message",
-          type: "text",
-          errorMessage:
-            "Message can only be between 1 and 1000 characters",//I made these numbers I made up so feel free to change them
-          placeholder: "Message",
-          pattern: "^[A-Za-z0-9@_+-.!?_*&$#():;]{1,1000}$",
-          required: true,
-        },
-    ];
-    /////////////////////////////////////////////////////////////////////////////////////////
-    const systemUsername = [
-        {
-            id: 1,
-            name: "username",
-            type: "text",
-            errorMessage:
-              "You must enter your username",
-            placeholder: "Username",
-            pattern: "^[A-Za-z0-9@_+-]{1,150}$",
-            required: true,
-          },
-    ];
-    const systemEmail = [
-        {
-            id: 1,
-            name: "email",
-            type: "email",
-            errorMessage: "A valid email address must be entered",
-            placeholder: "Email",
-            required: true,
-          },
-    ];
-    const systemMessage = [
-        {
-          id: 3,
-          name: "message",
-          type: "text",
-          errorMessage:
-            "Message can only be between 1 and 1000 characters",//I made these numbers I made up so feel free to change them
-          placeholder: "Message",
-          pattern: "^[A-Za-z0-9@_+-.!?_*&$#():;]{1,1000}$",
-          required: true,
-        },
-    ];
-    /////////////////////////////////////////////////////////////////////////////////////////////////
-    const contactUsername = [
-        {
-            id: 1,
-            name: "username",
-            type: "text",
-            errorMessage:
-              "You must enter your username",
-            placeholder: "Username",
-            pattern: "^[A-Za-z0-9@_+-]{1,150}$",
-            required: true,
-          },
-    ];
-    const contactEmail = [
-        {
-            id: 1,
-            name: "email",
-            type: "email",
-            errorMessage: "A valid email address must be entered",
-            placeholder: "Email",
-            required: true,
-          },
-    ];
-    const contactMessage = [
-        {
-          id: 3,
-          name: "message",
-          type: "text",
-          errorMessage:
-            "Message can only be between 1 and 1000 characters",//I made these numbers I made up so feel free to change them
-          placeholder: "Message",
-          pattern: "^[A-Za-z0-9@_+-.!?_*&$#():;]{1,1000}$",
-          required: true,
-        },
-    ];
-
-      const onChange = (e) => {
-        setValues({ ...values, [e.target.name]: e.target.value });
-      };
 
     const submitContactRequest = async () => {
-        axios.post('http://localhost:8000/api/v1/community/contactUs/', {
-            'username': contactUsername,
-            'email': contactEmail,
-            'content': contactMessage
-        }).then(res => {
-            if (res.status === 201)
-                alert('Thanks for reaching out!');
-        })
+        if (username == '' || email == '' || message == '') {
+            alert('Please fill out the information');
+        } else {
+            axios.post(baseUrl + '/api/v1/community/contactUs/', {
+                'username': username,
+                'email': email,
+                'content': message
+            }).then(res => {
+                if (res.status === 201)
+                    alert('Thanks for reaching out!');
+            })
+        }
     };
 
     const submitSystemRequest = async () => {
-        axios.post('http://localhost:8000/api/v1/community/systemRequest/', {
-            'username': systemUsername,
-            'email': systemEmail,
-            'content': systemMessage
-        }).then(res => {
-            if (res.status === 201)
-                alert('Thanks for the system request!');
-        })
+        if (username == '' || email == '' || message == '') {
+            alert('Please fill out the information');
+        } else {
+            axios.post(baseUrl + '/api/v1/community/systemRequest/', {
+                'username': username,
+                'email': email,
+                'content': message
+            }).then(res => {
+                if (res.status === 201)
+                    alert('Thanks for the system request!');
+            })
+        }
     };
 
     const submitBugReport = async () => {
-        axios.post('http://localhost:8000/api/v1/community/bugReport/', {
-            'username': bugUsername,
-            'email': bugEmail,
-            'content': bugMessage
-        }).then(res => {
-            if (res.status === 201)
-                alert('Thanks for the bug report!');
-        })
+        if (username == '' || email == '' || message == '') {
+            alert('Please fill out the information');
+        } else {
+            axios.post(baseUrl + '/api/v1/community/bugReport/', {
+                'username': username,
+                'email': email,
+                'content': message
+            }).then(res => {
+                if (res.status === 201)
+                    alert('Thanks for the bug report!');
+            })
+        }
     };
+
+
+    const ContactRequestForms = (msg) => <form>
+        <small id='usernameHelp' className='form-text text-muted'>{msg}</small>
+        <div className='form-group'>
+            <label htmlFor='usernameInput'>Username</label>
+            <input 
+                type='text' 
+                className='form-control' 
+                id='usernameInput'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+            />
+        </div>
+        <div className='form-group'>
+            <label htmlFor='emailInput'>Email</label>
+            <input 
+                type='email' 
+                className='form-control' 
+                id='emailInput' 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+        </div>
+        <div className='form-group'>
+            <label htmlFor='messageInput'>Message</label>
+            <input 
+                type='textarea' 
+                className='form-control' 
+                id='messageInput' 
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                height={200}
+            />
+        </div>
+    </form>
+
+    const ReportABugForm = () => <form>
+        <small id='usernameHelp' className='form-text text-muted'>Report a Bug</small>
+        <div className='form-group'>
+            <label htmlFor='usernameInput'>Username</label>
+            <input 
+                type='text' 
+                className='form-control' 
+                id='usernameInput'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+            />
+        </div>
+        <div className='form-group'>
+            <label htmlFor='emailInput'>Email</label>
+            <input 
+                type='email' 
+                className='form-control' 
+                id='emailInput' 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+        </div>
+        <div className='form-group'>
+            <label htmlFor='messageInput'>Message</label>
+            <input 
+                type='textarea' 
+                className='form-control' 
+                id='messageInput' 
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                height={200}
+            />
+        </div>
+    </form>
 
     return <div className='community-view'>
         <Navbar authenticated={props.authenticated} changeView={props.changeView} />
@@ -205,34 +183,7 @@ export default function Community(props) {
             </div>
             <Modal show={reportModalShow} onHide={() => handleModal('report')}>
                 <Modal.Header closeButton>Report a Bug</Modal.Header>
-                <Modal.Body>
-                    {bugUsername.map((input) => (
-                    <InputForm
-                        key={input.id[1,2]}
-                        {...input}
-                        value={values[input.name]}
-                        onChange={onChange}
-                    />
-                    ))}
-                    <p></p>
-                    {bugEmail.map((input) => (
-                    <InputForm
-                        key={input.id[1,2]}
-                        {...input}
-                        value={values[input.name]}
-                        onChange={onChange}
-                    />
-                    ))}
-                    <p></p>
-                    {bugMessage.map((input) => (
-                    <InputForm
-                        key={input.id[1,2]}
-                        {...input}
-                        value={values[input.name]}
-                        onChange={onChange}
-                    />
-                    ))}
-                </Modal.Body>
+                <Modal.Body>{ReportABugForm()}</Modal.Body>
                 <Modal.Footer>
                     <button 
                         className='btn btn-primary btn-lg rounded-pill'
@@ -249,34 +200,7 @@ export default function Community(props) {
             </Modal>
             <Modal show={systemModalShow} onHide={() => handleModal('system')}>
                 <Modal.Header closeButton>System Request</Modal.Header>
-                <Modal.Body>'Got an idea for a feature? Let us know!'
-                    {systemUsername.map((input) => (
-                    <InputForm
-                        key={input.id[1,2]}
-                        {...input}
-                        value={values[input.name]}
-                        onChange={onChange}
-                    />
-                    ))}
-                    <p></p>
-                    {systemEmail.map((input) => (
-                    <InputForm
-                        key={input.id[1,2]}
-                        {...input}
-                        value={values[input.name]}
-                        onChange={onChange}
-                    />
-                    ))}
-                    <p></p>
-                    {systemMessage.map((input) => (
-                    <InputForm
-                        key={input.id[1,2]}
-                        {...input}
-                        value={values[input.name]}
-                        onChange={onChange}
-                    />
-                    ))}
-                </Modal.Body>
+                <Modal.Body>{ContactRequestForms('Got an idea for a feature? Let us know!')}</Modal.Body>
                 <Modal.Footer>
                     <button 
                         className='btn btn-primary btn-lg rounded-pill'
@@ -293,34 +217,7 @@ export default function Community(props) {
             </Modal>
             <Modal show={contactModalShow} onHide={() => handleModal('contact')}>
                 <Modal.Header closeButton>Contact Us</Modal.Header>
-                <Modal.Body>Send us a message!
-                    {contactUsername.map((input) => (
-                    <InputForm
-                        key={input.id[1,2]}
-                        {...input}
-                        value={values[input.name]}
-                        onChange={onChange}
-                    />
-                    ))}
-                    <p></p>
-                    {contactEmail.map((input) => (
-                    <InputForm
-                        key={input.id[1,2]}
-                        {...input}
-                        value={values[input.name]}
-                        onChange={onChange}
-                    />
-                    ))}
-                    <p></p>
-                    {contactMessage.map((input) => (
-                    <InputForm
-                        key={input.id[1,2]}
-                        {...input}
-                        value={values[input.name]}
-                        onChange={onChange}
-                    />
-                    ))}
-                </Modal.Body>
+                <Modal.Body>{ContactRequestForms('Send us a message!')}</Modal.Body>
                 <Modal.Footer>
                     <button 
                         className='btn btn-primary btn-lg rounded-pill'

@@ -10,9 +10,6 @@ import './assets/css/app.css';
 export default class App extends Component {
     constructor(props) {
         super(props);
-    }
-
-    componentWillUnmount() {
         window.sessionStorage.setItem('authenticated', 'false');
         window.sessionStorage.setItem('token', '');
         window.sessionStorage.setItem('currentView', 'landing-page');

@@ -362,14 +362,14 @@ export default function GenHome(props) {
         </div>;
     };
 
-    const facingTemplateForm = () => <form>
+    const facingTemplateForm = () => 
+    <form>
         <div className="form-group">
         <label htmlFor="facingDir">Facing Direction: </label>
-            <select name="direction" id="d" className="" onChange={(e) => setFacingDir(e.target.value)}>
+            <select name="direction" id="d" className="form-control" onChange={(e) => setFacingDir(e.target.value)}>
                 <option value="Negative">Negative</option>
                 <option value="Positive">Positive</option>
             </select>
-            <br/>
             <label htmlFor="ToolNumber">Tool Number:</label>
                 <input type="" className="form-control" id="" placeholder="Tool number for facing" onChange={(e) => setFaceToolNumber(e.target.value)}></input>
             <label htmlFor="CutterDiameter">Cutter Diameter:</label>

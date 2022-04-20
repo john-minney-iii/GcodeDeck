@@ -369,26 +369,27 @@ export default function GenHome(props) {
                 <option value="Negative">Negative</option>
                 <option value="Positive">Positive</option>
             </select>
+            <br/>
             <label htmlFor="ToolNumber">Tool Number:</label>
-            <input type="" className="" id="" placeholder="Tool number for facing" onChange={(e) => setFaceToolNumber(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Tool number for facing" onChange={(e) => setFaceToolNumber(e.target.value)}></input>
             <label htmlFor="CutterDiameter">Cutter Diameter:</label>
-            <input type="" className="" id="" placeholder="Cutter Diameter for facing" onChange={(e) => setCutDiam(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Cutter Diameter for facing" onChange={(e) => setCutDiam(e.target.value)}></input>
             <label htmlFor="spindleSpeed">Spindle RPM:</label>
-            <input type="" className="form-control" id="" placeholder="Spindle RPM for facing" onChange={(e) => setfaceSpindleRPM(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Spindle RPM for facing" onChange={(e) => setfaceSpindleRPM(e.target.value)}></input>
             <label htmlFor="FeedRate">Feed Rate:</label>
-            <input type="" className="form-control" id="" placeholder="Feed Rate for Facing" onChange={(e) => setFaceFeedRate(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Feed Rate for Facing" onChange={(e) => setFaceFeedRate(e.target.value)}></input>
             <label htmlFor="Width">Width:</label>
-            <input type="" className="form-control" id="" placeholder="Width (along x) for facing" onChange={(e) => setFaceWidth(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Width (along x) for facing" onChange={(e) => setFaceWidth(e.target.value)}></input>
             <label htmlFor="Depth">Depth:</label>
-            <input type="" className="form-control" id="" placeholder="Depth (along y) for facing" onChange={(e) => setFaceDepth(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Depth (along y) for facing" onChange={(e) => setFaceDepth(e.target.value)}></input>
             <label htmlFor="Clearance">Clearance: </label>
-            <input type="" className="form-control" id="" placeholder="Z clearance for facing (top of part + clearance)" onChange={(e) => setFaceClearance(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Z clearance for facing (top of part + clearance)" onChange={(e) => setFaceClearance(e.target.value)}></input>
             <label htmlFor="DOC">DOC: </label>
-            <input type="" className="form-control" id="" placeholder="Depth of cut (how much are you taking off the top?)" onChange={(e) => setFaceDOC(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Depth of cut (how much are you taking off the top?)" onChange={(e) => setFaceDOC(e.target.value)}></input>
             <label htmlFor="PlungeRate">Plunge Rate:</label>
-            <input type="" className="form-control" id="" placeholder="Feed Rate for Z moves" onChange={(e) => setFacePlunge(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Feed Rate for Z moves" onChange={(e) => setFacePlunge(e.target.value)}></input>
             <label htmlFor="Stepover">Stepover:</label>
-            <input type="" className="form-control" id="" placeholder="Amount tool moves over each pass until facing is completed" onChange={(e) => setFaceStepOver(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Amount tool moves over each pass until facing is completed" onChange={(e) => setFaceStepOver(e.target.value)}></input>
         </div>
     </form>;
 

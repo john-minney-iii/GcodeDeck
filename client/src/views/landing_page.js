@@ -1,5 +1,8 @@
 import { useState } from "react";
 import axios from 'axios';
+import HeroImage from '../assets/img/hero-image.webp';
+import Navbar from "../components/navbar";
+import '../assets/css/landing-page.css';
 
 // Components
 import LoginFormModal from "../components/login-form-modal";
@@ -10,6 +13,40 @@ export default function LandingPage(props) {
     // States for Modals
     const [loginModalShow, setLoginModalShow] = useState(false);
     const [registerModalShow, setRegisterModalShow] = useState(false);
+
+    const AuthenticatedCallToActions = () => {
+        if (props.authenticated)
+            return (
+                <div>
+                    <button
+                        className="btn btn-outline-primary btn-lg rounded-pill"
+                        onClick={() => props.changeView('gen-home')}
+                    >Create a new program</button>
+                </div>
+            );
+        return null;
+    };
+
+    const UnAuthenticatedCallToActions = () => {
+        if (props.authenticated)
+            return <img src={HeroImage} className="w-75" alt="cnc router" />;
+        return (
+            <div>
+                <button
+                    className="btn btn-primary btn-lg rounded-pill mx-2"
+                    onClick={() => setLoginModalShow(true)}
+                >Login</button>
+                <button
+                    className="btn btn-primary btn-lg rounded-pill"
+                    onClick={() => setRegisterModalShow(true)}
+                >Register</button>
+                <button
+                    className="btn btn-outline-primary btn-lg rounded-pill"
+                    onClick={() => props.changeView('gen-home')}
+                >Create a new program</button>
+            </div>
+        );
+    };
 
     // Form Submits
 
@@ -52,16 +89,23 @@ export default function LandingPage(props) {
         }
     };
 
+    // Main Render
+
     return <div className="landing-page">
-        <div className="main-container">
-            <button
-                className="btn btn-primary btn-lg rounded-pill mx-2"
-                onClick={() => setLoginModalShow(!loginModalShow)}
-            >Login</button>
-            <button
-                className="btn btn-primary btn-lg rounded-pill"
-                onClick={() => setRegisterModalShow(!registerModalShow)}
-            >Register</button>
+        <Navbar authenticated={props.authenticated} changeView={props.changeView} />
+        <div className='main-container'>
+            <div className='container'>
+                <div className='row'>
+                    <div className='col-lg'>
+                        <h1>GCODEdeck</h1>
+                        <p>The first ever online conversational programmer for CNC Mills. Making simple tool paths couldn't be easier.</p>
+                        <AuthenticatedCallToActions />
+                    </div>
+                    <div className='col-lg home-page-image'>
+                        <UnAuthenticatedCallToActions />
+                    </div>
+                </div>
+            </div>
         </div>
         <LoginFormModal 
             show={loginModalShow} 

@@ -133,7 +133,7 @@ export default function RegisterFormModal(props) {
         <div className="form-group">
             <label htmlFor="username-input">Password*</label>
             <input 
-                type="text"
+                type="password"
                 className="form-control"
                 name="username-input"
                 value={password}
@@ -149,7 +149,7 @@ export default function RegisterFormModal(props) {
         <div className="form-group">
             <label htmlFor="username-input">Confirm Password*</label>
             <input 
-                type="text"
+                type="password"
                 className="form-control"
                 name="username-input"
                 value={passwordConfirm}

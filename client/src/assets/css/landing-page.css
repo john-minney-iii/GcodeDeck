@@ -18,3 +18,18 @@
     align-items: center;
     justify-content: center;
 }
+
+span{
+    color: red;
+    font-size: 11px;
+    padding: 3px;
+    display: none;
+}
+
+input:invalid[focused="true"]{
+    border: 1px solid red;
+}
+
+input:invalid[focused="true"] ~ span{
+    display: block;
+}

@@ -18,3 +18,11 @@
     align-items: center;
     justify-content: center;
 }
+
+.form-group input {
+    box-shadow: none !important;
+}
+
+.form-group label {
+    font-size: 16px;
+}

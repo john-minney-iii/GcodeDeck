@@ -56,7 +56,7 @@ export default function DrillingFormModal(props) {
     const drillRefValidation = () => {
         if (drillRef === '') {
             drillRefValid = false;
-            return <small className="text-danger">Please Enter A Valid Plane of Reference</small>;
+            return <small className="text-danger">Please Enter A Valid Reference</small>;
         }
         drillRefValid = true;
     };

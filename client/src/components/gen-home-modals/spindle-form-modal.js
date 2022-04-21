@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
 export default function SpindleCommandForm(props) {
-    const [spindleDirection, setSpindleDirection] = useState('CW');
-    const [spindleRPM, setSpindleRPM] = useState(0);
+    const [spindleDirection, setSpindleDirection] = useState('CW (M03)');
+    const [spindleRPM, setSpindleRPM] = useState('');
 
     // Validations 
     let spindleDirectionValid = false;
@@ -32,18 +32,20 @@ export default function SpindleCommandForm(props) {
 
     const SpindleForm = () => <form>
         <div className="form-group">
-            <label htmlFor="username-input">First Name*</label>
-            <input 
-                type="text"
-                className="form-control"
-                name="username-input"
+            <label htmlFor="username-input">Direction of Rotation:</label>
+            <select 
+                name="Cutter Compensation" 
+                id="axis" 
+                className="form-control" 
                 value={spindleDirection}
-                onChange={(e) => setSpindleDirection(e.target.value)}
-            />
+                onChange={(e) => setSpindleDirection(e.target.value)}>
+                <option value="CW">CW (M03)</option>
+                <option value="CCW">CCW (M04)</option>
+            </select>
             {spindleDirectionValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Last Name*</label>
+            <label htmlFor="username-input">Spindle RPM:</label>
             <input 
                 type="text"
                 className="form-control"

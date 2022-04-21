@@ -63,7 +63,6 @@ export default function ToolChangeForm(props) {
                 name="Cutter Compensation" 
                 id="axis" 
                 className="form-control" 
-                Lable="Cutter Compensation"
                 value={cutterCompensation}
                 onChange={(e) => setCutterCompensation(e.target.value)}>
                 <option value="G40">None (G40)</option>

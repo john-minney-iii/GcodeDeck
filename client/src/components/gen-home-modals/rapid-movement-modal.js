@@ -1,123 +1,84 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-export default function RegisterFormModal(props) {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordConfirm, setPasswordConfirm] = useState('');
+export default function rapidForm(props) {
+    const [rapidChoice, setRapidChoice] = useState('X');
+    const [rapidFeedRate, setRapidFeedRate] = useState(0);
+    const [rapidPos, setRapidPos] = useState(0);
+    const [rapidPos2, setRapidPos2] = useState(0);
 
     // Validations 
-    let firstNameValid = false;
-    let lastNameValid = false;
-    let usernameValid = false;
-    let emailValid = false;
-    let passwordValid = false;
-    let passwordConfirmValid = false;
+    let rapidChoiceValid = false;
+    let rapidFeedRateValid = false;
+    let rapidPosValid = false;
+    let rapidPos2Valid = false;
 
     const resetFormValues = () => {
-        setFirstName('');
-        setLastName('');
-        setUsername('');
-        setEmail('');
-        setPassword('');
-        setPasswordConfirm('');
+        setRapidChoice('');
+        setRapidFeedRate('');
+        setRapidPos('');
+        setRapidPos2('');
     };
 
-    const firstNameValidation = () => {
-        if (firstName === '') {
-            firstNameValid = false;
-            return <small className="text-danger">Please Enter Your First Name</small>;
+    const rapidFeedRateValidation = () => {
+        if (rapidFeedRate === '') {
+            rapidFeedRateValid = false;
+            return <small className="text-danger">Please Enter The Feed Rate</small>;
         }
-        firstNameValid = true;
+        rapidFeedRateValid = true;
     };
 
-    const lastNameValidation = () => {
-        if (lastName === '') {
-            lastNameValid = false;
-            return <small className="text-danger">Please Enter Your Last Name</small>;
-        }
-        lastNameValid = true;
-    };
-
-    const usernameValidation = () => {
-        if (username === '' || username.length > 150) {
-            usernameValid = false;
+    const rapidPosValidation = () => {
+        if (rapidPos === '') {
+            rapidPosValid = false;
             return <div>
-                <small className="text-danger">Please Enter Your Username</small>
+                <small className="text-danger">Please Enter A Valid Position</small>
                 <br />
             </div>;
         }
-        usernameValid = true;
+        rapidPosValid = true;
     };
 
-    const emailValidation = () => {
-        if (email === '') {
-            emailValid = false;
-            return <small className="text-danger">Please Enter A Valid Email</small>;
+    const rapidPos2Validation = () => {
+        if (rapidPos2 === '') {
+            rapidPos2Valid = false;
+            return <small className="text-danger">Please Enter A Valid End Position</small>;
         }
-        emailValid = true;
+        rapidPos2Valid = true;
     };
 
-    const passwordValidation = () => {
-        if (password === '') {
-            passwordValid = false;
-            return <div>
-                <small className="text-danger">Please Enter A Valid Password</small>
-                <br />
-            </div>;
-        }
-        passwordValid = true;
-    };
-
-    const passwordConfirmValidation = () => {
-        if (passwordConfirm === '' || password !== passwordConfirm) {
-            passwordConfirmValid = false;
-            return <div>
-                <small className="text-danger">Please Make Sure Your Passwords Match</small>
-            </div>;
-        }
-        passwordConfirmValid = true;
-    };
-
-    const RegisterForm = () => <form>
+    const RapidForm = () => <form>
         <div className="form-group">
-            <label htmlFor="username-input">First Name*</label>
-            <input 
-                type="text"
-                className="form-control"
-                name="username-input"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-            />
-            {firstNameValidation()}
+            <label htmlFor="axisOfMovement">Axis of Movement: </label>
+            <select name="Axis" id="axis" className="form-control" onChange={(e) => setRapidChoice(e.target.value)}>
+                <option value="X">X</option>
+                <option value="Y">Y</option>
+                <option value="Z">Z</option>
+                <option value="XY">XY</option>
+            </select>
+            {rapidFormHelper()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Last Name*</label>
+            <label htmlFor="username-input">Feed Rate</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={rapidFeedRate}
+                onChange={(e) => setRapidFeedRate(e.target.value)}
             />
-            {lastNameValidation()}
+            {rapidFeedRateValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Username*</label>
+            <label htmlFor="username-input">Position 1</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={rapidPos}
+                onChange={(e) => setRapidPos(e.target.value)}
             />
-            {usernameValidation()}
-            <small className='text-muted'>
-                150 characters or fewer. Letters, digits and @/_/+/- only
-            </small>
+            {rapidPosValidation()}
         </div>
         <div className="form-group">
             <label htmlFor="username-input">Email*</label>
@@ -125,57 +86,58 @@ export default function RegisterFormModal(props) {
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={rapidPos2}
+                onChange={(e) => setRapidPos2(e.target.value)}
             />
-            {emailValidation()}
-        </div>
-        <div className="form-group">
-            <label htmlFor="username-input">Password*</label>
-            <input 
-                type="password"
-                className="form-control"
-                name="username-input"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            {passwordValidation()}
-            <small id='usernameHelp' className='form-text text-muted'>
-                Use a mix of letters, numbers, and symbols. Password cannot
-                be too similar to your other personal information, nor be a commonly
-                used password, nor be entirely numeric.
-            </small>
-        </div>
-        <div className="form-group">
-            <label htmlFor="username-input">Confirm Password*</label>
-            <input 
-                type="password"
-                className="form-control"
-                name="username-input"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
-            />
-            {passwordConfirmValidation()}
+            {rapidPos2Validation()}
         </div>
     </form>;
 
+const rapidFormHelper = () => {
+    let posInput;
+    if (rapidChoice === 'X')
+        posInput = <div>
+            <label htmlfor='x-pos-input'>X:</label>
+            <input className='form-control' name='x-pos-input' onChange={(e) => setRapidPos(e.target.value)} />
+        </div>;
+    else if (rapidChoice === 'Y')
+        posInput = <div>
+            <label htmlfor='y-pos-input'>Y:</label>
+            <input className='form-control' name='y-pos-input' onChange={(e) => setRapidPos(e.target.value)} />
+        </div>;
+    else if (rapidChoice === 'Z')
+        posInput = <div>
+            <label htmlfor='z-pos-input'>Z:</label>
+            <input className='form-control' name='z-pos-input' onChange={(e) => setRapidPos(e.target.value)} />
+        </div>;
+    else if (rapidChoice === 'XY')
+        posInput = <div>
+            <label htmlfor='x-pos-input'>X:</label>
+            <input className='form-control' name='x-pos-input' onChange={(e) => setRapidPos(e.target.value)} />
+            <label htmlfor='y-pos-input'>Y:</label>
+            <input className='form-control' name='y-pos-input' onChange={(e) => setRapidPos2(e.target.value)} />
+        </div>;
+    return <div>
+        {posInput}
+    </div>;
+};
+
     const handleSubmit = () => {
-        if (firstNameValid && lastNameValid && usernameValid && emailValid && passwordValid && passwordConfirmValid) {
+        if (firstNameValid && lastNameValid && usernameValid && rapidPos2) {
             props.setShow(false);
             resetFormValues();
             props.registerSubmit(
-                firstName,
-                lastName,
-                username,
-                email,
-                password
+                rapidChoice,
+                rapidFeedRate,
+                rapidPos,
+                rapidPos2
             );
         }
     };
 
     return <Modal show={props.show} onHide={() => props.setShow(false)} >
-        <Modal.Header closeButton>Register</Modal.Header>
-        <Modal.Body>{RegisterForm()}</Modal.Body>
+        <Modal.Header closeButton>Rapid Movement</Modal.Header>
+        <Modal.Body>{RapidForm()}</Modal.Body>
         <Modal.Footer>
             <button
                 className='btn btn-primary btn-lg rounded-pill'
@@ -187,7 +149,7 @@ export default function RegisterFormModal(props) {
             <button
                 className='btn btn-primary btn-lg rounded-pill'
                 onClick={() => handleSubmit()}
-            >Register</button>
+            >Submit</button>
         </Modal.Footer>
     </Modal>;
 }

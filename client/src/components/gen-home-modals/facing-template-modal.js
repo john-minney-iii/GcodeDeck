@@ -1,181 +1,297 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-export default function RegisterFormModal(props) {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordConfirm, setPasswordConfirm] = useState('');
+export default function facingTemplateForm(props) {
+    const [facingDir, setFacingDir] = useState(0);
+    const [faceToolNumber, setFaceToolNumber] = useState(0);
+    const [faceCutDiam, setCutDiam] = useState(0);
+    const [faceSpindleRPM, setfaceSpindleRPM] = useState(0);
+    const [faceFeedRate, setFaceFeedRate] = useState(0);
+    const [faceWidth, setFaceWidth] = useState(0);
+    const [faceDepth, setFaceDepth] = useState(0);
+    const [faceClearance, setFaceClearance] = useState(0);
+    const [faceDOC, setFaceDOC] = useState(0);
+    const [facePlunge, setFacePlunge] = useState(0);
+    const [faceStepOver, setFaceStepOver] = useState(0);
 
     // Validations 
-    let firstNameValid = false;
-    let lastNameValid = false;
-    let usernameValid = false;
-    let emailValid = false;
-    let passwordValid = false;
-    let passwordConfirmValid = false;
+    let facingDirValid = false;
+    let faceToolNumberValid = false;
+    let faceCutDiamValid = false;
+    let faceSpindleRPMValid = false;
+    let faceFeedRateValid = false;
+    let faceWidthValid = false;
+    let faceDepthValid = false;
+    let faceClearanceValid = false;
+    let faceDOCValid = false;
+    let facePlungeValid = false;
+    let faceStepOverValid = false;
 
     const resetFormValues = () => {
-        setFirstName('');
-        setLastName('');
-        setUsername('');
-        setEmail('');
-        setPassword('');
-        setPasswordConfirm('');
+        setFacingDir('');
+        setFaceToolNumber('');
+        setFaceCutDiam('');
+        setFaceSpindleRPM('');
+        setFaceFeedRate('');
+        setFaceWidth('');
+        setFaceDepth('');
+        setFaceClearance('');
+        setFaceDOC('');
+        setFacePlunge('');
+        setFaceStepOver('');
     };
 
-    const firstNameValidation = () => {
-        if (firstName === '') {
-            firstNameValid = false;
-            return <small className="text-danger">Please Enter Your First Name</small>;
+    const facingDirValidation = () => {
+        if (facingDir === '') {
+            facingDirValid = false;
+            return <small className="text-danger">Please Enter A Valid Facing Direction</small>;
         }
-        firstNameValid = true;
+        facingDirValid = true;
     };
 
-    const lastNameValidation = () => {
-        if (lastName === '') {
-            lastNameValid = false;
-            return <small className="text-danger">Please Enter Your Last Name</small>;
+    const faceToolNumberValidation = () => {
+        if (faceToolNumber === '') {
+            faceToolNumberValid = false;
+            return <small className="text-danger">Please Enter A Valid Face Tool Number</small>;
         }
-        lastNameValid = true;
+        faceToolNumberValid = true;
     };
 
-    const usernameValidation = () => {
-        if (username === '' || username.length > 150) {
-            usernameValid = false;
+    const faceCutDiamValidation = () => {
+        if (faceCutDiam === '') {
+            faceCutDiamValid = false;
             return <div>
-                <small className="text-danger">Please Enter Your Username</small>
+                <small className="text-danger">Please Enter A Valide Face Cut Diameter</small>
                 <br />
             </div>;
         }
-        usernameValid = true;
+        faceCutDiamValid = true;
     };
 
-    const emailValidation = () => {
-        if (email === '') {
-            emailValid = false;
-            return <small className="text-danger">Please Enter A Valid Email</small>;
+    const faceSpindleRPMValidation = () => {
+        if (faceSpindleRPM === '') {
+            faceSpindleRPMValid = false;
+            return <small className="text-danger">Please Enter A Valid RPM</small>;
         }
-        emailValid = true;
+        faceSpindleRPMValid = true;
     };
 
-    const passwordValidation = () => {
-        if (password === '') {
-            passwordValid = false;
+    const faceFeedRateValidation = () => {
+        if (faceFeedRate === '') {
+            faceFeedRateValid = false;
             return <div>
-                <small className="text-danger">Please Enter A Valid Password</small>
+                <small className="text-danger">Please Enter A Valid Feed Rate</small>
                 <br />
             </div>;
         }
-        passwordValid = true;
+        faceFeedRateValid = true;
     };
 
-    const passwordConfirmValidation = () => {
-        if (passwordConfirm === '' || password !== passwordConfirm) {
-            passwordConfirmValid = false;
+    const faceWidthValidation = () => {
+        if (faceWidth === '') {
+            faceWidthValid = false;
+            return <small className="text-danger">Please Enter A Valid Face Width</small>;
+        }
+        faceWidthValid = true;
+    };
+
+    const faceDepthValidation = () => {
+        if (faceDepth === '') {
+            faceDepthValid = false;
+            return <small className="text-danger">Please Enter A Valid Face Depth</small>;
+        }
+        faceDepthValid = true;
+    };
+
+    const faceClearanceValidation = () => {
+        if (faceClearance === '') {
+            faceClearanceValid = false;
             return <div>
-                <small className="text-danger">Please Make Sure Your Passwords Match</small>
+                <small className="text-danger">Please Enter A Valid Face Clearance</small>
+                <br />
             </div>;
         }
-        passwordConfirmValid = true;
+        faceClearanceValid = true;
     };
 
-    const RegisterForm = () => <form>
+    const faceDOCValidation = () => {
+        if (faceDOC === '') {
+            faceDOCValid = false;
+            return <small className="text-danger">Please Enter A Valid Face DOC</small>;
+        }
+        faceDOCValid = true;
+    };
+
+    const facePlungeValidation = () => {
+        if (facePlunge === '') {
+            facePlungeValid = false;
+            return <div>
+                <small className="text-danger">Please Enter A Valid Face Plunge</small>
+                <br />
+            </div>;
+        }
+        facePlungeValid = true;
+    };
+
+    const faceStepOverValidation = () => {
+        if (faceStepOver === '') {
+            faceStepOverValid = false;
+            return <div>
+                <small className="text-danger">Please Enter A Valid Face Step Over</small>
+                <br />
+            </div>;
+        }
+        faceStepOverValid = true;
+    };
+
+
+    const FacingTemplateForm = () => <form>
         <div className="form-group">
-            <label htmlFor="username-input">First Name*</label>
+            <label htmlFor="username-input">Facing Direction</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                value={facingDir}
+                onChange={(e) => setFacingDir(e.target.value)}
             />
-            {firstNameValidation()}
+            {facingDirValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Last Name*</label>
+            <label htmlFor="username-input">Face Tool Number</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={faceToolNumber}
+                onChange={(e) => setFaceToolNumber(e.target.value)}
             />
-            {lastNameValidation()}
+            {faceToolNumberValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Username*</label>
+            <label htmlFor="username-input">Set Face Cut Diameter</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={faceCutDiam}
+                onChange={(e) => setFaceCutDiam(e.target.value)}
             />
-            {usernameValidation()}
-            <small className='text-muted'>
-                150 characters or fewer. Letters, digits and @/_/+/- only
-            </small>
+            {faceCutDiamValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Email*</label>
+            <label htmlFor="username-input">Spindle RPM</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={faceSpindleRPM}
+                onChange={(e) => setFaceSpindleRPM(e.target.value)}
             />
-            {emailValidation()}
+            {faceSpindleRPMValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Password*</label>
+            <label htmlFor="username-input">Feed Rate</label>
             <input 
                 type="password"
                 className="form-control"
                 name="username-input"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={faceFeedRate}
+                onChange={(e) => setFaceFeedRate(e.target.value)}
             />
-            {passwordValidation()}
-            <small id='usernameHelp' className='form-text text-muted'>
-                Use a mix of letters, numbers, and symbols. Password cannot
-                be too similar to your other personal information, nor be a commonly
-                used password, nor be entirely numeric.
-            </small>
+            {faceFeedRateValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Confirm Password*</label>
+            <label htmlFor="username-input">Width</label>
             <input 
                 type="password"
                 className="form-control"
                 name="username-input"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
+                value={faceWidth}
+                onChange={(e) => setFaceWidth(e.target.value)}
             />
-            {passwordConfirmValidation()}
+            {faceWidthValidation()}
+        </div>
+        <div className="form-group">
+            <label htmlFor="username-input">Depth</label>
+            <input 
+                type="password"
+                className="form-control"
+                name="username-input"
+                value={faceDepth}
+                onChange={(e) => setFaceDepth(e.target.value)}
+            />
+            {faceDepthValidation()}
+        </div>
+        <div className="form-group">
+            <label htmlFor="username-input">Clearance</label>
+            <input 
+                type="password"
+                className="form-control"
+                name="username-input"
+                value={faceClearance}
+                onChange={(e) => setFaceClearance(e.target.value)}
+            />
+            {faceClearanceValidation()}
+        </div>
+        <div className="form-group">
+            <label htmlFor="username-input">DOC</label>
+            <input 
+                type="password"
+                className="form-control"
+                name="username-input"
+                value={faceDOC}
+                onChange={(e) => setFaceDOC(e.target.value)}
+            />
+            {faceDOCValidation()}
+        </div>
+        <div className="form-group">
+            <label htmlFor="username-input">Plunge</label>
+            <input 
+                type="password"
+                className="form-control"
+                name="username-input"
+                value={facePlunge}
+                onChange={(e) => setFacePlunge(e.target.value)}
+            />
+            {facePlungeValidation()}
+        </div>
+        <div className="form-group">
+            <label htmlFor="username-input">Step Over</label>
+            <input 
+                type="password"
+                className="form-control"
+                name="username-input"
+                value={faceStepOver}
+                onChange={(e) => setFaceStepOver(e.target.value)}
+            />
+            {faceStepOverValidation()}
         </div>
     </form>;
 
     const handleSubmit = () => {
-        if (firstNameValid && lastNameValid && usernameValid && emailValid && passwordValid && passwordConfirmValid) {
+        if (facingDirValid && faceToolNumberValid && faceCutDiamValid && faceSpindleRPMValid && faceFeedRateValid && faceWidthValid && faceDepthValid && faceClearanceValid && faceDOCValid && facePlungeValid && faceStepOverValid) {
             props.setShow(false);
             resetFormValues();
             props.registerSubmit(
-                firstName,
-                lastName,
-                username,
-                email,
-                password
+                facingDir,
+                faceToolNumber,
+                faceCutDiam,
+                faceSpindleRPM,
+                faceFeedRate,
+                faceWidth,
+                faceDepth,
+                faceClearance,
+                faceDOC,
+                facePlunge,
+                faceStepOver
             );
         }
     };
 
     return <Modal show={props.show} onHide={() => props.setShow(false)} >
-        <Modal.Header closeButton>Register</Modal.Header>
-        <Modal.Body>{RegisterForm()}</Modal.Body>
+        <Modal.Header closeButton>Facing Template</Modal.Header>
+        <Modal.Body>{FacingTemplateForm()}</Modal.Body>
         <Modal.Footer>
             <button
                 className='btn btn-primary btn-lg rounded-pill'
@@ -187,7 +303,7 @@ export default function RegisterFormModal(props) {
             <button
                 className='btn btn-primary btn-lg rounded-pill'
                 onClick={() => handleSubmit()}
-            >Register</button>
+            >Submit</button>
         </Modal.Footer>
     </Modal>;
 }

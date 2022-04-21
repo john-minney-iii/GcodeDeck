@@ -1,98 +1,46 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-export default function RegisterFormModal(props) {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordConfirm, setPasswordConfirm] = useState('');
+export default function spindleCommandForm(props) {
+    const [spindleDirection, setSpindleDirection] = useState('CW');
+    const [spindleRPM, setSpindleRPM] = useState(0);
 
     // Validations 
-    let firstNameValid = false;
-    let lastNameValid = false;
-    let usernameValid = false;
-    let emailValid = false;
-    let passwordValid = false;
-    let passwordConfirmValid = false;
+    let spindleDirectionValid = false;
+    let spindleRPMValid = false;
 
     const resetFormValues = () => {
-        setFirstName('');
-        setLastName('');
-        setUsername('');
-        setEmail('');
-        setPassword('');
-        setPasswordConfirm('');
+        setSpindleDirection('');
+        setSpindleRPM('');
     };
 
-    const firstNameValidation = () => {
-        if (firstName === '') {
-            firstNameValid = false;
-            return <small className="text-danger">Please Enter Your First Name</small>;
+    const spindleDirectionValidation = () => {
+        if (spindleDirection === '') {
+            spindleDirectionValid = false;
+            return <small className="text-danger">Please Enter a Valid Spindle Direction</small>;
         }
-        firstNameValid = true;
+        spindleDirectionValid = true;
     };
 
-    const lastNameValidation = () => {
-        if (lastName === '') {
-            lastNameValid = false;
-            return <small className="text-danger">Please Enter Your Last Name</small>;
+    const spindleRPMValidation = () => {
+        if (spindleRPM === '') {
+            spindleRPMValid = false;
+            return <small className="text-danger">Please Enter A Valid RPM</small>;
         }
-        lastNameValid = true;
+        spindleRPMValid = true;
     };
 
-    const usernameValidation = () => {
-        if (username === '' || username.length > 150) {
-            usernameValid = false;
-            return <div>
-                <small className="text-danger">Please Enter Your Username</small>
-                <br />
-            </div>;
-        }
-        usernameValid = true;
-    };
-
-    const emailValidation = () => {
-        if (email === '') {
-            emailValid = false;
-            return <small className="text-danger">Please Enter A Valid Email</small>;
-        }
-        emailValid = true;
-    };
-
-    const passwordValidation = () => {
-        if (password === '') {
-            passwordValid = false;
-            return <div>
-                <small className="text-danger">Please Enter A Valid Password</small>
-                <br />
-            </div>;
-        }
-        passwordValid = true;
-    };
-
-    const passwordConfirmValidation = () => {
-        if (passwordConfirm === '' || password !== passwordConfirm) {
-            passwordConfirmValid = false;
-            return <div>
-                <small className="text-danger">Please Make Sure Your Passwords Match</small>
-            </div>;
-        }
-        passwordConfirmValid = true;
-    };
-
-    const RegisterForm = () => <form>
+    const SpindleForm = () => <form>
         <div className="form-group">
             <label htmlFor="username-input">First Name*</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                value={spindleDirection}
+                onChange={(e) => setSpindleDirection(e.target.value)}
             />
-            {firstNameValidation()}
+            {spindleDirectionValidation()}
         </div>
         <div className="form-group">
             <label htmlFor="username-input">Last Name*</label>
@@ -100,82 +48,27 @@ export default function RegisterFormModal(props) {
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={spindleRPM}
+                onChange={(e) => setSpindleRPM(e.target.value)}
             />
-            {lastNameValidation()}
-        </div>
-        <div className="form-group">
-            <label htmlFor="username-input">Username*</label>
-            <input 
-                type="text"
-                className="form-control"
-                name="username-input"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            {usernameValidation()}
-            <small className='text-muted'>
-                150 characters or fewer. Letters, digits and @/_/+/- only
-            </small>
-        </div>
-        <div className="form-group">
-            <label htmlFor="username-input">Email*</label>
-            <input 
-                type="text"
-                className="form-control"
-                name="username-input"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            {emailValidation()}
-        </div>
-        <div className="form-group">
-            <label htmlFor="username-input">Password*</label>
-            <input 
-                type="password"
-                className="form-control"
-                name="username-input"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            {passwordValidation()}
-            <small id='usernameHelp' className='form-text text-muted'>
-                Use a mix of letters, numbers, and symbols. Password cannot
-                be too similar to your other personal information, nor be a commonly
-                used password, nor be entirely numeric.
-            </small>
-        </div>
-        <div className="form-group">
-            <label htmlFor="username-input">Confirm Password*</label>
-            <input 
-                type="password"
-                className="form-control"
-                name="username-input"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
-            />
-            {passwordConfirmValidation()}
+            {spindleRPMValidation()}
         </div>
     </form>;
 
     const handleSubmit = () => {
-        if (firstNameValid && lastNameValid && usernameValid && emailValid && passwordValid && passwordConfirmValid) {
+        if (spindleDirection && spindleRPM) {
             props.setShow(false);
             resetFormValues();
             props.registerSubmit(
-                firstName,
-                lastName,
-                username,
-                email,
-                password
+                spindleDirection,
+                spindleDirection
             );
         }
     };
 
     return <Modal show={props.show} onHide={() => props.setShow(false)} >
         <Modal.Header closeButton>Register</Modal.Header>
-        <Modal.Body>{RegisterForm()}</Modal.Body>
+        <Modal.Body>{SpindleForm()}</Modal.Body>
         <Modal.Footer>
             <button
                 className='btn btn-primary btn-lg rounded-pill'

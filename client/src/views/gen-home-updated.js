@@ -5,6 +5,11 @@ import axios from "axios";
 
 // Components
 import DrillingFormModal from "../components/gen-home-modals/drilling-modal";
+import spindleCommandForm from "../components/gen-home-modals/spindle-form-modal";
+import toolChangeForm from "../components/gen-home-modals/tool-change-modal";
+import rapidForm from "../components/gen-home-modals/rapid-movement-modal";
+import linearForm from "../components/gen-home-modals/linear-movement-modal";
+import facingTemplateForm from "../components/gen-home-modals/facing-template-modal";
 
 
 export default function GenHome(props) {
@@ -19,42 +24,6 @@ export default function GenHome(props) {
     const [drillModalShow, setDrillModalShow] = useState(false);
     const [toolChangeModalShow, setToolChangeModalShow] = useState(false);
     const [facingTemplateModalShow, setFacingTemplateModalShow] = useState(false);
-
-    // States for tool change
-    const [toolNumber, setToolNumber] = useState(0);
-    const [cutterCompensation, setCutterCompensation] = useState('G40');
-    const [toolNotes, setToolNotes] = useState('');
-
-    // States for spindle command
-    const [spindleDirection, setSpindleDirection] = useState('CW');
-    const [spindleRPM, setSpindleRPM] = useState(0);
-
-    // States for drilling
-
-    // States for rapid movement
-    const [rapidChoice, setRapidChoice] = useState('X');
-    const [rapidFeedRate, setRapidFeedRate] = useState(0);
-    const [rapidPos, setRapidPos] = useState(0);
-    const [rapidPos2, setRapidPos2] = useState(0);
-
-    // States for linear movement
-    const [linearChoice, setLinearChoice] = useState('X');
-    const [linearFeedRate, setLinearFeedRate] = useState(0);
-    const [linearPos, setLinearPos] = useState(0);
-    const [linearPos2, setLinearPos2] = useState(0);
-
-    // States for Facing
-    const [facingDir, setFacingDir] = useState(0);
-    const [faceToolNumber, setFaceToolNumber] = useState(0);
-    const [faceCutDiam, setCutDiam] = useState(0);
-    const [faceSpindleRPM, setfaceSpindleRPM] = useState(0);
-    const [faceFeedRate, setFaceFeedRate] = useState(0);
-    const [faceWidth, setFaceWidth] = useState(0);
-    const [faceDepth, setFaceDepth] = useState(0);
-    const [faceClearance, setFaceClearance] = useState(0);
-    const [faceDOC, setFaceDOC] = useState(0);
-    const [facePlunge, setFacePlunge] = useState(0);
-    const [faceStepOver, setFaceStepOver] = useState(0);
 
     // Used for server posts
     const [baseUrl, setBaseUrl] = useState(
@@ -144,7 +113,7 @@ export default function GenHome(props) {
 
     // Form Submit Functions --------------------------------------------- 
 
-    const toolChangeFormSubmit = () => {
+    const toolChangeFormSubmit = (toolNumber, cutterCompensation, toolNotes) => {
         axios.post(baseUrl + '/api/v1/gcode/toolChange/', {
             'toolNumber': toolNumber,
             'cutterCompensation': cutterCompensation,
@@ -155,7 +124,7 @@ export default function GenHome(props) {
         });
     };
 
-    const spindleCommandFormSubmit = () => {
+    const spindleCommandFormSubmit = (spindleDirection, spindleRPM) => {
         axios.post(baseUrl + '/api/v1/gcode/spindleCommand/', {
             'directionOfRotation': spindleDirection,
             'spindleRpm': spindleRPM
@@ -188,7 +157,7 @@ export default function GenHome(props) {
         }
     };
 
-    const rapidFormSubmit = async () => {
+    const rapidFormSubmit = async (rapidFeedRate, rapidChoice, rapidPos, rapidPos2) => {
         axios.post(baseUrl + '/api/v1/gcode/rapidMovement/', {
             'feedrate': rapidFeedRate,
             'axis': rapidChoice,
@@ -200,7 +169,7 @@ export default function GenHome(props) {
         });
     };
 
-    const linearFormSubmit = async () => {
+    const linearFormSubmit = async (linearFeedRate, linearChoice, linearPos, linearPos2) => {
         axios.post(baseUrl + '/api/v1/gcode/linearMovement/', {
             'feedrate': linearFeedRate,
             'axis': linearChoice,
@@ -212,7 +181,7 @@ export default function GenHome(props) {
         })
     };
 
-    const facingTemplateFormSubmit = () => {
+    const facingTemplateFormSubmit = (facingDir, faceToolNumber, faceCutDiam, faceSpindleRPM, faceFeedRate, faceWidth, faceDepth, faceClearance, faceDOC, facePlunge, faceStepOver) => {
         axios.post(baseUrl + '/api/v1/gcode/facingTemplate/', {
             'faceDir': facingDir,
             'toolNumber': faceToolNumber,
@@ -230,154 +199,6 @@ export default function GenHome(props) {
                 addGcodeBlock(res.data)
         });
     };
-
-    // Forms ---------------------------------------------------------------
-
-    const toolChangeForm = () => <form>
-        <div className="form-group">
-            <label htmlFor="Tool Number">Tool Number:</label>
-            <input type="" className="" id="" placeholder="Tool pocket Number" onChange={(e) => setToolNumber(e.target.value)}></input>
-            <label htmlFor="Tool Number">Cutter Compensation:</label>
-            <select name="Cutter Compensation" id="axis" className="form-control" onChange={(e) => setCutterCompensation(e.target.value)}>
-                <option value="G40">None (G40)</option>
-                <option value="G41">Left (G41)</option>
-                <option value="G42">Right (G42)</option>
-            </select>
-            <label htmlFor="Notes">Notes:</label>
-            <input type="" className="" id="" placeholder="Notes about tool" onChange={(e) => setToolNotes(e.target.value)}></input>
-        </div>
-    </form>;
-
-    const spindleCommandForm = () => <form>
-        <div className="form-group">
-            <label htmlFor="axisOfMovement">Direction of Rotation: </label>
-            <select name="Axis" id="axis" className="form-control" onChange={(e) => setSpindleDirection(e.target.value)} >
-                <option value="CW">CW (M03)</option>
-                <option value="CCW">CCW (M04)</option>
-            </select>
-            <label htmlFor="spindleSpeed">Spindle RPM:</label>
-            <input type="" className="form-control" id="" onChange={(e) => setSpindleRPM(e.target.value)}></input>
-        </div>
-    </form>;
-
-
-
-    const rapidForm = () => <form>
-        <div className="form-group">
-            <label htmlFor="axisOfMovement">Axis of Movement: </label>
-            <select name="Axis" id="axis" className="form-control" onChange={(e) => setRapidChoice(e.target.value)}>
-                <option value="X">X</option>
-                <option value="Y">Y</option>
-                <option value="Z">Z</option>
-                <option value="XY">XY</option>
-            </select>
-            {rapidFormHelper()}
-        </div>
-    </form>;
-
-    const rapidFormHelper = () => {
-        let posInput;
-        if (rapidChoice === 'X')
-            posInput = <div>
-                <label htmlfor='x-pos-input'>X:</label>
-                <input className='form-control' name='x-pos-input' onChange={(e) => setRapidPos(e.target.value)} />
-            </div>;
-        else if (rapidChoice === 'Y')
-            posInput = <div>
-                <label htmlfor='y-pos-input'>Y:</label>
-                <input className='form-control' name='y-pos-input' onChange={(e) => setRapidPos(e.target.value)} />
-            </div>;
-        else if (rapidChoice === 'Z')
-            posInput = <div>
-                <label htmlfor='z-pos-input'>Z:</label>
-                <input className='form-control' name='z-pos-input' onChange={(e) => setRapidPos(e.target.value)} />
-            </div>;
-        else if (rapidChoice === 'XY')
-            posInput = <div>
-                <label htmlfor='x-pos-input'>X:</label>
-                <input className='form-control' name='x-pos-input' onChange={(e) => setRapidPos(e.target.value)} />
-                <label htmlfor='y-pos-input'>Y:</label>
-                <input className='form-control' name='y-pos-input' onChange={(e) => setRapidPos2(e.target.value)} />
-            </div>;
-        return <div>
-            {posInput}
-        </div>;
-    };
-
-    const linearForm = () => <form>
-        <div className="form-group">
-            <label htmlFor="axisOfMovement">Axis of Movement: </label>
-            <select name="Axis" id="axis" className="form-control" onChange={(e) => setLinearChoice(e.target.value)}>
-                <option value="X">X</option>
-                <option value="Y">Y</option>
-                <option value="Z">Z</option>
-                <option value="XY">XY</option>
-            </select>
-            {linearFormHelper()}
-        </div>
-    </form>;
-
-    const linearFormHelper = () => {
-        let posInput;
-        if (linearChoice === 'X')
-            posInput = <div>
-                <label htmlfor='x-pos-input'>X:</label>
-                <input className='form-control' name='x-pos-input' onChange={(e) => setLinearPos(e.target.value)} />
-            </div>;
-        else if (linearChoice === 'Y')
-            posInput = <div>
-                <label htmlfor='y-pos-input'>Y:</label>
-                <input className='form-control' name='y-pos-input' onChange={(e) => setLinearPos(e.target.value)} />
-            </div>;
-        else if (linearChoice === 'Z')
-            posInput = <div>
-                <label htmlfor='z-pos-input'>Z:</label>
-                <input className='form-control' name='z-pos-input' onChange={(e) => setLinearPos(e.target.value)} />
-            </div>;
-        else if (linearChoice === 'XY')
-            posInput = <div>
-                <label htmlfor='x-pos-input'>X:</label>
-                <input className='form-control' name='x-pos-input' onChange={(e) => setLinearPos(e.target.value)} />
-                <label htmlfor='y-pos-input'>Y:</label>
-                <input className='form-control' name='y-pos-input' onChange={(e) => setLinearPos2(e.target.value)} />
-            </div>;
-        return <div>
-            <label htmlfor='feedrate-input'>Feedrate:</label>
-            <input type='text' className='form-control' name='feedrate-input' onChange={(e) => setLinearFeedRate(e.target.value)} />
-            {posInput}
-        </div>;
-    };
-
-    const facingTemplateForm = () => 
-    <form>
-        <div className="form-group">
-        <label htmlFor="facingDir">Facing Direction: </label>
-            <select name="direction" id="d" className="form-control" onChange={(e) => setFacingDir(e.target.value)}>
-                <option value="Negative">Negative</option>
-                <option value="Positive">Positive</option>
-            </select>
-            <label htmlFor="ToolNumber">Tool Number:</label>
-                <input type="" className="form-control" id="" placeholder="Tool number for facing" onChange={(e) => setFaceToolNumber(e.target.value)}></input>
-            <label htmlFor="CutterDiameter">Cutter Diameter:</label>
-                <input type="" className="form-control" id="" placeholder="Cutter Diameter for facing" onChange={(e) => setCutDiam(e.target.value)}></input>
-            <label htmlFor="spindleSpeed">Spindle RPM:</label>
-                <input type="" className="form-control" id="" placeholder="Spindle RPM for facing" onChange={(e) => setfaceSpindleRPM(e.target.value)}></input>
-            <label htmlFor="FeedRate">Feed Rate:</label>
-                <input type="" className="form-control" id="" placeholder="Feed Rate for Facing" onChange={(e) => setFaceFeedRate(e.target.value)}></input>
-            <label htmlFor="Width">Width:</label>
-                <input type="" className="form-control" id="" placeholder="Width (along x) for facing" onChange={(e) => setFaceWidth(e.target.value)}></input>
-            <label htmlFor="Depth">Depth:</label>
-                <input type="" className="form-control" id="" placeholder="Depth (along y) for facing" onChange={(e) => setFaceDepth(e.target.value)}></input>
-            <label htmlFor="Clearance">Clearance: </label>
-                <input type="" className="form-control" id="" placeholder="Z clearance for facing (top of part + clearance)" onChange={(e) => setFaceClearance(e.target.value)}></input>
-            <label htmlFor="DOC">DOC: </label>
-                <input type="" className="form-control" id="" placeholder="Depth of cut (how much are you taking off the top?)" onChange={(e) => setFaceDOC(e.target.value)}></input>
-            <label htmlFor="PlungeRate">Plunge Rate:</label>
-                <input type="" className="form-control" id="" placeholder="Feed Rate for Z moves" onChange={(e) => setFacePlunge(e.target.value)}></input>
-            <label htmlFor="Stepover">Stepover:</label>
-                <input type="" className="form-control" id="" placeholder="Amount tool moves over each pass until facing is completed" onChange={(e) => setFaceStepOver(e.target.value)}></input>
-        </div>
-    </form>;
 
     // Main Return ---------------------------------------------------------------------------------------------------------------------------
     return (

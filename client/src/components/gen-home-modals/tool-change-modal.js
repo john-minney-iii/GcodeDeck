@@ -1,181 +1,100 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-export default function RegisterFormModal(props) {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordConfirm, setPasswordConfirm] = useState('');
+export default function toolChangeForm(props) {
+    const [toolNumber, setToolNumber] = useState(0);
+    const [cutterCompensation, setCutterCompensation] = useState('G40');
+    const [toolNotes, setToolNotes] = useState('');
 
     // Validations 
-    let firstNameValid = false;
-    let lastNameValid = false;
-    let usernameValid = false;
-    let emailValid = false;
-    let passwordValid = false;
-    let passwordConfirmValid = false;
+    let toolNumberValid = false;
+    let cutterCompensationValid = false;
+    let toolNotesValid = false;
 
     const resetFormValues = () => {
-        setFirstName('');
-        setLastName('');
-        setUsername('');
-        setEmail('');
-        setPassword('');
-        setPasswordConfirm('');
+        setToolNumber('');
+        setCutterCompensation('');
+        setToolNotes('');
     };
 
-    const firstNameValidation = () => {
-        if (firstName === '') {
-            firstNameValid = false;
-            return <small className="text-danger">Please Enter Your First Name</small>;
+    const toolNumberValidation = () => {
+        if (toolNumber === '') {
+            toolNumberValid = false;
+            return <small className="text-danger">Please Enter a Valid Tool Number</small>;
         }
-        firstNameValid = true;
+        toolNumberValid = true;
     };
 
-    const lastNameValidation = () => {
-        if (lastName === '') {
+    const cutterCompensationValidation = () => {
+        if (cutterCompensation === '') {
             lastNameValid = false;
-            return <small className="text-danger">Please Enter Your Last Name</small>;
+            return <small className="text-danger">Please Enter A Valid Compensation</small>;
         }
-        lastNameValid = true;
+        cutterCompensationValid = true;
     };
 
-    const usernameValidation = () => {
-        if (username === '' || username.length > 150) {
-            usernameValid = false;
+    const toolNotesValidation = () => {
+        if (toolNotes === '') {
+            toolNotesValid = false;
             return <div>
-                <small className="text-danger">Please Enter Your Username</small>
+                <small className="text-danger">Please Enter Some Note</small>
                 <br />
             </div>;
         }
-        usernameValid = true;
+        toolNotesValid = true;
     };
 
-    const emailValidation = () => {
-        if (email === '') {
-            emailValid = false;
-            return <small className="text-danger">Please Enter A Valid Email</small>;
-        }
-        emailValid = true;
-    };
-
-    const passwordValidation = () => {
-        if (password === '') {
-            passwordValid = false;
-            return <div>
-                <small className="text-danger">Please Enter A Valid Password</small>
-                <br />
-            </div>;
-        }
-        passwordValid = true;
-    };
-
-    const passwordConfirmValidation = () => {
-        if (passwordConfirm === '' || password !== passwordConfirm) {
-            passwordConfirmValid = false;
-            return <div>
-                <small className="text-danger">Please Make Sure Your Passwords Match</small>
-            </div>;
-        }
-        passwordConfirmValid = true;
-    };
-
-    const RegisterForm = () => <form>
+    const ToolChangeForm = () => <form>
         <div className="form-group">
-            <label htmlFor="username-input">First Name*</label>
+            <label htmlFor="username-input">Tool number</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                value={toolNumber}
+                onChange={(e) => setToolNumber(e.target.value)}
             />
-            {firstNameValidation()}
+            {toolNumberValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Last Name*</label>
+            <label htmlFor="username-input">Cutter Compensation</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={cutterCompensation}
+                onChange={(e) => setCutterCompensation(e.target.value)}
             />
-            {lastNameValidation()}
+            {cutterCompensationValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Username*</label>
+            <label htmlFor="username-input">Tool Notes</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={toolNotes}
+                onChange={(e) => setToolNotes(e.target.value)}
             />
-            {usernameValidation()}
-            <small className='text-muted'>
-                150 characters or fewer. Letters, digits and @/_/+/- only
-            </small>
-        </div>
-        <div className="form-group">
-            <label htmlFor="username-input">Email*</label>
-            <input 
-                type="text"
-                className="form-control"
-                name="username-input"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            {emailValidation()}
-        </div>
-        <div className="form-group">
-            <label htmlFor="username-input">Password*</label>
-            <input 
-                type="password"
-                className="form-control"
-                name="username-input"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            {passwordValidation()}
-            <small id='usernameHelp' className='form-text text-muted'>
-                Use a mix of letters, numbers, and symbols. Password cannot
-                be too similar to your other personal information, nor be a commonly
-                used password, nor be entirely numeric.
-            </small>
-        </div>
-        <div className="form-group">
-            <label htmlFor="username-input">Confirm Password*</label>
-            <input 
-                type="password"
-                className="form-control"
-                name="username-input"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
-            />
-            {passwordConfirmValidation()}
+            {toolNotesValidation()}
         </div>
     </form>;
 
     const handleSubmit = () => {
-        if (firstNameValid && lastNameValid && usernameValid && emailValid && passwordValid && passwordConfirmValid) {
+        if (toolNumber && cutterCompensation && toolNotes) {
             props.setShow(false);
             resetFormValues();
             props.registerSubmit(
-                firstName,
-                lastName,
-                username,
-                email,
-                password
+                toolNumber,
+                cutterCompensation,
+                toolNotes
             );
         }
     };
 
     return <Modal show={props.show} onHide={() => props.setShow(false)} >
-        <Modal.Header closeButton>Register</Modal.Header>
-        <Modal.Body>{RegisterForm()}</Modal.Body>
+        <Modal.Header closeButton>Tool Change</Modal.Header>
+        <Modal.Body>{ToolChangeForm()}</Modal.Body>
         <Modal.Footer>
             <button
                 className='btn btn-primary btn-lg rounded-pill'
@@ -187,7 +106,7 @@ export default function RegisterFormModal(props) {
             <button
                 className='btn btn-primary btn-lg rounded-pill'
                 onClick={() => handleSubmit()}
-            >Register</button>
+            >Submit</button>
         </Modal.Footer>
     </Modal>;
 }

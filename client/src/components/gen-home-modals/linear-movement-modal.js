@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-export default function LinearFormModal(props) {
+export default function linearForm(props) {
     const [linearChoice, setLinearChoice] = useState('X');
     const [linearFeedRate, setLinearFeedRate] = useState(0);
     const [linearPos, setLinearPos] = useState(0);
@@ -57,15 +57,14 @@ export default function LinearFormModal(props) {
 
     const LinearForm = () => <form>
         <div className="form-group">
-            <label htmlFor="username-input">choice</label>
-            <input 
-                type="drop-down"
-                className="form-control"
-                name="username-input"
-                value={linearChoice}
-                onChange={(e) => setLinearChoice(e.target.value)}
-            />
-            {linearChoiceValidation()}
+            <label htmlFor="axisOfMovement">Axis of Movement: </label>
+            <select name="Axis" id="axis" className="form-control" onChange={(e) => setLinearChoice(e.target.value)}>
+                <option value="X">X</option>
+                <option value="Y">Y</option>
+                <option value="Z">Z</option>
+                <option value="XY">XY</option>
+            </select>
+            {linearFormHelper()}
         </div>
         <div className="form-group">
             <label htmlFor="username-input">Linear Feed Rate</label>
@@ -104,6 +103,37 @@ export default function LinearFormModal(props) {
             {linearPos2Validation()}
         </div>
     </form>;
+
+const linearFormHelper = () => {
+    let posInput;
+    if (linearChoice === 'X')
+        posInput = <div>
+            <label htmlfor='x-pos-input'>X:</label>
+            <input className='form-control' name='x-pos-input' onChange={(e) => setLinearPos(e.target.value)} />
+        </div>;
+    else if (linearChoice === 'Y')
+        posInput = <div>
+            <label htmlfor='y-pos-input'>Y:</label>
+            <input className='form-control' name='y-pos-input' onChange={(e) => setLinearPos(e.target.value)} />
+        </div>;
+    else if (linearChoice === 'Z')
+        posInput = <div>
+            <label htmlfor='z-pos-input'>Z:</label>
+            <input className='form-control' name='z-pos-input' onChange={(e) => setLinearPos(e.target.value)} />
+        </div>;
+    else if (linearChoice === 'XY')
+        posInput = <div>
+            <label htmlfor='x-pos-input'>X:</label>
+            <input className='form-control' name='x-pos-input' onChange={(e) => setLinearPos(e.target.value)} />
+            <label htmlfor='y-pos-input'>Y:</label>
+            <input className='form-control' name='y-pos-input' onChange={(e) => setLinearPos2(e.target.value)} />
+        </div>;
+    return <div>
+        <label htmlfor='feedrate-input'>Feedrate:</label>
+        <input type='text' className='form-control' name='feedrate-input' onChange={(e) => setLinearFeedRate(e.target.value)} />
+        {posInput}
+    </div>;
+};
 
     const handleSubmit = () => {
         if (linearChoice && linearFeedRate && linearPos && linearPos2) {

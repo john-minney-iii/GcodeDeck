@@ -151,18 +151,5 @@ const linearFormHelper = () => {
     return <Modal show={props.show} onHide={() => props.setShow(false)} >
         <Modal.Header closeButton>Linear Movement</Modal.Header>
         <Modal.Body>{LinearForm()}</Modal.Body>
-        <Modal.Footer>
-            <button
-                className='btn btn-primary btn-lg rounded-pill'
-                onClick={() => {
-                    props.setShow(false);
-                    resetFormValues();
-                }}
-            >Cancel</button>
-            <button
-                className='btn btn-primary btn-lg rounded-pill'
-                onClick={() => handleSubmit()}
-            >Submit</button>
-        </Modal.Footer>
     </Modal>;
 }

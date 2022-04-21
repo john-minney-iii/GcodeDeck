@@ -107,57 +107,12 @@ export default function Community(props) {
                     </div>
                 </div>
             </div>
-            <Modal show={reportModalShow} onHide={() => handleModal('report')}>
-                <Modal.Header closeButton>Report a Bug</Modal.Header>
-                <Modal.Body>{ReportABugForm()}</Modal.Body>
-                <Modal.Footer>
-                    <button 
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => handleModal('report')}
-                    >Cancel</button>
-                    <button 
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => {
-                            handleModal('report');
-                            submitBugReport();
-                        }}
-                    >Submit</button>
-                </Modal.Footer>
-            </Modal>
-            <Modal show={systemModalShow} onHide={() => handleModal('system')}>
-                <Modal.Header closeButton>System Request</Modal.Header>
-                <Modal.Body>{SystemRequestForm('Got an idea for a feature? Let us know!')}</Modal.Body>
-                <Modal.Footer>
-                    <button 
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => handleModal('system')}
-                    >Cancel</button>
-                    <button 
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => {
-                            handleModal('system');
-                            submitSystemRequest();
-                        }}
-                    >Submit</button>
-                </Modal.Footer>
-            </Modal>
-            <Modal show={contactModalShow} onHide={() => handleModal('contact')}>
-                <Modal.Header closeButton>Contact Us</Modal.Header>
-                <Modal.Body>{ContactRequestForms('Send us a message!')}</Modal.Body>
-                <Modal.Footer>
-                    <button 
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => handleModal('contact')}
-                    >Cancel</button>
-                    <button 
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => {
-                            handleModal('contact');
-                            submitContactRequest();
-                        }}
-                    >Submit</button>
-                </Modal.Footer>
-            </Modal>
+            <ReportABugForm show={reportModalShow} onHide={() => handleModal('report')}>
+            </ReportABugForm>
+            <SystemRequestForm show={systemModalShow} onHide={() => handleModal('system')}>
+            </SystemRequestForm>
+            <ContactRequestForms show={contactModalShow} onHide={() => handleModal('contact')}>
+            </ContactRequestForms>
         </div>
     </div>
 

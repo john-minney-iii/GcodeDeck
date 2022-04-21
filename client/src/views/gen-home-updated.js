@@ -302,13 +302,7 @@ export default function GenHome(props) {
                 </div>
             </div>
 
-            <Modal show={linearModalShow} onHide={() => handleModal('linearModal')}>
-                <Modal.Header closeButton>
-                    Linear Movement
-                </Modal.Header>
-                <Modal.Body>
-                    {LinearForm()}
-                </Modal.Body>
+            <LinearForm show={linearModalShow} onHide={() => handleModal('linearModal')}>
                 <Modal.Footer>
                     <button
                         className='btn btn-primary btn-lg rounded-pill'
@@ -322,15 +316,9 @@ export default function GenHome(props) {
                         }}
                     >Submit</button>
                 </Modal.Footer>
-            </Modal>
+            </LinearForm>
 
-            <Modal show={toolChangeModalShow} onHide={() => handleModal('toolChangeModal')}>
-                <Modal.Header closeButton>
-                    Tool Change
-                </Modal.Header>
-                <Modal.Body>
-                    {ToolChangeForm()}
-                </Modal.Body>
+            <ToolChangeForm show={toolChangeModalShow} onHide={() => handleModal('toolChangeModal')}>
                 <Modal.Footer>
                     <button
                         className='btn btn-primary btn-lg rounded-pill'
@@ -344,15 +332,9 @@ export default function GenHome(props) {
                         }}
                     >Submit</button>
                 </Modal.Footer>
-            </Modal>
+            </ToolChangeForm>
 
-            <Modal show={rapidModalShow} onHide={() => handleModal('rapidModal')}>
-                <Modal.Header closeButton>
-                    Rapid Movement
-                </Modal.Header>
-                <Modal.Body>
-                    {RapidForm()}
-                </Modal.Body>
+            <RapidForm show={rapidModalShow} onHide={() => handleModal('rapidModal')}>
                 <Modal.Footer>
                     <button
                         className='btn btn-primary btn-lg rounded-pill'
@@ -366,15 +348,9 @@ export default function GenHome(props) {
                         }}
                     >Submit</button>
                 </Modal.Footer>
-            </Modal>
+            </RapidForm>
 
-            <Modal show={facingTemplateModalShow} onHide={() => handleModal('facingTemplateModal')}>
-                <Modal.Header closeButton>
-                    Facing Template
-                </Modal.Header>
-                <Modal.Body>
-                </Modal.Body>
-                {FacingTemplateForm()}
+            <FacingTemplateForm show={facingTemplateModalShow} onHide={() => handleModal('facingTemplateModal')}>
                 <Modal.Footer>
                     <button
                         className='btn btn-primary btn-lg rounded-pill'
@@ -388,15 +364,9 @@ export default function GenHome(props) {
                         }}
                     >Submit</button>
                 </Modal.Footer>
-            </Modal>
+            </FacingTemplateForm>
 
-            <Modal show={drillModalShow} onHide={() => handleModal('drillModal')}>
-                <Modal.Header closeButton>
-                    Peck Drilling
-                </Modal.Header>
-                <Modal.Body>
-                </Modal.Body>
-                {DrillingFormModal()}
+            <DrillingFormModal show={drillModalShow} onHide={() => handleModal('drillModal')}>
                 <Modal.Footer>
                     <button
                         className='btn btn-primary btn-lg rounded-pill'
@@ -410,15 +380,9 @@ export default function GenHome(props) {
                         }}
                     >Submit</button>
                 </Modal.Footer>
-            </Modal>
+            </DrillingFormModal>
 
-            <Modal show={spindleModalShow} onHide={() => handleModal('spindleModal')}>
-                <Modal.Header closeButton>
-                    Spindle Command
-                </Modal.Header>
-                <Modal.Body>
-                    {SpindleCommandForm()}
-                </Modal.Body>
+            <SpindleCommandForm show={spindleModalShow} onHide={() => handleModal('spindleModal')}>
                 <Modal.Footer>
                     <button
                         className='btn btn-primary btn-lg rounded-pill'
@@ -432,7 +396,7 @@ export default function GenHome(props) {
                         }}
                     >Submit</button>
                 </Modal.Footer>
-            </Modal>
+            </SpindleCommandForm>
         </div>
     );
 

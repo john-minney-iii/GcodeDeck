@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../components/navbar';
+import HeadshotShannon from "../assets/img/HeadshotShannon.jpg";
+import "../assets/css/aboutus.css"
 
 export default class AboutUs extends Component {
 
@@ -30,13 +32,13 @@ constructor(props) {
             <h3> Meet our developers! </h3>
             <div className="col">
               <div className="card">
-                <img className="card-img-top" src="../assets/img/hero-image.webp" alt="Card image cap"></img>
+                <img className="card-img-top" src={HeadshotShannon} alt="Card image cap"></img>
                 <div className="card-body">
                   <h5 className="card-title">Shannon Daly</h5>
-                  <p className="card-text">a whole shitton of fucking lots of text mate</p>
+                  <p className="card-text">Front end developer, project documenter, not a whole lot else</p>
                 </div>
                 <div className="card-body">
-                  <a href="www.linkedin.com/in/shannon-daly-a0b111237">Linkedin</a>
+                  <a href="https://www.linkedin.com/in/shannon-daly-a0b111237" target="_blank">Linkedin</a>
                 </div>
               </div>
 
@@ -46,7 +48,7 @@ constructor(props) {
                 <img className="card-img-top" src="../assets/img/hero-image.webp" alt="Card image cap"></img>
                 <div className="card-body">
                   <h5 className="card-title">John Minney III</h5>
-                  <p className="card-text">Some text</p>
+                  <p className="card-text">Lead Developer, full stack</p>
                 </div>
                 <div className="card-body">
                   <a href="">Linkedin</a>
@@ -59,7 +61,7 @@ constructor(props) {
                 <img className="card-img-top" src="../assets/img/hero-image.webp" alt="Card image cap"></img>
                 <div className="card-body">
                   <h5 className="card-title">Riley Peterson</h5>
-                  <p className="card-text">Some text</p>
+                  <p className="card-text">Project Manager, CNC expert, resident machinist</p>
                 </div>
                 <div className="card-body">
                   <a href="">Linkedin</a>

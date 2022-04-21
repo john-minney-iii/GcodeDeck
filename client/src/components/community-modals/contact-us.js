@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-export default function ContactUsFormModal(props) {
+export default function ContactRequestForms(props) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');

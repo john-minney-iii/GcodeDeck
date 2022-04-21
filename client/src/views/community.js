@@ -3,15 +3,19 @@ import Navbar from "../components/navbar";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 import '../assets/css/community.css';
+import ContactRequestForms from "../components/community-modals/contact-us";
+import ReportABugForm from "../components/community-modals/report-bug";
+import SystemRequestForm from "../components/community-modals/system-request";
+
 
 export default function Community(props) {
     const [reportModalShow, setReportModalShow] = useState(false);
     const [systemModalShow, setSystemModalShow] = useState(false);
     const [contactModalShow, setContactModalShow] = useState(false);
-    // States for forms
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
+    // // States for forms
+    // const [username, setUsername] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [message, setMessage] = useState('');
 
     // Used for server posts
     const [baseUrl, setBaseUrl] = useState(
@@ -80,75 +84,75 @@ export default function Community(props) {
     };
 
 
-    const ContactRequestForms = (msg) => <form>
-        <small id='usernameHelp' className='form-text text-muted'>{msg}</small>
-        <div className='form-group'>
-            <label htmlFor='usernameInput'>Username</label>
-            <input 
-                type='text' 
-                className='form-control' 
-                id='usernameInput'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-        </div>
-        <div className='form-group'>
-            <label htmlFor='emailInput'>Email</label>
-            <input 
-                type='email' 
-                className='form-control' 
-                id='emailInput' 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-        </div>
-        <div className='form-group'>
-            <label htmlFor='messageInput'>Message</label>
-            <input 
-                type='textarea' 
-                className='form-control' 
-                id='messageInput' 
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                height={200}
-            />
-        </div>
-    </form>
+    // const ContactRequestForms = (msg) => <form>
+    //     <small id='usernameHelp' className='form-text text-muted'>{msg}</small>
+    //     <div className='form-group'>
+    //         <label htmlFor='usernameInput'>Username</label>
+    //         <input 
+    //             type='text' 
+    //             className='form-control' 
+    //             id='usernameInput'
+    //             value={username}
+    //             onChange={(e) => setUsername(e.target.value)}
+    //         />
+    //     </div>
+    //     <div className='form-group'>
+    //         <label htmlFor='emailInput'>Email</label>
+    //         <input 
+    //             type='email' 
+    //             className='form-control' 
+    //             id='emailInput' 
+    //             value={email}
+    //             onChange={(e) => setEmail(e.target.value)}
+    //         />
+    //     </div>
+    //     <div className='form-group'>
+    //         <label htmlFor='messageInput'>Message</label>
+    //         <input 
+    //             type='textarea' 
+    //             className='form-control' 
+    //             id='messageInput' 
+    //             value={message}
+    //             onChange={(e) => setMessage(e.target.value)}
+    //             height={200}
+    //         />
+    //     </div>
+    // </form>
 
-    const ReportABugForm = () => <form>
-        <small id='usernameHelp' className='form-text text-muted'>Report a Bug</small>
-        <div className='form-group'>
-            <label htmlFor='usernameInput'>Username</label>
-            <input 
-                type='text' 
-                className='form-control' 
-                id='usernameInput'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-        </div>
-        <div className='form-group'>
-            <label htmlFor='emailInput'>Email</label>
-            <input 
-                type='email' 
-                className='form-control' 
-                id='emailInput' 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-        </div>
-        <div className='form-group'>
-            <label htmlFor='messageInput'>Message</label>
-            <input 
-                type='textarea' 
-                className='form-control' 
-                id='messageInput' 
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                height={200}
-            />
-        </div>
-    </form>
+    // const ReportABugForm = () => <form>
+    //     <small id='usernameHelp' className='form-text text-muted'>Report a Bug</small>
+    //     <div className='form-group'>
+    //         <label htmlFor='usernameInput'>Username</label>
+    //         <input 
+    //             type='text' 
+    //             className='form-control' 
+    //             id='usernameInput'
+    //             value={username}
+    //             onChange={(e) => setUsername(e.target.value)}
+    //         />
+    //     </div>
+    //     <div className='form-group'>
+    //         <label htmlFor='emailInput'>Email</label>
+    //         <input 
+    //             type='email' 
+    //             className='form-control' 
+    //             id='emailInput' 
+    //             value={email}
+    //             onChange={(e) => setEmail(e.target.value)}
+    //         />
+    //     </div>
+    //     <div className='form-group'>
+    //         <label htmlFor='messageInput'>Message</label>
+    //         <input 
+    //             type='textarea' 
+    //             className='form-control' 
+    //             id='messageInput' 
+    //             value={message}
+    //             onChange={(e) => setMessage(e.target.value)}
+    //             height={200}
+    //         />
+    //     </div>
+    // </form>
 
     return <div className='community-view'>
         <Navbar authenticated={props.authenticated} changeView={props.changeView} />
@@ -200,7 +204,7 @@ export default function Community(props) {
             </Modal>
             <Modal show={systemModalShow} onHide={() => handleModal('system')}>
                 <Modal.Header closeButton>System Request</Modal.Header>
-                <Modal.Body>{ContactRequestForms('Got an idea for a feature? Let us know!')}</Modal.Body>
+                <Modal.Body>{SystemRequestForm('Got an idea for a feature? Let us know!')}</Modal.Body>
                 <Modal.Footer>
                     <button 
                         className='btn btn-primary btn-lg rounded-pill'

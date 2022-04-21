@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-export default function RegisterFormModal(props) {
+export default function ReportABugForm(props) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
@@ -45,7 +45,7 @@ export default function RegisterFormModal(props) {
         messageValid = true;
     };
 
-    const SystemRequestForm = () => <form>
+    const BugReportForm = () => <form>
         <div className="form-group">
             <label htmlFor="username-input">Username*</label>
             <input 
@@ -94,8 +94,8 @@ export default function RegisterFormModal(props) {
     };
 
     return <Modal show={props.show} onHide={() => props.setShow(false)} >
-        <Modal.Header closeButton>System Request</Modal.Header>
-        <Modal.Body>{SystemRequestForm()}</Modal.Body>
+        <Modal.Header closeButton>Report a Bug</Modal.Header>
+        <Modal.Body>{BugReportForm()}</Modal.Body>
         <Modal.Footer>
             <button
                 className='btn btn-primary btn-lg rounded-pill'

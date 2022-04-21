@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-export default function RegisterFormModal(props) {
+export default function SystemRequestForm(props) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');

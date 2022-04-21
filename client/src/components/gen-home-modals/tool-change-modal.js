@@ -95,5 +95,18 @@ export default function ToolChangeForm(props) {
     return <Modal show={props.show} onHide={() => props.setShow(false)} >
         <Modal.Header closeButton>Tool Change</Modal.Header>
         <Modal.Body>{ToolChangeForm()}</Modal.Body>
+        <Modal.Footer>
+            <button
+                className='btn btn-primary btn-lg rounded-pill'
+                onClick={() => {
+                    props.setShow(false);
+                    resetFormValues();
+                }}
+            >Cancel</button>
+            <button
+                className='btn btn-primary btn-lg rounded-pill'
+                onClick={() => handleSubmit()}
+            >Submit</button>
+        </Modal.Footer>
     </Modal>;
 }

@@ -114,24 +114,28 @@ export default function GenHome(props) {
     // Form Submit Functions --------------------------------------------- 
 
     const toolChangeFormSubmit = (toolNumber, cutterCompensation, toolNotes) => {
-        axios.post(baseUrl + '/api/v1/gcode/toolChange/', {
-            'toolNumber': toolNumber,
-            'cutterCompensation': cutterCompensation,
-            'notes': toolNotes
-        }).then(res => { // flag
-            if (res.status === 200)
-                addGcodeBlock(res.data)
-        });
+        if (toolNumber !== '' || cutterCompensation !== '' || toolNotes !== '') {
+            axios.post(baseUrl + '/api/v1/gcode/toolChange/', {
+                'toolNumber': toolNumber,
+                'cutterCompensation': cutterCompensation,
+                'notes': toolNotes
+            }).then(res => { // flag
+                if (res.status === 200)
+                    addGcodeBlock(res.data)
+            });
+        }
     };
 
     const spindleCommandFormSubmit = (spindleDirection, spindleRPM) => {
-        axios.post(baseUrl + '/api/v1/gcode/spindleCommand/', {
-            'directionOfRotation': spindleDirection,
-            'spindleRpm': spindleRPM
-        }).then(res => { // flag
-            if (res.status === 200)
-                addGcodeBlock(res.data)
-        });
+        if (spindleDirection !== '' || spindleRpm!== '') {
+            axios.post(baseUrl + '/api/v1/gcode/spindleCommand/', {
+                'directionOfRotation': spindleDirection,
+                'spindleRpm': spindleRPM
+            }).then(res => { // flag
+                if (res.status === 200)
+                    addGcodeBlock(res.data)
+            });
+        }
     };
 
     const DrillingFormModalSubmit = async (drillXPos, drillYPos, drillZPos, drillRef, drillPeckDepth, drillFeedRate) => {
@@ -158,46 +162,52 @@ export default function GenHome(props) {
     };
 
     const rapidFormSubmit = async (rapidFeedRate, rapidChoice, rapidPos, rapidPos2) => {
-        axios.post(baseUrl + '/api/v1/gcode/rapidMovement/', {
-            'feedrate': rapidFeedRate,
-            'axis': rapidChoice,
-            'pos': rapidPos,
-            'pos2': rapidPos2
-        }).then(res => { // flag
-            if (res.status === 200)
-                addGcodeBlock(res.data)
-        });
+        if (rapidFeedRate !== '' || rapidChoice !== '' || rapidPos !== ''|| rapidPos2 !== '') {
+            axios.post(baseUrl + '/api/v1/gcode/rapidMovement/', {
+                'feedrate': rapidFeedRate,
+                'axis': rapidChoice,
+                'pos': rapidPos,
+                'pos2': rapidPos2
+            }).then(res => { // flag
+                if (res.status === 200)
+                    addGcodeBlock(res.data)
+            });
+        }
     };
 
     const linearFormSubmit = async (linearFeedRate, linearChoice, linearPos, linearPos2) => {
-        axios.post(baseUrl + '/api/v1/gcode/linearMovement/', {
-            'feedrate': linearFeedRate,
-            'axis': linearChoice,
-            'pos': linearPos,
-            'pos2': linearPos2
-        }).then(res => { // flag
-            if (res.status === 200)
-                addGcodeBlock(res.data)
-        })
+        if (linearFeedRate !== '' || linearChoice !== '' || linearPos !== ''|| linearPos2 !== '') {
+            axios.post(baseUrl + '/api/v1/gcode/linearMovement/', {
+                'feedrate': linearFeedRate,
+                'axis': linearChoice,
+                'pos': linearPos,
+                'pos2': linearPos2
+            }).then(res => { // flag
+                if (res.status === 200)
+                    addGcodeBlock(res.data)
+            })
+        }
     };
 
     const facingTemplateFormSubmit = (facingDir, faceToolNumber, faceCutDiam, faceSpindleRPM, faceFeedRate, faceWidth, faceDepth, faceClearance, faceDOC, facePlunge, faceStepOver) => {
-        axios.post(baseUrl + '/api/v1/gcode/facingTemplate/', {
-            'faceDir': facingDir,
-            'toolNumber': faceToolNumber,
-            'cutterDiameter': faceCutDiam,
-            'spindleRpm': faceSpindleRPM,
-            'feedRate': faceFeedRate,
-            'width': faceWidth,
-            'depth': faceDepth,
-            'clearance': faceClearance,
-            'doc': faceDOC,
-            'plungeRate': facePlunge,
-            'stepOver': faceStepOver
-        }).then(res => { // flag
-            if (res.status === 200)
-                addGcodeBlock(res.data)
-        });
+        if (facingDir !== '' || faceToolNumber !== '' || faceCutDiam !== ''|| faceSpindleRPM !== '' || faceFeedRate !== '' || faceWidth !== '' || faceDepth !== ''|| faceClearance !== '' || faceDOC !== '' || facePlunge !== '' || faceStepOver !== '') {
+            axios.post(baseUrl + '/api/v1/gcode/facingTemplate/', {
+                'faceDir': facingDir,
+                'toolNumber': faceToolNumber,
+                'cutterDiameter': faceCutDiam,
+                'spindleRpm': faceSpindleRPM,
+                'feedRate': faceFeedRate,
+                'width': faceWidth,
+                'depth': faceDepth,
+                'clearance': faceClearance,
+                'doc': faceDOC,
+                'plungeRate': facePlunge,
+                'stepOver': faceStepOver
+            }).then(res => { // flag
+                if (res.status === 200)
+                    addGcodeBlock(res.data)
+            });
+        }
     };
 
     // Main Return ---------------------------------------------------------------------------------------------------------------------------

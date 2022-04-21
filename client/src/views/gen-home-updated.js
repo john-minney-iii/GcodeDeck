@@ -46,6 +46,7 @@ export default function GenHome(props) {
     const [linearPos2, setLinearPos2] = useState(0);
 
     // States for Facing
+    const [facingDir, setFacingDir] = useState(0);
     const [faceToolNumber, setFaceToolNumber] = useState(0);
     const [faceCutDiam, setCutDiam] = useState(0);
     const [faceSpindleRPM, setfaceSpindleRPM] = useState(0);
@@ -62,22 +63,74 @@ export default function GenHome(props) {
         (props.prod) ? 'https://minn4519.pythonanywhere.com' : 'http://localhost:8000'
     );
 
-    const handleModal = (which) => {
-        setLinearChoice('X');
-        setRapidChoice('X');
+    const resetToolChange = () => {
+        setToolNumber(0);
+        setCutterCompensation('G40');
+        setToolNotes('');
+    };
+
+    const resetSpindleCommand = () => {
         setSpindleDirection('CW');
-        if (which === 'linearModal')
+        setSpindleRPM(0);
+    };
+
+    const resetDrilling = () => {
+        setDrillXPos(0);
+        setDrillYPos(0);
+        setDrillZPos(0);
+        setDrillRef(0);
+        setDrillPeckDepth(0);
+        setDrillFeedRate(0);
+    };
+
+    const resetRapidMovement = () => {
+        setRapidChoice('X');
+        setRapidFeedRate(0);
+        setRapidPos(0);
+        setRapidPos2(0);
+    };
+
+    const resetLinearMovement = () => {
+        setLinearChoice('X');
+        setLinearFeedRate(0);
+        setLinearPos(0);
+        setLinearPos2(0);
+    };
+
+    const resetFacing = () => {
+        setFacingDir(0);
+        setFaceToolNumber(0);
+        setCutDiam(0);
+        setfaceSpindleRPM(0);
+        setFaceFeedRate(0);
+        setFaceWidth(0);
+        setFaceDepth(0);
+        setFaceClearance(0);
+        setFaceDOC(0);
+        setFacePlunge(0);
+        setFaceStepOver(0);
+    };
+
+    const handleModal = (which) => {
+        if (which === 'linearModal') {
+            resetLinearMovement();
             setlinearModalShow(!linearModalShow);
-        else if (which === 'rapidModal')
+        } else if (which === 'rapidModal') {
+            resetRapidMovement();
             setrapidModalShow(!rapidModalShow);
-        else if (which === 'drillModal')
+        } else if (which === 'drillModal') {
+            resetDrilling();
             setDrillModalShow(!drillModalShow);
-        else if (which === 'spindleModal')
+        } else if (which === 'spindleModal') {
+            resetSpindleCommand();
             setSpindleModalShow(!spindleModalShow);
-        else if (which === 'toolChangeModal')
+        } else if (which === 'toolChangeModal') {
+            resetToolChange();
             setToolChangeModalShow(!toolChangeModalShow);
-        else if (which === 'facingTemplateModal')
+        } else if (which === 'facingTemplateModal') {
+            resetFacing();
             setFacingTemplateModalShow(!facingTemplateModalShow);
+        }    
     };
 
     // Functions for Gcode Data Struct ---------------------------------
@@ -143,6 +196,11 @@ export default function GenHome(props) {
         }
     };
 
+    const viewGcode = async () => {
+        // TODO: copy the text before rendering the new window
+        window.open("https://ncviewer.com/");
+    };
+
     // Form Submit Functions ---------------------------------------------
 
     const toolChangeFormSubmit = () => {
@@ -206,6 +264,7 @@ export default function GenHome(props) {
 
     const facingTemplateFormSubmit = () => {
         axios.post(baseUrl + '/api/v1/gcode/facingTemplate/', {
+            'faceDir': facingDir,
             'toolNumber': faceToolNumber,
             'cutterDiameter': faceCutDiam,
             'spindleRpm': faceSpindleRPM,
@@ -360,28 +419,34 @@ export default function GenHome(props) {
         </div>;
     };
 
-    const facingTemplateForm = () => <form>
+    const facingTemplateForm = () => 
+    <form>
         <div className="form-group">
-            <label htmlFor="axisOfMovement">Tool Number:</label>
-            <input type="" className="" id="" placeholder="Tool number for facing" onChange={(e) => setFaceToolNumber(e.target.value)}></input>
+        <label htmlFor="facingDir">Facing Direction: </label>
+            <select name="direction" id="d" className="form-control" onChange={(e) => setFacingDir(e.target.value)}>
+                <option value="Negative">Negative</option>
+                <option value="Positive">Positive</option>
+            </select>
+            <label htmlFor="ToolNumber">Tool Number:</label>
+                <input type="" className="form-control" id="" placeholder="Tool number for facing" onChange={(e) => setFaceToolNumber(e.target.value)}></input>
             <label htmlFor="CutterDiameter">Cutter Diameter:</label>
-            <input type="" className="" id="" placeholder="Tool number for facing" onChange={(e) => setCutDiam(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Cutter Diameter for facing" onChange={(e) => setCutDiam(e.target.value)}></input>
             <label htmlFor="spindleSpeed">Spindle RPM:</label>
-            <input type="" className="form-control" id="" placeholder="Spindle RPM for facing" onChange={(e) => setfaceSpindleRPM(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Spindle RPM for facing" onChange={(e) => setfaceSpindleRPM(e.target.value)}></input>
             <label htmlFor="FeedRate">Feed Rate:</label>
-            <input type="" className="form-control" id="" placeholder="Feed Rate for Facing" onChange={(e) => setFaceFeedRate(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Feed Rate for Facing" onChange={(e) => setFaceFeedRate(e.target.value)}></input>
             <label htmlFor="Width">Width:</label>
-            <input type="" className="form-control" id="" placeholder="Width (along x) for facing" onChange={(e) => setFaceWidth(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Width (along x) for facing" onChange={(e) => setFaceWidth(e.target.value)}></input>
             <label htmlFor="Depth">Depth:</label>
-            <input type="" className="form-control" id="" placeholder="Depth (along y) for facing" onChange={(e) => setFaceDepth(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Depth (along y) for facing" onChange={(e) => setFaceDepth(e.target.value)}></input>
             <label htmlFor="Clearance">Clearance: </label>
-            <input type="" className="form-control" id="" placeholder="Z clearance for facing (top of part + clearance)" onChange={(e) => setFaceClearance(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Z clearance for facing (top of part + clearance)" onChange={(e) => setFaceClearance(e.target.value)}></input>
             <label htmlFor="DOC">DOC: </label>
-            <input type="" className="form-control" id="" placeholder="Depth of cut (how much are you taking off the top?)" onChange={(e) => setFaceDOC(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Depth of cut (how much are you taking off the top?)" onChange={(e) => setFaceDOC(e.target.value)}></input>
             <label htmlFor="PlungeRate">Plunge Rate:</label>
-            <input type="" className="form-control" id="" placeholder="Feed Rate for Z moves" onChange={(e) => setFacePlunge(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Feed Rate for Z moves" onChange={(e) => setFacePlunge(e.target.value)}></input>
             <label htmlFor="Stepover">Stepover:</label>
-            <input type="" className="form-control" id="" placeholder="Amount tool moves over each pass until facing is completed" onChange={(e) => setFaceStepOver(e.target.value)}></input>
+                <input type="" className="form-control" id="" placeholder="Amount tool moves over each pass until facing is completed" onChange={(e) => setFaceStepOver(e.target.value)}></input>
         </div>
     </form>;
 
@@ -435,7 +500,7 @@ export default function GenHome(props) {
                                     className="btn btn-outline-primary btn-XL rounded-pill w-100"
                                     onClick={() => handleModal('linearModal')}
                                 >
-                                    Linear Movement (linear)
+                                    Linear Movement (G01)
                                 </button>
                             </div>
                             <div className="drilling-button py-3">
@@ -475,6 +540,7 @@ export default function GenHome(props) {
                                     <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => gcodeRedo()}>Redo</button>
                                     <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => gcodeCopy()}>Copy</button>
                                     <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => gcodeCopyLast()}>Copy Last</button>
+                                    <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => viewGcode()}>View in NC Viewer</button>
                                 </div>
                             </div>
                         </div>

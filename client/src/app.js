@@ -10,66 +10,60 @@ import './assets/css/app.css';
 export default class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            currentView: 'landing-page',
-            token: '',
-            authenticated: false,
-            prod: false
-        };
+        window.sessionStorage.setItem('currentView', 'landing-page');
+    }
+
+    componentDidMount() {
+        window.sessionStorage.setItem('authenticated', 'false');
+        window.sessionStorage.setItem('token', '');
     }
 
     loginUser = (token) => {
-        this.setState({
-            token: token,
-            authenticated: true
-        });
+        window.sessionStorage.setItem('authenticated', 'true');
+        window.sessionStorage.setItem('token', token);
+        this.setState({});
     };
 
     logoutUser = () => {
-        this.setState({
-            token: '',
-            authenticated: false
-        });
+        window.sessionStorage.setItem('authenticated', 'false');
+        window.sessionStorage.setItem('token', '');
         this.changeCurrentView('landing-page');
         alert('Logged Out');
     };
 
     changeCurrentView = (value) => {
-        this.setState({ currentView: value});
+        window.sessionStorage.setItem('currentView', value);
+        this.setState({});
     };
 
     chooseCurrentView = () => {
-        if (this.state.currentView === 'landing-page')
+        if (window.sessionStorage.getItem('currentView') === 'landing-page')
             return <LandingPage 
-                authenticated={this.state.authenticated}
+                authenticated={(window.sessionStorage.getItem('authenticated') === 'true')}
                 loginUser={this.loginUser}
                 changeView={this.changeCurrentView}
-                prod={this.state.prod}
             />
-        else if (this.state.currentView === 'about-us')
+        else if (window.sessionStorage.getItem('currentView') === 'about-us')
             return <AboutUs 
-                authenticated={this.state.authenticated}
+                authenticated={(window.sessionStorage.getItem('authenticated') === 'true')}
                 changeView={this.changeCurrentView} 
             />
-        else if (this.state.currentView === 'community')
+        else if (window.sessionStorage.getItem('currentView') === 'community')
             return <Community 
-                authenticated={this.state.authenticated}
+                authenticated={(window.sessionStorage.getItem('authenticated') === 'true')}
                 changeView={this.changeCurrentView}
-                prod={this.state.prod}
             />
-        else if (this.state.currentView === 'gen-home')
+        else if (window.sessionStorage.getItem('currentView') === 'gen-home')
             return <GenHome 
-                authenticated={this.state.authenticated}
+                authenticated={(window.sessionStorage.getItem('authenticated') === 'true')}
                 changeView={this.changeCurrentView}
-                prod={this.state.prod}
             />
-        else if (this.state.currentView === 'account')
+        else if (window.sessionStorage.getItem('currentView') === 'account')
             return <Account 
-                authenticated={this.state.authenticated}
+                authenticated={(window.sessionStorage.getItem('authenticated') === 'true')}
                 changeView={this.changeCurrentView}
-                token={this.state.token}
+                token={window.sessionStorage.getItem('token')}
                 logOut={this.logoutUser}
-                prod={this.state.prod}
             />
         return <p>Idk Dawg</p>
     };

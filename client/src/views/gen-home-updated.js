@@ -63,22 +63,74 @@ export default function GenHome(props) {
         (props.prod) ? 'https://minn4519.pythonanywhere.com' : 'http://localhost:8000'
     );
 
-    const handleModal = (which) => {
-        setLinearChoice('X');
-        setRapidChoice('X');
+    const resetToolChange = () => {
+        setToolNumber(0);
+        setCutterCompensation('G40');
+        setToolNotes('');
+    };
+
+    const resetSpindleCommand = () => {
         setSpindleDirection('CW');
-        if (which === 'linearModal')
+        setSpindleRPM(0);
+    };
+
+    const resetDrilling = () => {
+        setDrillXPos(0);
+        setDrillYPos(0);
+        setDrillZPos(0);
+        setDrillRef(0);
+        setDrillPeckDepth(0);
+        setDrillFeedRate(0);
+    };
+
+    const resetRapidMovement = () => {
+        setRapidChoice('X');
+        setRapidFeedRate(0);
+        setRapidPos(0);
+        setRapidPos2(0);
+    };
+
+    const resetLinearMovement = () => {
+        setLinearChoice('X');
+        setLinearFeedRate(0);
+        setLinearPos(0);
+        setLinearPos2(0);
+    };
+
+    const resetFacing = () => {
+        setFacingDir(0);
+        setFaceToolNumber(0);
+        setCutDiam(0);
+        setfaceSpindleRPM(0);
+        setFaceFeedRate(0);
+        setFaceWidth(0);
+        setFaceDepth(0);
+        setFaceClearance(0);
+        setFaceDOC(0);
+        setFacePlunge(0);
+        setFaceStepOver(0);
+    };
+
+    const handleModal = (which) => {
+        if (which === 'linearModal') {
+            resetLinearMovement();
             setlinearModalShow(!linearModalShow);
-        else if (which === 'rapidModal')
+        } else if (which === 'rapidModal') {
+            resetRapidMovement();
             setrapidModalShow(!rapidModalShow);
-        else if (which === 'drillModal')
+        } else if (which === 'drillModal') {
+            resetDrilling();
             setDrillModalShow(!drillModalShow);
-        else if (which === 'spindleModal')
+        } else if (which === 'spindleModal') {
+            resetSpindleCommand();
             setSpindleModalShow(!spindleModalShow);
-        else if (which === 'toolChangeModal')
+        } else if (which === 'toolChangeModal') {
+            resetToolChange();
             setToolChangeModalShow(!toolChangeModalShow);
-        else if (which === 'facingTemplateModal')
+        } else if (which === 'facingTemplateModal') {
+            resetFacing();
             setFacingTemplateModalShow(!facingTemplateModalShow);
+        }    
     };
 
     // Functions for Gcode Data Struct ---------------------------------
@@ -142,6 +194,11 @@ export default function GenHome(props) {
             tempGcode.push(lastBlock);
             setGcodeList(tempGcode);
         }
+    };
+
+    const viewGcode = async () => {
+        // TODO: copy the text before rendering the new window
+        window.open("https://ncviewer.com/");
     };
 
     // Form Submit Functions ---------------------------------------------
@@ -483,6 +540,7 @@ export default function GenHome(props) {
                                     <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => gcodeRedo()}>Redo</button>
                                     <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => gcodeCopy()}>Copy</button>
                                     <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => gcodeCopyLast()}>Copy Last</button>
+                                    <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => viewGcode()}>View in NC Viewer</button>
                                 </div>
                             </div>
                         </div>

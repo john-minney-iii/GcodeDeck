@@ -2,12 +2,12 @@ import { Modal } from "react-bootstrap";
 import { useState } from "react";
 
 export default function DrillingFormModal(props) {
-    const [drillXPos, setDrillXPos] = useState(0);
-    const [drillYPos, setDrillYPos] = useState(0);
-    const [drillZPos, setDrillZPos] = useState(0);
-    const [drillRef, setDrillRef] = useState(0);
-    const [drillPeckDepth, setDrillPeckDepth] = useState(0);
-    const [drillFeedRate, setDrillFeedRate] = useState(0);
+    const [drillXPos, setDrillXPos] = useState('');
+    const [drillYPos, setDrillYPos] = useState('');
+    const [drillZPos, setDrillZPos] = useState('');
+    const [drillRef, setDrillRef] = useState('');
+    const [drillPeckDepth, setDrillPeckDepth] = useState('');
+    const [drillFeedRate, setDrillFeedRate] = useState('');
 
     //Validations
     let drillXPosValid = false;

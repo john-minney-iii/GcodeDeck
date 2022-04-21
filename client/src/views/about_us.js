@@ -26,6 +26,61 @@ constructor(props) {
                 and simpler, along with the portability and cost effectiveness that comes with a web application.
               </p>
           </div>
+          <div className="row">
+            <h3> Meet our developers! </h3>
+            <div className="col">
+              <div className="card">
+                <img className="card-img-top" src="../assets/img/hero-image.webp" alt="Card image cap"></img>
+                <div className="card-body">
+                  <h5 className="card-title">Shannon Daly</h5>
+                  <p className="card-text">a whole shitton of fucking lots of text mate</p>
+                </div>
+                <div className="card-body">
+                  <a href="www.linkedin.com/in/shannon-daly-a0b111237">Linkedin</a>
+                </div>
+              </div>
+
+            </div>
+            <div className="col">
+              <div className="card">
+                <img className="card-img-top" src="../assets/img/hero-image.webp" alt="Card image cap"></img>
+                <div className="card-body">
+                  <h5 className="card-title">John Minney III</h5>
+                  <p className="card-text">Some text</p>
+                </div>
+                <div className="card-body">
+                  <a href="">Linkedin</a>
+                </div>
+              </div>
+
+            </div>
+            <div className="col">
+              <div className="card">
+                <img className="card-img-top" src="../assets/img/hero-image.webp" alt="Card image cap"></img>
+                <div className="card-body">
+                  <h5 className="card-title">Riley Peterson</h5>
+                  <p className="card-text">Some text</p>
+                </div>
+                <div className="card-body">
+                  <a href="">Linkedin</a>
+                </div>
+              </div>
+
+            </div>
+            <div className="col">
+              <div className="card">
+                <img className="card-img-top" src="../assets/img/hero-image.webp" alt="Card image cap"></img>
+                <div className="card-body">
+                  <h5 className="card-title">Katie Williams</h5>
+                  <p className="card-text">Some text</p>
+                </div>
+                <div className="card-body">
+                  <a href="">Linkedin</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
     </div>
     );

@@ -2,17 +2,17 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
 export default function FacingTemplateForm(props) {
-    const [facingDir, setFacingDir] = useState(0);
-    const [faceToolNumber, setFaceToolNumber] = useState(0);
-    const [faceCutDiam, setFaceCutDiam] = useState(0);
-    const [faceSpindleRPM, setFaceSpindleRPM] = useState(0);
-    const [faceFeedRate, setFaceFeedRate] = useState(0);
-    const [faceWidth, setFaceWidth] = useState(0);
-    const [faceDepth, setFaceDepth] = useState(0);
-    const [faceClearance, setFaceClearance] = useState(0);
-    const [faceDOC, setFaceDOC] = useState(0);
-    const [facePlunge, setFacePlunge] = useState(0);
-    const [faceStepOver, setFaceStepOver] = useState(0);
+    const [facingDir, setFacingDir] = useState('');
+    const [faceToolNumber, setFaceToolNumber] = useState('');
+    const [faceCutDiam, setFaceCutDiam] = useState('');
+    const [faceSpindleRPM, setFaceSpindleRPM] = useState('');
+    const [faceFeedRate, setFaceFeedRate] = useState('');
+    const [faceWidth, setFaceWidth] = useState('');
+    const [faceDepth, setFaceDepth] = useState('');
+    const [faceClearance, setFaceClearance] = useState('');
+    const [faceDOC, setFaceDOC] = useState('');
+    const [facePlunge, setFacePlunge] = useState('');
+    const [faceStepOver, setFaceStepOver] = useState('');
 
     // Validations 
     let facingDirValid = false;
@@ -61,7 +61,7 @@ export default function FacingTemplateForm(props) {
         if (faceCutDiam === '') {
             faceCutDiamValid = false;
             return <div>
-                <small className="text-danger">Please Enter A Valide Face Cut Diameter</small>
+                <small className="text-danger">Please Enter A Valid Face Cut Diameter</small>
                 <br />
             </div>;
         }
@@ -147,7 +147,7 @@ export default function FacingTemplateForm(props) {
 
     const FacingTemplateForm = () => <form>
         <div className="form-group">
-            <label htmlFor="username-input">Facing Direction</label>
+            <label htmlFor="username-input">Facing Direction:</label>
             <input 
                 type="text"
                 className="form-control"
@@ -158,110 +158,120 @@ export default function FacingTemplateForm(props) {
             {facingDirValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Face Tool Number</label>
+            <label htmlFor="username-input">Tool Number:</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
+                placeholder="Tool number for facing"
                 value={faceToolNumber}
                 onChange={(e) => setFaceToolNumber(e.target.value)}
             />
             {faceToolNumberValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Set Face Cut Diameter</label>
+            <label htmlFor="username-input">Cutter Diameter:</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
+                placeholder="Cutter Diameter for facing"
                 value={faceCutDiam}
                 onChange={(e) => setFaceCutDiam(e.target.value)}
             />
             {faceCutDiamValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Spindle RPM</label>
+            <label htmlFor="username-input">Spindle RPM:</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
+                placeholder="Spindle RPM for facing"
                 value={faceSpindleRPM}
                 onChange={(e) => setFaceSpindleRPM(e.target.value)}
             />
             {faceSpindleRPMValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Feed Rate</label>
+            <label htmlFor="username-input">Feed Rate:</label>
             <input 
                 type="password"
                 className="form-control"
                 name="username-input"
+                placeholder="Feed Rate for facing"
                 value={faceFeedRate}
                 onChange={(e) => setFaceFeedRate(e.target.value)}
             />
             {faceFeedRateValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Width</label>
+            <label htmlFor="username-input">Width:</label>
             <input 
                 type="password"
                 className="form-control"
                 name="username-input"
+                placeholder="Width (along x) for facing"
                 value={faceWidth}
                 onChange={(e) => setFaceWidth(e.target.value)}
             />
             {faceWidthValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Depth</label>
+            <label htmlFor="username-input">Depth:</label>
             <input 
                 type="password"
                 className="form-control"
                 name="username-input"
+                placeholder="Depth (along y) for facing"
                 value={faceDepth}
                 onChange={(e) => setFaceDepth(e.target.value)}
             />
             {faceDepthValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Clearance</label>
+            <label htmlFor="username-input">Clearance:</label>
             <input 
                 type="password"
                 className="form-control"
                 name="username-input"
+                placeholder="Z clearance for facing (top of part + clearance)"
                 value={faceClearance}
                 onChange={(e) => setFaceClearance(e.target.value)}
             />
             {faceClearanceValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">DOC</label>
+            <label htmlFor="username-input">DOC:</label>
             <input 
                 type="password"
                 className="form-control"
                 name="username-input"
+                placeholder="Depth of cut (how much are you taking off the top?)"
                 value={faceDOC}
                 onChange={(e) => setFaceDOC(e.target.value)}
             />
             {faceDOCValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Plunge</label>
+            <label htmlFor="username-input">Plunge Rate:</label>
             <input 
                 type="password"
                 className="form-control"
                 name="username-input"
+                placeholder="Feed Rate for Z moves"
                 value={facePlunge}
                 onChange={(e) => setFacePlunge(e.target.value)}
             />
             {facePlungeValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Step Over</label>
+            <label htmlFor="username-input">Stepover:</label>
             <input 
                 type="password"
                 className="form-control"
                 name="username-input"
+                placeholder="Amount tool moves over each pass"
                 value={faceStepOver}
                 onChange={(e) => setFaceStepOver(e.target.value)}
             />

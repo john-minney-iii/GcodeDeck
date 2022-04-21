@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 
 export default function RapidForm(props) {
     const [rapidChoice, setRapidChoice] = useState('X');
-    const [rapidPos, setRapidPos] = useState();
+    const [rapidPos, setRapidPos] = useState('');
 
     // Validations 
     let rapidChoiceValid = false;

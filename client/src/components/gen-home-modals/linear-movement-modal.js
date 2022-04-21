@@ -3,8 +3,8 @@ import { Modal } from "react-bootstrap";
 
 export default function LinearForm(props) {
     const [linearChoice, setLinearChoice] = useState('X');
-    const [linearFeedRate, setLinearFeedRate] = useState();
-    const [linearPos, setLinearPos] = useState();
+    const [linearFeedRate, setLinearFeedRate] = useState('');
+    const [linearPos, setLinearPos] = useState('');
 
     // Validations 
     let linearChoiceValid = false;
@@ -18,7 +18,7 @@ export default function LinearForm(props) {
     };
 
     const linearChoiceValidation = () => {
-        if (linearChoice != 'X') {
+        if (linearChoice != '') {
             linearChoiceValid = false;
             return <small className="text-danger">Please Enter Your Choice</small>;
         }

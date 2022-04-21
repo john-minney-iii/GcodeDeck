@@ -9,7 +9,7 @@ import spindleCommandForm from "../components/gen-home-modals/spindle-form-modal
 import toolChangeForm from "../components/gen-home-modals/tool-change-modal";
 import rapidForm from "../components/gen-home-modals/rapid-movement-modal";
 import linearForm from "../components/gen-home-modals/linear-movement-modal";
-import facingTemplateForm from "../components/gen-home-modals/facing-template-modal";
+import FacingTemplateForm from "../components/gen-home-modals/facing-template-modal";
 
 
 export default function GenHome(props) {
@@ -379,7 +379,7 @@ export default function GenHome(props) {
                 </Modal.Header>
                 <Modal.Body>
                 </Modal.Body>
-                {facingTemplateForm()}
+                {FacingTemplateForm()}
                 <Modal.Footer>
                     <button
                         className='btn btn-primary btn-lg rounded-pill'

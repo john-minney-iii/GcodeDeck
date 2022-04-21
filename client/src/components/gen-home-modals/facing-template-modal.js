@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-export default function facingTemplateForm(props) {
+export default function FacingTemplateForm(props) {
     const [facingDir, setFacingDir] = useState(0);
     const [faceToolNumber, setFaceToolNumber] = useState(0);
     const [faceCutDiam, setCutDiam] = useState(0);

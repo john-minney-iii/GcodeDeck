@@ -31,9 +31,6 @@ export default function GenHome(props) {
     );
 
     const handleModal = (which) => {
-        setLinearChoice('X');
-        setRapidChoice('X');
-        setSpindleDirection('CW');
         if (which === 'linearModal')
             setlinearModalShow(!linearModalShow);
         else if (which === 'rapidModal')
@@ -127,15 +124,13 @@ export default function GenHome(props) {
     };
 
     const spindleCommandFormSubmit = (spindleDirection, spindleRPM) => {
-        if (spindleDirection !== '' || spindleRpm!== '') {
-            axios.post(baseUrl + '/api/v1/gcode/spindleCommand/', {
-                'directionOfRotation': spindleDirection,
-                'spindleRpm': spindleRPM
-            }).then(res => { // flag
-                if (res.status === 200)
-                    addGcodeBlock(res.data)
-            });
-        }
+        axios.post(baseUrl + '/api/v1/gcode/spindleCommand/', {
+            'directionOfRotation': spindleDirection,
+            'spindleRpm': spindleRPM
+        }).then(res => { // flag
+            if (res.status === 200)
+                addGcodeBlock(res.data)
+        });
     };
 
     const DrillingFormModalSubmit = async (drillXPos, drillYPos, drillZPos, drillRef, drillPeckDepth, drillFeedRate) => {

@@ -27,7 +27,7 @@ export default function ToolChangeForm(props) {
 
     const cutterCompensationValidation = () => {
         if (cutterCompensation === '') {
-            lastNameValid = false;
+            cutterCompensationValid = false;
             return <small className="text-danger">Please Enter A Valid Compensation</small>;
         }
         cutterCompensationValid = true;
@@ -81,7 +81,7 @@ export default function ToolChangeForm(props) {
     </form>;
 
     const handleSubmit = () => {
-        if (toolNumber && cutterCompensation && toolNotes) {
+        if (toolNumberValid && cutterCompensationValid && toolNotesValid) {
             props.setShow(false);
             resetFormValues();
             props.registerSubmit(

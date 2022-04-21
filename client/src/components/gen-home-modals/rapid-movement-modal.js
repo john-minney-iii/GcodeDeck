@@ -123,7 +123,7 @@ const rapidFormHelper = () => {
 };
 
     const handleSubmit = () => {
-        if (firstNameValid && lastNameValid && usernameValid && rapidPos2) {
+        if (rapidChoiceValid && rapidFeedRateValid && rapidPosValid && rapidPos2Valid) {
             props.setShow(false);
             resetFormValues();
             props.registerSubmit(

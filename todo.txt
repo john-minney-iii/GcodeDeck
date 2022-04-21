@@ -1,7 +1,7 @@
 
--- Todo for Senior Project
+-- Todo for last push
 
-	- Create my own gen home
-	- Start hooking up react with Riley's scripts
-		- Move Riley's scripts to Django views
-	- Output gcode from scrits into a text box (nothing fancy)
+	- NC Viewer intergration
+	- Refresh bug
+	- Edit the gcode output
+	- Clear forms on gen-home

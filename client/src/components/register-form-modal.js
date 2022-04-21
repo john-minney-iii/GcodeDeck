@@ -9,7 +9,7 @@ export default function RegisterFormModal(props) {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
 
-    // Validations
+    // Validations 
     let firstNameValid = false;
     let lastNameValid = false;
     let usernameValid = false;

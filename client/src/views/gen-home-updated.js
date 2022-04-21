@@ -3,6 +3,11 @@ import Navbar from "../components/navbar";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 
+// Components
+import DrillingFormModal from "../components/gen-home-modals/drilling-modal";
+import LinearFormModal from "../components/gen-home-modals/linear-movement-modal";
+
+
 export default function GenHome(props) {
     const [gcodeList, setGcodeList] = useState([]);         // Gcode data struct
     const [lastBlockUndo, setLastBlockUndo] = useState();   // Used for redo
@@ -26,12 +31,6 @@ export default function GenHome(props) {
     const [spindleRPM, setSpindleRPM] = useState(0);
 
     // States for drilling
-    const [drillXPos, setDrillXPos] = useState(0);
-    const [drillYPos, setDrillYPos] = useState(0);
-    const [drillZPos, setDrillZPos] = useState(0);
-    const [drillRef, setDrillRef] = useState(0);
-    const [drillPeckDepth, setDrillPeckDepth] = useState(0);
-    const [drillFeedRate, setDrillFeedRate] = useState(0);
 
     // States for rapid movement
     const [rapidChoice, setRapidChoice] = useState('X');
@@ -40,10 +39,6 @@ export default function GenHome(props) {
     const [rapidPos2, setRapidPos2] = useState(0);
 
     // States for linear movement
-    const [linearChoice, setLinearChoice] = useState('X');
-    const [linearFeedRate, setLinearFeedRate] = useState(0);
-    const [linearPos, setLinearPos] = useState(0);
-    const [linearPos2, setLinearPos2] = useState(0);
 
     // States for Facing
     const [facingDir, setFacingDir] = useState(0);
@@ -144,7 +139,7 @@ export default function GenHome(props) {
         }
     };
 
-    // Form Submit Functions ---------------------------------------------
+    // Form Submit Functions --------------------------------------------- 
 
     const toolChangeFormSubmit = () => {
         axios.post(baseUrl + '/api/v1/gcode/toolChange/', {
@@ -167,18 +162,27 @@ export default function GenHome(props) {
         });
     };
 
-    const drillFormSubmit = () => {
-        axios.post(baseUrl + '/api/v1/gcode/drilling/', {
+    const DrillingFormModalSubmit = async (drillXPos, drillYPos, drillZPos, drillRef, drillPeckDepth, drillFeedRate) => {
+        if (drillXPos !== '' || drillYPos !== '' || drillZPos !== '' || drillRef !== '' || drillPeckDepth !== ''|| drillFeedRate !== '') {
+            let finished = false;
+            axios.post(baseUrl + '/api/v1/gcode/drilling/', {//don't know
             'xPos': drillXPos,
             'yPos': drillYPos,
             'zPos': drillZPos,
             'reference': drillRef,
             'peckDepth': drillPeckDepth,
             'feedRate': drillFeedRate
-        }).then(res => { // flag
-            if (res.status === 200)
-                addGcodeBlock(res.data)
-        });
+            }).then(res => { // flag
+                if (res.status === 200) {
+                    addGcodeBlock(res.data)
+                    finished = true;
+                }
+            }).then(res => {
+                if (!finished) {
+                    alert('Drill Form Not Filled Out Properly, Please try again');
+                }
+            });
+        }
     };
 
     const rapidFormSubmit = async () => {
@@ -253,28 +257,7 @@ export default function GenHome(props) {
         </div>
     </form>;
 
-    const drillForm = () => <form>
-        <div className="form-group">
-            <label htmlFor="X Location">X:</label>
-            <input type="" className="" id="" placeholder="X Coordinate of hole" onChange={(e) => setDrillXPos(e.target.value)}></input>
-            <br />
-            <label htmlFor="Y Location">Y:</label>
-            <input type="" className="" id="" placeholder="y Coordinate of hole" onChange={(e) => setDrillYPos(e.target.value)}></input>
-            <br />
-            <label htmlFor="Z Location at bottom of hole">Z:</label>
-            <input type="" className="" id="" placeholder="Bottom of hole location" onChange={(e) => setDrillZPos(e.target.value)}></input>
-            <br />
-            <label htmlFor="R - reference plane (position above part)">R:</label>
-            <input type="" className="" id="" placeholder="Top of part + some clearance" onChange={(e) => setDrillRef(e.target.value)}></input>
-            <br />
-            <label htmlFor="Q - Peck Depth">Q:</label>
-            <input type="" className="" id="" placeholder="Depth per peck" onChange={(e) => setDrillPeckDepth(e.target.value)}></input>
-            <br />
-            <label htmlFor="FeedRate">Feed Rate:</label>
-            <input type="" className="" id="" placeholder="Drilling Feedrate" onChange={(e) => setDrillFeedRate(e.target.value)}></input>
-            <br />
-        </div>
-    </form>;
+
 
     const rapidForm = () => <form>
         <div className="form-group">
@@ -584,7 +567,7 @@ export default function GenHome(props) {
                 </Modal.Header>
                 <Modal.Body>
                 </Modal.Body>
-                {drillForm()}
+                {DrillingFormModal()}
                 <Modal.Footer>
                     <button
                         className='btn btn-primary btn-lg rounded-pill'
@@ -594,7 +577,7 @@ export default function GenHome(props) {
                         className='btn btn-primary btn-lg rounded-pill'
                         onClick={() => {
                             handleModal('drillModal');
-                            drillFormSubmit();
+                            DrillingFormModalSubmit();
                         }}
                     >Submit</button>
                 </Modal.Footer>

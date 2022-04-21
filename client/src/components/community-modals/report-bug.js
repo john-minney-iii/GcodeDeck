@@ -75,14 +75,14 @@ export default function ReportABugForm(props) {
                 className="form-control"
                 name="username-input"
                 value={message}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setMessage(e.target.value)}
             />
             {messageValidation()}
         </div>
     </form>;
 
     const handleSubmit = () => {
-        if (firstNameValid && lastNameValid && usernameValid && emailValid && passwordValid && passwordConfirmValid) {
+        if (usernameValid && emailValid && messageValid) {
             props.setShow(false);
             resetFormValues();
             props.registerSubmit(

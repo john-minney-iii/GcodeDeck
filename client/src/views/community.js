@@ -29,16 +29,9 @@ export default function Community(props) {
             setSystemModalShow(!systemModalShow);
         else if (which === 'contact')
             setContactModalShow(!contactModalShow);
-        resetFormStates();
     };
 
-    const resetFormStates = () => {
-        setUsername('');
-        setEmail('');
-        setMessage('');
-    };
-
-    const submitContactRequest = async () => {
+    const submitContactRequest = async (username, email, message) => {
         if (username == '' || email == '' || message == '') {
             alert('Please fill out the information');
         } else {
@@ -53,7 +46,7 @@ export default function Community(props) {
         }
     };
 
-    const submitSystemRequest = async () => {
+    const submitSystemRequest = async (username, email, message) => {
         if (username == '' || email == '' || message == '') {
             alert('Please fill out the information');
         } else {
@@ -68,7 +61,7 @@ export default function Community(props) {
         }
     };
 
-    const submitBugReport = async () => {
+    const submitBugReport = async (username, email, message) => {
         if (username == '' || email == '' || message == '') {
             alert('Please fill out the information');
         } else {
@@ -82,77 +75,6 @@ export default function Community(props) {
             })
         }
     };
-
-
-    // const ContactRequestForms = (msg) => <form>
-    //     <small id='usernameHelp' className='form-text text-muted'>{msg}</small>
-    //     <div className='form-group'>
-    //         <label htmlFor='usernameInput'>Username</label>
-    //         <input 
-    //             type='text' 
-    //             className='form-control' 
-    //             id='usernameInput'
-    //             value={username}
-    //             onChange={(e) => setUsername(e.target.value)}
-    //         />
-    //     </div>
-    //     <div className='form-group'>
-    //         <label htmlFor='emailInput'>Email</label>
-    //         <input 
-    //             type='email' 
-    //             className='form-control' 
-    //             id='emailInput' 
-    //             value={email}
-    //             onChange={(e) => setEmail(e.target.value)}
-    //         />
-    //     </div>
-    //     <div className='form-group'>
-    //         <label htmlFor='messageInput'>Message</label>
-    //         <input 
-    //             type='textarea' 
-    //             className='form-control' 
-    //             id='messageInput' 
-    //             value={message}
-    //             onChange={(e) => setMessage(e.target.value)}
-    //             height={200}
-    //         />
-    //     </div>
-    // </form>
-
-    // const ReportABugForm = () => <form>
-    //     <small id='usernameHelp' className='form-text text-muted'>Report a Bug</small>
-    //     <div className='form-group'>
-    //         <label htmlFor='usernameInput'>Username</label>
-    //         <input 
-    //             type='text' 
-    //             className='form-control' 
-    //             id='usernameInput'
-    //             value={username}
-    //             onChange={(e) => setUsername(e.target.value)}
-    //         />
-    //     </div>
-    //     <div className='form-group'>
-    //         <label htmlFor='emailInput'>Email</label>
-    //         <input 
-    //             type='email' 
-    //             className='form-control' 
-    //             id='emailInput' 
-    //             value={email}
-    //             onChange={(e) => setEmail(e.target.value)}
-    //         />
-    //     </div>
-    //     <div className='form-group'>
-    //         <label htmlFor='messageInput'>Message</label>
-    //         <input 
-    //             type='textarea' 
-    //             className='form-control' 
-    //             id='messageInput' 
-    //             value={message}
-    //             onChange={(e) => setMessage(e.target.value)}
-    //             height={200}
-    //         />
-    //     </div>
-    // </form>
 
     return <div className='community-view'>
         <Navbar authenticated={props.authenticated} changeView={props.changeView} />

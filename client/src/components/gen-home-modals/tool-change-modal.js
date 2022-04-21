@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
 export default function ToolChangeForm(props) {
-    const [toolNumber, setToolNumber] = useState(0);
+    const [toolNumber, setToolNumber] = useState('');
     const [cutterCompensation, setCutterCompensation] = useState('G40');
     const [toolNotes, setToolNotes] = useState('');
 
@@ -37,7 +37,7 @@ export default function ToolChangeForm(props) {
         if (toolNotes === '') {
             toolNotesValid = false;
             return <div>
-                <small className="text-danger">Please Enter Some Note</small>
+                <small className="text-danger">Please Enter Some Notes</small>
                 <br />
             </div>;
         }
@@ -46,9 +46,10 @@ export default function ToolChangeForm(props) {
 
     const ToolChangeForm = () => <form>
         <div className="form-group">
-            <label htmlFor="username-input">Tool number</label>
+            <label htmlFor="username-input">Tool number:</label>
             <input 
                 type="text"
+                placeholder="Tool Pocket Number"
                 className="form-control"
                 name="username-input"
                 value={toolNumber}
@@ -57,22 +58,27 @@ export default function ToolChangeForm(props) {
             {toolNumberValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Cutter Compensation</label>
-            <input 
-                type="text"
-                className="form-control"
-                name="username-input"
+            <label htmlFor="username-input">Cutter Compensation:</label>
+            <select 
+                name="Cutter Compensation" 
+                id="axis" 
+                className="form-control" 
+                Lable="Cutter Compensation"
                 value={cutterCompensation}
-                onChange={(e) => setCutterCompensation(e.target.value)}
-            />
+                onChange={(e) => setCutterCompensation(e.target.value)}>
+                <option value="G40">None (G40)</option>
+                <option value="G41">Left (G41)</option>
+                <option value="G42">Right (G42)</option>
+            </select>
             {cutterCompensationValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Tool Notes</label>
+            <label htmlFor="username-input">Tool Notes:</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
+                placeholder="Notes About Tool"
                 value={toolNotes}
                 onChange={(e) => setToolNotes(e.target.value)}
             />

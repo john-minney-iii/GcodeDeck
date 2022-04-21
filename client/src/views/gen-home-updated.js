@@ -111,7 +111,7 @@ export default function GenHome(props) {
     // Form Submit Functions --------------------------------------------- 
 
     const toolChangeFormSubmit = (toolNumber, cutterCompensation, toolNotes) => {
-        if (toolNumber !== '' || cutterCompensation !== '' || toolNotes !== '') {
+        if (toolNumber !== '' || cutterCompensation !== '') {
             axios.post(baseUrl + '/api/v1/gcode/toolChange/', {
                 'toolNumber': toolNumber,
                 'cutterCompensation': cutterCompensation,

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-export default function toolChangeForm(props) {
+export default function ToolChangeForm(props) {
     const [toolNumber, setToolNumber] = useState(0);
     const [cutterCompensation, setCutterCompensation] = useState('G40');
     const [toolNotes, setToolNotes] = useState('');

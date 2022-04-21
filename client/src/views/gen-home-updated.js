@@ -5,10 +5,10 @@ import axios from "axios";
 
 // Components
 import DrillingFormModal from "../components/gen-home-modals/drilling-modal";
-import spindleCommandForm from "../components/gen-home-modals/spindle-form-modal";
-import toolChangeForm from "../components/gen-home-modals/tool-change-modal";
-import rapidForm from "../components/gen-home-modals/rapid-movement-modal";
-import linearForm from "../components/gen-home-modals/linear-movement-modal";
+import SpindleCommandForm from "../components/gen-home-modals/spindle-form-modal";
+import ToolChangeForm from "../components/gen-home-modals/tool-change-modal";
+import RapidForm from "../components/gen-home-modals/rapid-movement-modal";
+import LinearForm from "../components/gen-home-modals/linear-movement-modal";
 import FacingTemplateForm from "../components/gen-home-modals/facing-template-modal";
 
 
@@ -312,7 +312,7 @@ export default function GenHome(props) {
                     Linear Movement
                 </Modal.Header>
                 <Modal.Body>
-                    {linearForm()}
+                    {LinearForm()}
                 </Modal.Body>
                 <Modal.Footer>
                     <button
@@ -334,7 +334,7 @@ export default function GenHome(props) {
                     Tool Change
                 </Modal.Header>
                 <Modal.Body>
-                    {toolChangeForm()}
+                    {ToolChangeForm()}
                 </Modal.Body>
                 <Modal.Footer>
                     <button
@@ -356,7 +356,7 @@ export default function GenHome(props) {
                     Rapid Movement
                 </Modal.Header>
                 <Modal.Body>
-                    {rapidForm()}
+                    {RapidForm()}
                 </Modal.Body>
                 <Modal.Footer>
                     <button
@@ -422,7 +422,7 @@ export default function GenHome(props) {
                     Spindle Command
                 </Modal.Header>
                 <Modal.Body>
-                    {spindleCommandForm()}
+                    {SpindleCommandForm()}
                 </Modal.Body>
                 <Modal.Footer>
                     <button

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-export default function rapidForm(props) {
+export default function RapidForm(props) {
     const [rapidChoice, setRapidChoice] = useState('X');
     const [rapidFeedRate, setRapidFeedRate] = useState(0);
     const [rapidPos, setRapidPos] = useState(0);

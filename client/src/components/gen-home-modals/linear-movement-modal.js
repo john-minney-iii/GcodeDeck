@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-export default function linearForm(props) {
+export default function LinearForm(props) {
     const [linearChoice, setLinearChoice] = useState('X');
     const [linearFeedRate, setLinearFeedRate] = useState(0);
     const [linearPos, setLinearPos] = useState(0);

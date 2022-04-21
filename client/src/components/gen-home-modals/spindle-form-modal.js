@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-export default function spindleCommandForm(props) {
+export default function SpindleCommandForm(props) {
     const [spindleDirection, setSpindleDirection] = useState('CW');
     const [spindleRPM, setSpindleRPM] = useState(0);
 

@@ -302,101 +302,42 @@ export default function GenHome(props) {
                 </div>
             </div>
 
-            <LinearForm show={linearModalShow} onHide={() => handleModal('linearModal')}>
-                <Modal.Footer>
-                    <button
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => handleModal('linearModal')}
-                    >Cancel</button>
-                    <button
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => {
-                            handleModal('linearModal');
-                            linearFormSubmit();
-                        }}
-                    >Submit</button>
-                </Modal.Footer>
-            </LinearForm>
+            <LinearForm 
+                show={linearModalShow} 
+                setShow={setlinearModalShow}
+                linearFormSubmit={linearFormSubmit}
+            />
 
-            <ToolChangeForm show={toolChangeModalShow} onHide={() => handleModal('toolChangeModal')}>
-                <Modal.Footer>
-                    <button
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => handleModal('toolChangeModal')}
-                    >Cancel</button>
-                    <button
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => {
-                            handleModal('toolChangeModal');
-                            toolChangeFormSubmit();
-                        }}
-                    >Submit</button>
-                </Modal.Footer>
-            </ToolChangeForm>
+            <ToolChangeForm
+                show={toolChangeModalShow}
+                setShow={setToolChangeModalShow}
+                toolChangeFormSubmit={toolChangeFormSubmit}
+            />
+               
 
-            <RapidForm show={rapidModalShow} onHide={() => handleModal('rapidModal')}>
-                <Modal.Footer>
-                    <button
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => handleModal('rapidModal')}
-                    >Cancel</button>
-                    <button
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => {
-                            handleModal('rapidModal');
-                            rapidFormSubmit();
-                        }}
-                    >Submit</button>
-                </Modal.Footer>
-            </RapidForm>
+            <RapidForm
+                show={rapidModalShow}
+                setShow={setrapidModalShow}
+                rapidFormSubmit={rapidFormSubmit}
+            />
 
-            <FacingTemplateForm show={facingTemplateModalShow} onHide={() => handleModal('facingTemplateModal')}>
-                <Modal.Footer>
-                    <button
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => handleModal('facingTemplateModal')}
-                    >Cancel</button>
-                    <button
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => {
-                            handleModal('facingTemplateModal');
-                            facingTemplateFormSubmit();
-                        }}
-                    >Submit</button>
-                </Modal.Footer>
-            </FacingTemplateForm>
+            <FacingTemplateForm 
+                show={facingTemplateModalShow} 
+                setShow={setFacingTemplateModalShow}
+                facingTemplateFormSubmit={facingTemplateFormSubmit}
+            />
 
-            <DrillingFormModal show={drillModalShow} onHide={() => handleModal('drillModal')}>
-                <Modal.Footer>
-                    <button
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => handleModal('drillModal')}
-                    >Cancel</button>
-                    <button
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => {
-                            handleModal('drillModal');
-                            DrillingFormModalSubmit();
-                        }}
-                    >Submit</button>
-                </Modal.Footer>
-            </DrillingFormModal>
+            <DrillingFormModal 
+                show={drillModalShow}
+                setShow={setDrillModalShow}
+                DrillingFormModalSubmit={DrillingFormModalSubmit}
+            />
 
-            <SpindleCommandForm show={spindleModalShow} onHide={() => handleModal('spindleModal')}>
-                <Modal.Footer>
-                    <button
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => handleModal('spindleModal')}
-                    >Cancel</button>
-                    <button
-                        className='btn btn-primary btn-lg rounded-pill'
-                        onClick={() => {
-                            handleModal('spindleModal');
-                            spindleCommandFormSubmit();
-                        }}
-                    >Submit</button>
-                </Modal.Footer>
-            </SpindleCommandForm>
+            <SpindleCommandForm 
+            show={spindleModalShow} 
+            setShow={setSpindleModalShow}
+            spindleCommandFormSubmit={spindleCommandFormSubmit}
+            />
         </div>
     );
 

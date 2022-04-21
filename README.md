@@ -2,6 +2,8 @@
 BACS371 senior project for generating gcode<br>
 **README version 1 : updated 3/9/22**
 
+** Make sure to use Chrome **
+
 ## Setting up a local dev environment
 The following instructions are for setting up a local development environment on your personal machine.
 The instructions are Windows focuses, for different OS follow their guidelines. Before you can run the app

@@ -107,12 +107,21 @@ export default function Community(props) {
                     </div>
                 </div>
             </div>
-            <ReportABugForm show={reportModalShow} onHide={() => handleModal('report')}>
-            </ReportABugForm>
-            <SystemRequestForm show={systemModalShow} onHide={() => handleModal('system')}>
-            </SystemRequestForm>
-            <ContactRequestForms show={contactModalShow} onHide={() => handleModal('contact')}>
-            </ContactRequestForms>
+            <ReportABugForm 
+                show={reportModalShow} 
+                setShow={setReportModalShow}
+                submitBugReport={submitBugReport}
+            />
+            <SystemRequestForm 
+                show={systemModalShow} 
+                setShow={setSystemModalShow}
+                submitSystemRequest={submitSystemRequest}
+            />
+            <ContactRequestForms 
+                show={contactModalShow} 
+                setShow={setContactModalShow}
+                submitContactRequest={submitContactRequest}
+            />
         </div>
     </div>
 

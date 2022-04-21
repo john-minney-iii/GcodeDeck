@@ -65,18 +65,18 @@ export default function LinearFormModal(props) {
                 value={linearChoice}
                 onChange={(e) => setLinearChoice(e.target.value)}
             />
-            {firstNameValidation()}
+            {linearChoiceValidation()}
         </div>
         <div className="form-group">
-            <label htmlFor="username-input">Last Name*</label>
+            <label htmlFor="username-input">Linear Feed Rate</label>
             <input 
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={linearFeedRate}
+                onChange={(e) => setLinearFeedRate(e.target.value)}
             />
-            {lastNameValidation()}
+            {linearFeedRateValidation()}
         </div>
         <div className="form-group">
             <label htmlFor="username-input">Username*</label>
@@ -84,10 +84,10 @@ export default function LinearFormModal(props) {
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={linearPos}
+                onChange={(e) => setLinearPos(e.target.value)}
             />
-            {usernameValidation()}
+            {linearPosValidation()}
             <small className='text-muted'>
                 150 characters or fewer. Letters, digits and @/_/+/- only
             </small>
@@ -98,50 +98,22 @@ export default function LinearFormModal(props) {
                 type="text"
                 className="form-control"
                 name="username-input"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={linearPos2}
+                onChange={(e) => setLinearPos2(e.target.value)}
             />
-            {emailValidation()}
-        </div>
-        <div className="form-group">
-            <label htmlFor="username-input">Password*</label>
-            <input 
-                type="password"
-                className="form-control"
-                name="username-input"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            {passwordValidation()}
-            <small id='usernameHelp' className='form-text text-muted'>
-                Use a mix of letters, numbers, and symbols. Password cannot
-                be too similar to your other personal information, nor be a commonly
-                used password, nor be entirely numeric.
-            </small>
-        </div>
-        <div className="form-group">
-            <label htmlFor="username-input">Confirm Password*</label>
-            <input 
-                type="password"
-                className="form-control"
-                name="username-input"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
-            />
-            {passwordConfirmValidation()}
+            {linearPos2Validation()}
         </div>
     </form>;
 
     const handleSubmit = () => {
-        if (firstNameValid && lastNameValid && usernameValid && emailValid && passwordValid && passwordConfirmValid) {
+        if (linearChoice && linearFeedRate && linearPos && linearPos2) {
             props.setShow(false);
             resetFormValues();
             props.registerSubmit(
-                firstName,
-                lastName,
-                username,
-                email,
-                password
+                linearChoice,
+                linearFeedRate,
+                linearPos,
+                linearPos2
             );
         }
     };

@@ -5,7 +5,6 @@ import axios from "axios";
 
 // Components
 import DrillingFormModal from "../components/gen-home-modals/drilling-modal";
-import LinearFormModal from "../components/gen-home-modals/linear-movement-modal";
 
 
 export default function GenHome(props) {
@@ -39,6 +38,10 @@ export default function GenHome(props) {
     const [rapidPos2, setRapidPos2] = useState(0);
 
     // States for linear movement
+    const [linearChoice, setLinearChoice] = useState('X');
+    const [linearFeedRate, setLinearFeedRate] = useState(0);
+    const [linearPos, setLinearPos] = useState(0);
+    const [linearPos2, setLinearPos2] = useState(0);
 
     // States for Facing
     const [facingDir, setFacingDir] = useState(0);

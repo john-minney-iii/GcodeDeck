@@ -2,6 +2,4 @@
 -- Todo for last push
 
 	- NC Viewer intergration (Wow look unicorns and rainbows.... it aint going to work)
-	- Refresh bug
 	- Edit the gcode output
-	- Clear forms on gen-home

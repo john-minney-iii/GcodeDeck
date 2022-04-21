@@ -144,6 +144,11 @@ export default function GenHome(props) {
         }
     };
 
+    const viewGcode = async () => {
+        // TODO: copy the text before rendering the new window
+        window.open("https://ncviewer.com/");
+    };
+
     // Form Submit Functions ---------------------------------------------
 
     const toolChangeFormSubmit = () => {
@@ -483,6 +488,7 @@ export default function GenHome(props) {
                                     <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => gcodeRedo()}>Redo</button>
                                     <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => gcodeCopy()}>Copy</button>
                                     <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => gcodeCopyLast()}>Copy Last</button>
+                                    <button className="btn btn-primary rounded-pill mb-2 w-100" onClick={() => viewGcode()}>View in NC Viewer</button>
                                 </div>
                             </div>
                         </div>

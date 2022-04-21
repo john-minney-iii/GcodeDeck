@@ -10,12 +10,15 @@ import './assets/css/app.css';
 export default class App extends Component {
     constructor(props) {
         super(props);
-        window.sessionStorage.setItem('currentView', 'landing-page');
+        if (!window.sessionStorage.getItem('authenticated')) {
+            window.sessionStorage.setItem('currentView', 'landing-page');
+        }
     }
 
     componentDidMount() {
-        window.sessionStorage.setItem('authenticated', 'false');
-        window.sessionStorage.setItem('token', '');
+        if (!window.sessionStorage.getItem('authenticated')) {
+            window.sessionStorage.setItem('token', '');
+        }
     }
 
     loginUser = (token) => {

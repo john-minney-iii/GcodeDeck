@@ -4,8 +4,8 @@ import { Modal } from "react-bootstrap";
 export default function FacingTemplateForm(props) {
     const [facingDir, setFacingDir] = useState(0);
     const [faceToolNumber, setFaceToolNumber] = useState(0);
-    const [faceCutDiam, setCutDiam] = useState(0);
-    const [faceSpindleRPM, setfaceSpindleRPM] = useState(0);
+    const [faceCutDiam, setFaceCutDiam] = useState(0);
+    const [faceSpindleRPM, setFaceSpindleRPM] = useState(0);
     const [faceFeedRate, setFaceFeedRate] = useState(0);
     const [faceWidth, setFaceWidth] = useState(0);
     const [faceDepth, setFaceDepth] = useState(0);

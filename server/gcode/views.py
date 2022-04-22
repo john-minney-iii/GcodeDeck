@@ -98,7 +98,7 @@ class LinearMovement(APIView):
             elif axis == "Y":
                 g01 = f'G01 Y{float(pos)} F{float(feed_rate)} ; (G01 Linear Move)'
             elif axis == "Z":
-                g01 = f'G01 Y{float(pos)} F{float(feed_rate)} ; (G01 Linear Move)'
+                g01 = f'G01 Z{float(pos)} F{float(feed_rate)} ; (G01 Linear Move)'
             elif axis == "XY":
                 g01 = f'G01 X{float(pos)} Y{float(pos2)} F{float(feed_rate)} ; (G01 Linear Move)'
             else:

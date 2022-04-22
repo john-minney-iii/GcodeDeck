@@ -40,10 +40,6 @@ export default function LandingPage(props) {
                     className="btn btn-primary btn-lg rounded-pill"
                     onClick={() => setRegisterModalShow(true)}
                 >Register</button>
-                <button
-                    className="btn btn-outline-primary btn-lg rounded-pill"
-                    onClick={() => props.changeView('gen-home')}
-                >Create a new program</button>
             </div>
         );
     };

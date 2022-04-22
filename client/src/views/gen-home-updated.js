@@ -516,15 +516,6 @@ export default function GenHome(props) {
                                     Facing Template
                                 </button>
                             </div>
-                            <div className="rectangleTemplate-button py-3">
-                                <button
-                                    type="button"
-                                    className="btn btn-outline-primary btn-XL rounded-pill w-100"
-                                    onClick={() => handleModal('rectangleTemplateModal')}
-                                >
-                                    Rectangle Template
-                                </button>
-                            </div>
                         </div>
                         <div className="col-8">
                             <div className="container-justify-content-start d-flex d-flex-inline">

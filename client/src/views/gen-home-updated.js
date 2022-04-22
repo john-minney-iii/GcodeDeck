@@ -556,8 +556,9 @@ export default function GenHome(props) {
                     Facing Template
                 </Modal.Header>
                 <Modal.Body>
-                </Modal.Body>
                 {facingTemplateForm()}
+                </Modal.Body>
+
                 <Modal.Footer>
                     <button
                         className='btn btn-primary btn-lg rounded-pill'
@@ -578,8 +579,9 @@ export default function GenHome(props) {
                     Peck Drilling
                 </Modal.Header>
                 <Modal.Body>
-                </Modal.Body>
                 {drillForm()}
+                </Modal.Body>
+
                 <Modal.Footer>
                     <button
                         className='btn btn-primary btn-lg rounded-pill'

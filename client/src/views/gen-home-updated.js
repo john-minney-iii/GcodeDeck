@@ -286,7 +286,7 @@ export default function GenHome(props) {
     const toolChangeForm = () => <form>
         <div className="form-group">
             <label htmlFor="Tool Number">Tool Number:</label>
-            <input type="" className="" id="" placeholder="Tool pocket Number" onChange={(e) => setToolNumber(e.target.value)}></input>
+            <input type="" className="form-control" id="" placeholder="Tool pocket Number" onChange={(e) => setToolNumber(e.target.value)}></input>
             <label htmlFor="Tool Number">Cutter Compensation:</label>
             <select name="Cutter Compensation" id="axis" className="form-control" onChange={(e) => setCutterCompensation(e.target.value)}>
                 <option value="G40">None (G40)</option>
@@ -294,7 +294,7 @@ export default function GenHome(props) {
                 <option value="G42">Right (G42)</option>
             </select>
             <label htmlFor="Notes">Notes:</label>
-            <input type="" className="" id="" placeholder="Notes about tool" onChange={(e) => setToolNotes(e.target.value)}></input>
+            <input type="" className="form-control" id="" placeholder="Notes about tool" onChange={(e) => setToolNotes(e.target.value)}></input>
         </div>
     </form>;
 
@@ -313,22 +313,22 @@ export default function GenHome(props) {
     const drillForm = () => <form>
         <div className="form-group">
             <label htmlFor="X Location">X:</label>
-            <input type="" className="" id="" placeholder="X Coordinate of hole" onChange={(e) => setDrillXPos(e.target.value)}></input>
+            <input type="" className="form-control" id="" placeholder="X Coordinate of hole" onChange={(e) => setDrillXPos(e.target.value)}></input>
             <br />
             <label htmlFor="Y Location">Y:</label>
-            <input type="" className="" id="" placeholder="y Coordinate of hole" onChange={(e) => setDrillYPos(e.target.value)}></input>
+            <input type="" className="form-control" id="" placeholder="y Coordinate of hole" onChange={(e) => setDrillYPos(e.target.value)}></input>
             <br />
             <label htmlFor="Z Location at bottom of hole">Z:</label>
-            <input type="" className="" id="" placeholder="Bottom of hole location" onChange={(e) => setDrillZPos(e.target.value)}></input>
+            <input type="" className="form-control" id="" placeholder="Bottom of hole location" onChange={(e) => setDrillZPos(e.target.value)}></input>
             <br />
             <label htmlFor="R - reference plane (position above part)">R:</label>
-            <input type="" className="" id="" placeholder="Top of part + some clearance" onChange={(e) => setDrillRef(e.target.value)}></input>
+            <input type="" className="form-control" id="" placeholder="Top of part + some clearance" onChange={(e) => setDrillRef(e.target.value)}></input>
             <br />
             <label htmlFor="Q - Peck Depth">Q:</label>
-            <input type="" className="" id="" placeholder="Depth per peck" onChange={(e) => setDrillPeckDepth(e.target.value)}></input>
+            <input type="" className="form-control" id="" placeholder="Depth per peck" onChange={(e) => setDrillPeckDepth(e.target.value)}></input>
             <br />
             <label htmlFor="FeedRate">Feed Rate:</label>
-            <input type="" className="" id="" placeholder="Drilling Feedrate" onChange={(e) => setDrillFeedRate(e.target.value)}></input>
+            <input type="" className="form-control" id="" placeholder="Drilling Feedrate" onChange={(e) => setDrillFeedRate(e.target.value)}></input>
             <br />
         </div>
     </form>;
@@ -419,7 +419,7 @@ export default function GenHome(props) {
         </div>;
     };
 
-    const facingTemplateForm = () => 
+    const facingTemplateForm = () =>
     <form>
         <div className="form-group">
         <label htmlFor="facingDir">Facing Direction: </label>

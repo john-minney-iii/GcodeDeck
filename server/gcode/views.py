@@ -160,7 +160,7 @@ class FacingTemplate(APIView):
             x = float(width) * -1
             y = 0
             really_fucking_long_gcode = ''
-            really_fucking_long_gcode += (f',G54 G90 G17 G20; (Safe Start)')
+            really_fucking_long_gcode += (f',G54 G90 G17 G20 G40; (Safe Start)')
             really_fucking_long_gcode += (f',M06 T{tool_number} ; (Switch to correct tool)')
             really_fucking_long_gcode += (f',M03 S{spindle_rpm} ; (Turn on Spindle)')
             really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y0 Z{float(clearance)} ; (Rapid Move)')

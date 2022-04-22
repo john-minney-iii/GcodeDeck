@@ -257,22 +257,17 @@ export default function GenHome(props) {
         <div className="form-group">
             <label htmlFor="X Location">X:</label>
             <input type="" className="form-control" id="" placeholder="X Coordinate of hole" onChange={(e) => setDrillXPos(e.target.value)}></input>
-            <br />
             <label htmlFor="Y Location">Y:</label>
             <input type="" className="form-control" id="" placeholder="y Coordinate of hole" onChange={(e) => setDrillYPos(e.target.value)}></input>
-            <br />
             <label htmlFor="Z Location at bottom of hole">Z:</label>
             <input type="" className="form-control" id="" placeholder="Bottom of hole location" onChange={(e) => setDrillZPos(e.target.value)}></input>
-            <br />
             <label htmlFor="R - reference plane (position above part)">R:</label>
             <input type="" className="form-control" id="" placeholder="Top of part + some clearance" onChange={(e) => setDrillRef(e.target.value)}></input>
-            <br />
             <label htmlFor="Q - Peck Depth">Q:</label>
             <input type="" className="form-control" id="" placeholder="Depth per peck" onChange={(e) => setDrillPeckDepth(e.target.value)}></input>
-            <br />
             <label htmlFor="FeedRate">Feed Rate:</label>
             <input type="" className="form-control" id="" placeholder="Drilling Feedrate" onChange={(e) => setDrillFeedRate(e.target.value)}></input>
-            <br />
+
         </div>
     </form>;
 

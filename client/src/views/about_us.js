@@ -35,7 +35,7 @@ constructor(props) {
           </div>
           <div className="row">
             <h3> Meet our developers! </h3>
-            <div className="col">
+            <div className="col w-33">
               <div className="card">
                 <img className="card-img-top" src={HeadshotShannon} alt="Card image cap"></img>
                 <div className="card-body">
@@ -74,6 +74,8 @@ constructor(props) {
 
             </div>
 
+
+          </div>
           <div className="row">
             <div className="col">
                 <div className="card">
@@ -111,7 +113,6 @@ constructor(props) {
                   </div>
                 </div>
             </div>
-          </div>
           </div>
         </div>
     </div>

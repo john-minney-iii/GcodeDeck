@@ -127,7 +127,7 @@ class Drilling(APIView):
             peck_depth = request.data['peckDepth']
             feed_rate = request.data['feedRate']
             sendZHome = f'G28 Z ; (Home Z to Prevent Crash)'
-            goToHole = f'G00 X{float(x_pos)} Y{float(y_pos)} Z{float(z_pos)} ; (Rapid to hole location @Z Reference Point)'
+            goToHole = f'G00 X{float(x_pos)} Y{float(y_pos)} Z{float(reference)} ; (Rapid to hole location @Z Reference Point)'
             peckDrill = f'G83 G99 Z{float(z_pos)} R{float(reference)} Q{float(peck_depth)} F{float(feed_rate)} ; (G83 Peck Drill)'
             cancelCannedCycle = f'G80 ; (Cancel Canned Cycle)'
             return Response(
@@ -163,6 +163,7 @@ class FacingTemplate(APIView):
             really_fucking_long_gcode += (f',G54 G90 G17 G20 G40; (Safe Start)')
             really_fucking_long_gcode += (f',M06 T{tool_number} ; (Switch to correct tool)')
             really_fucking_long_gcode += (f',M03 S{spindle_rpm} ; (Turn on Spindle)')
+            really_fucking_long_gcode += (f',G43 H{tool_number} ; (Enable Height Offset)')
             really_fucking_long_gcode += (f',G00 X{float(width) + float(cutter_diameter)} Y0 Z{float(clearance)} ; (Rapid Move)')
             # Z Depth of the facing operation @ programmed plungerate
             if facingDirection == 'Positive':
